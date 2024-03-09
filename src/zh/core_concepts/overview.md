@@ -1,0 +1,162 @@
+# Overview
+
+Linera is a decentralized infrastructure optimized for Web3 applications that require guaranteed performance for an unlimited number of active users.
+
+The core idea of the Linera protocol is to run many lightweight blockchains, called **microchains**, in parallel in a single set of validators.
+
+## [How does it work?](https://linera.dev/core_concepts/overview.html#how-does-it-work)
+
+In Linera, user wallets operate their own microchains. The owner of a chain chooses when to add new blocks to the chain and what goes inside the blocks. Such chains with a single user are called **user chains**.
+
+Users may add new blocks to their chains in order to process **incoming messages** from other chains or to execute secure **operations** on their accounts, for instance to transfer assets to another user.
+
+Importantly, validators ensure that all new blocks are **valid**. For instance, transfer operations must originate from accounts with sufficient funds; and incoming messages must have been actually sent from another chain. Blocks are verified by validators in the same way for every chain.
+
+A Linera **application** is a Wasm program that defines its own state and operations. Users can publish bytecode and initialize an application on one chain, and it will be automatically deployed to all chains where it is needed, with a separate state on each chain.
+
+To ensure coordination across chains, an application may rely on asynchronous **cross-chain messages**. Message payloads are application-specific and opaque to the rest of the system.
+
+```ignore
+                               ┌───┐     ┌───┐     ┌───┐
+                       Chain A │   ├────►│   ├────►│   │
+                               └───┘     └───┘     └───┘
+                                                     ▲
+                                           ┌─────────┘
+                                           │
+                               ┌───┐     ┌─┴─┐     ┌───┐
+                       Chain B │   ├────►│   ├────►│   │
+                               └───┘     └─┬─┘     └───┘
+                                           │         ▲
+                                           │         │
+                                           ▼         │
+                               ┌───┐     ┌───┐     ┌─┴─┐
+                       Chain C │   ├────►│   ├────►│   │
+                               └───┘     └───┘     └───┘
+```
+
+The number of applications present on a single chain is not limited. On the same chain, applications are **composed** as usual using synchronous calls.
+
+The current Linera SDK uses **Rust** as a source language to create Wasm applications. It relies on the normal Rust toolchains so that Rust programmers can work in their preferred environments.
+
+## [How does Linera compare to existing multi-chain infrastructure?](https://linera.dev/core_concepts/overview.html#how-does-linera-compare-to-existing-multi-chain-infrastructure)
+
+Linera is the first infrastructure designed to support many chains in parallel, and notably an arbitrary number of **user chains** meant to be operated by user wallets.
+
+In traditional multi-chain infrastructures, each chain usually runs a full blockchain protocol in a separate set of validators. Creating a new chain or exchanging messages between chains is expensive. As a result, the total number of chains is generally limited. Some chains may be specialized to a given use case: these are called "app chains".
+
+In contrast, Linera is optimized for a large number of user chains:
+
+- Users only create blocks in their chain when needed;
+- Creating a microchain does not require onboarding validators;
+- All chains have the same level of security;
+- Microchains communicate efficiently using the internal networks of validators;
+- Validators are internally sharded (like a regular web service) and may adjust their capacity elastically by adding or removing internal workers.
+
+> Besides user chains, the [Linera protocol](https://linera.io/whitepaper) is designed to support other types of microchains, called "permissioned" and "public" chains. Public chains are operated by validators. In this regard, they are similar to classical blockchains. Permissioned chains are meant to be used for temporary interactions between users, such as atomic swaps.
+
+## [Why build on top of Linera?](https://linera.dev/core_concepts/overview.html#why-build-on-top-of-linera)
+
+We believe that many high-value use cases are currently out of reach of existing Web3 infrastructures because of the challenges of serving **many active users** simultaneously without degrading user experience (unpredictable fees, latency, etc).
+
+Examples of applications that require processing time-sensitive transactions created by many simultaneous users include:
+
+- real-time micro-payments and micro-rewards,
+- social data feeds,
+- real-time auction systems,
+- turn-based games,
+- version control systems for software, data pipelines, or AI training pipelines.
+
+Lightweight user chains are instrumental in providing elastic scalability but they have other benefits as well. Because user chains have fewer blocks than traditional blockchains, in Linera, the full-nodes of user chains will be embedded into the users' wallets, typically deployed as a browser extension.
+
+This means that Web UIs connected to a wallet will be able to query the state of the user chain directly (no API provider, no light client) using familiar frameworks (React/GraphQL). Furthermore, wallets will be able to leverage the full node as well for security purposes, including to display meaningful confirmation messages to users.
+
+## [What is the current state of the development of Linera?](https://linera.dev/core_concepts/overview.html#what-is-the-current-state-of-the-development-of-linera)
+
+The [reference open-source implementation](https://github.com/linera-io/linera-protocol) of Linera is under active development. It already includes a Web3 SDK with the necessary features to prototype simple Web3 applications and test them locally on the same machine. Notably, Web UIs (possibly reactive) can already be built on top of Wasm-embedded GraphQL services, and tested locally in the browser.
+
+The main limitations of our current Web3 SDK include:
+
+- Web UIs need to query a local HTTP service acting as a wallet. This setup is meant to be temporary and for testing only: in the future, web UIs will securely connect to a Wallet installed as a browser extension, as usual.
+- Only user chains are currently available for testing and documented in this manual. Support for other types of chain (called "public" and "permissioned") will be added later.
+
+The main development workstreams of Linera, beyond its SDK, can be broken down as follows.
+
+### [Core Protocol](https://linera.dev/core_concepts/overview.html#core-protocol)
+
+-  User chains
+-  Permissioned chain (core protocol only)
+-  Cross-chain messages
+-  Cross-chain pub/sub channels (initial version)
+-  Bytecode publishing
+-  Application creation
+-  Reconfigurations of validators
+-  Initial support for gas fees
+-  Initial support for storage fees and storage limits
+-  External services to help users create their first chain
+-  Permissioned chains (adding operation access control, demo of atomic swaps, etc)
+-  Public chains (adding leader election, inbox constraints, etc)
+-  Support for easy onboarding of user chains into a new application (removing the need to accept requests)
+-  Improved pub/sub channels (removing the need to accept subscriptions)
+-  Blob storage for applications (generalizing bytecode storage)
+-  Support for archiving chains
+-  Wallet-friendly chain clients (compile to Wasm/JS, do not maintain execution states for other chains)
+-  General tokenomics and incentives for all stakeholders
+-  Governance on the admin chain (e.g. DPoS, onboarding of validators)
+-  Auditing procedures
+
+### [Wasm VM integration](https://linera.dev/core_concepts/overview.html#wasm-vm-integration)
+
+-  Support for the Wasmer VM
+-  Support for the Wasmtime VM (experimental)
+-  Test gas metering and deterministic execution across VMs
+-  Composing Wasm applications on the same chain (initial version)
+-  Enhanced composability with "sessions"
+-  Support for non-blocking (yet deterministic) calls to storage
+-  Support for read-only GraphQL services in Wasm
+-  Support for mocked system APIs (initial version)
+-  More efficient cross-application calls
+-  Improve host/guest stub generation to make mocks easier (currently wit-bindgen)
+-  Compile user full node to Wasm/JS
+
+### [Storage](https://linera.dev/core_concepts/overview.html#storage)
+
+-  Object management library ("linera-views") on top of Key-Value store abstraction
+-  Support for Rocksdb
+-  Experimental support for DynamoDb
+-  Initial derive macros for GraphQL
+-  Initial support for ScyllaDb
+-  Make library fully extensible by users (requires better GraphQL macros)
+-  Performance benchmarks and improvements (including faster state hashing)
+-  Production-grade support for the chosen main database
+-  Support global object locks (needed for dynamic sharding)
+-  Tooling for debugging
+-  Make the storage library easy to use outside of Linera
+
+### [Validator Infrastructure](https://linera.dev/core_concepts/overview.html#validator-infrastructure)
+
+-  Simple TCP/UDP networking (used for benchmarks only)
+-  GRPC networking
+-  Basic frontend (aka. proxy) supporting fixed internal shards
+-  Observability
+-  Initial kubernetes support in CI
+-  Initial deployment using a cloud provider
+-  New frontend to support dynamic shard assignment
+-  Cloud integration to demonstrate elastic scaling
+
+### [Web3 SDK](https://linera.dev/core_concepts/overview.html#web3-sdk)
+
+-  Initial traits for contract and service interfaces
+-  Support for unit testing
+-  Support for integration testing
+-  Local GraphQL service to query and browse system state
+-  Local GraphQL service to query and browse application states
+-  Use GraphQL mutations to execute operations and create blocks
+-  Initial support for unit tests
+-  Support for integration tests
+-  Initial ABIs for contract and service interfaces
+-  Allowing message sender to pay for message execution fees
+-  Bindings to use native cryptographic primitives from Wasm
+-  Allowing applications to pay for user fees
+-  Allowing applications to use permissioned chains and public chains
+-  Wallet as a browser extension (no VM)
+-  Wallet as a browser extension (with Wasm VM)
