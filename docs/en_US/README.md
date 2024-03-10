@@ -1,4 +1,4 @@
-![The Linera banner](README.assets/Linera-Header_1920x284px.svg)
+![The Linera banner](../README.assets/Linera-Header_1920x284px.svg)
 
 # [The Linera Developer Manual](https://linera-dev.respeer.ai/#/introduction?id=the-linera-dev.respeer.ai/#eloper-manual)
 
