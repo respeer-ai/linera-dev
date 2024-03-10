@@ -1,6 +1,6 @@
 [book]
-authors = ["kikakkz"]
+authors = ["fengland"]
 language = "en"
-multilingual = true
+multilingual = false
 src = "src"
-title = "The Linera Developer Manual"
+title = "Linera"
