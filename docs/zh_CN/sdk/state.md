@@ -2,7 +2,7 @@
 
 The `struct` which defines your application's state can be found in `src/state.rs`.
 
-To represent our counter, we're going to need a single `u64`. To persist the counter we'll be using Linera's [view](https://linera-dev.respeer.ai/#/advanced_topics/views) paradigm.
+To represent our counter, we're going to need a single `u64`. To persist the counter we'll be using Linera's [view](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views) paradigm.
 
 Views are a little like an [ORM](https://en.wikipedia.org/wiki/Object–relational_mapping), however instead of mapping data structures to a relational database like Postgres, they are instead mapped onto key-value stores like [RocksDB](https://rocksdb.org/).
 
@@ -34,6 +34,6 @@ The `RegisterView<T>` supports modifying a single value of type `T`. There are d
 - A `BTreeMap` corresponds to a `MapView` if its values are primitive, or to `CollectionView` if its values are other views;
 - A `Queue` corresponds to a `QueueView`
 
-For an exhaustive list refer to the Views [documentation](https://linera-dev.respeer.ai/#/advanced_topics/views).
+For an exhaustive list refer to the Views [documentation](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views).
 
 Finally, run `cargo check` to ensure that your changes compile.

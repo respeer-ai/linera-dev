@@ -60,7 +60,7 @@ There's quite a bit going on here, so let's break it down and take one method at
 
 For this application, we'll be using the `initialize` and `execute_operation` methods.
 
-## [Initializing our Application](https://linera-dev.respeer.ai/#/sdk/contract?id=initializing-our-application)
+## [Initializing our Application](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=initializing-our-application)
 
 The first thing we need to do is initialize our application by using `Contract::initialize`.
 
@@ -81,7 +81,7 @@ For our example application, we'll want to initialize the state of the applicati
     }
 ```
 
-## [Implementing the Increment Operation](https://linera-dev.respeer.ai/#/sdk/contract?id=implementing-the-increment-operation)
+## [Implementing the Increment Operation](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=implementing-the-increment-operation)
 
 Now that we have our counter's state and a way to initialize it to any value we would like, a way to increment our counter's value. Changes made by block proposers to application states are broadly called 'operations'.
 
@@ -99,7 +99,7 @@ To create a new operation, we need to use the method `Contract::execute_operatio
     }
 ```
 
-## [Declaring the ABI](https://linera-dev.respeer.ai/#/sdk/contract?id=declaring-the-abi)
+## [Declaring the ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=declaring-the-abi)
 
 Finally, to link our `Contract` trait implementation with the ABI of the application, the following code is added:
 

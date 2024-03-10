@@ -2,7 +2,7 @@
 
 Let's start with the installation of the Linera development tools.
 
-## [Overview](https://linera-dev.respeer.ai/#/getting_started/installation?id=overview)
+## [Overview](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=overview)
 
 The Linera toolchain consist of two crates:
 
@@ -12,7 +12,7 @@ The Linera toolchain consist of two crates:
   - `linera-proxy` -- the proxy service, acting as a public entrypoint for each validator,
   - `linera-server` -- the service run by each worker of a validator, hidden behind the proxy.
 
-## [Requirements](https://linera-dev.respeer.ai/#/getting_started/installation?id=requirements)
+## [Requirements](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=requirements)
 
 The operating systems currently supported by the Linera toolchain can be summarized as follows:
 
@@ -43,7 +43,7 @@ targets = [ "wasm32-unknown-unknown" ]
 profile = "minimal"
 ```
 
-## [Installing from crates.io](https://linera-dev.respeer.ai/#/getting_started/installation?id=installing-from-cratesio)
+## [Installing from crates.io](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio)
 
 You may install the Linera binaries with
 
@@ -60,7 +60,7 @@ cargo add linera-sdk@0.9.0
 
 The version number `0.9.0` corresponds to the current Devnet of Linera and may change frequently.
 
-## [Installing from GitHub](https://linera-dev.respeer.ai/#/getting_started/installation?id=installing-from-github)
+## [Installing from GitHub](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-github)
 
 Download the source from [GitHub](https://github.com/linera-io/linera-protocol):
 
@@ -84,10 +84,10 @@ This manual was tested against the following commit of the [repository](https://
 c6f5b00b2017e6158dbdc090bf70e3e0fc71f4c6
 ```
 
-## [Bash helper (optional)](https://linera-dev.respeer.ai/#/getting_started/installation?id=bash-helper-optional)
+## [Bash helper (optional)](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=bash-helper-optional)
 
-Consider adding the output of `linera net helper` to your `~/.bash_profile` to help with [automation](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=automation-in-bash).
+Consider adding the output of `linera net helper` to your `~/.bash_profile` to help with [automation](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=automation-in-bash).
 
-## [Getting help](https://linera-dev.respeer.ai/#/getting_started/installation?id=getting-help)
+## [Getting help](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=getting-help)
 
 If installation fails, reach out to the team (e.g. on [Discord](https://discord.gg/linera)) to help troubleshoot your issue or [create an issue](https://github.com/linera-io/linera-protocol/issues/new) on GitHub.

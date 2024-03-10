@@ -8,7 +8,7 @@ Applications should consider having both types of tests. Unit tests should be us
 
 > In most cases, the simplest way to run both unit tests and integration tests is to call `linera project test` from the project's directory.
 
-## [Unit tests](https://linera-dev.respeer.ai/#/sdk/testing?id=unit-tests)
+## [Unit tests](https://linera-dev.respeer.ai/#/zh_CN/sdk/testing?id=unit-tests)
 
 Unit tests are written beside the application's source code (i.e., inside the `src` directory of the project). There are several differences to normal Rust unit tests:
 
@@ -18,9 +18,9 @@ Unit tests are written beside the application's source code (i.e., inside the `s
 
 The first two items are done automatically by `linera project test`.
 
-Alternatively, one may set up the environment and run `cargo test` directly as described [below](https://linera-dev.respeer.ai/#/sdk/testing?id=manually-configuring-the-environment).
+Alternatively, one may set up the environment and run `cargo test` directly as described [below](https://linera-dev.respeer.ai/#/zh_CN/sdk/testing?id=manually-configuring-the-environment).
 
-### [Example](https://linera-dev.respeer.ai/#/sdk/testing?id=example)
+### [Example](https://linera-dev.respeer.ai/#/zh_CN/sdk/testing?id=example)
 
 A simple unit test is shown below, which tests if the application's `do_something` method changes the application state.
 
@@ -48,7 +48,7 @@ mod tests {
 }
 ```
 
-### [Mocking System APIs](https://linera-dev.respeer.ai/#/sdk/testing?id=mocking-system-apis)
+### [Mocking System APIs](https://linera-dev.respeer.ai/#/zh_CN/sdk/testing?id=mocking-system-apis)
 
 Unit tests run in a constrained environment, so things like access to the key-value store, cross-chain messages and cross-application calls can't be executed. However, they can be simulated using mock APIs. The `linera-sdk::test` module provides some helper functions to mock the system APIs.
 
@@ -82,7 +82,7 @@ mod tests {
 }
 ```
 
-### [Running Unit Tests with `cargo test`](https://linera-dev.respeer.ai/#/sdk/testing?id=running-unit-tests-with-cargo-test)
+### [Running Unit Tests with `cargo test`](https://linera-dev.respeer.ai/#/zh_CN/sdk/testing?id=running-unit-tests-with-cargo-test)
 
 Running `linera project test` is easier, but if there's a need to run `cargo test` explicitly to run the unit tests, Cargo must be configured to use the custom test runner `linera-wasm-test-runner`. This binary can be built from the repository or installed with `cargo install linera-sdk`.
 
@@ -115,7 +115,7 @@ Optionally, `wasm32-unknown-unknown` can be made the default build target with t
 target = "wasm32-unknown-unknown"
 ```
 
-## [Integration Tests](https://linera-dev.respeer.ai/#/sdk/testing?id=integration-tests)
+## [Integration Tests](https://linera-dev.respeer.ai/#/zh_CN/sdk/testing?id=integration-tests)
 
 Integration tests are usually written separately from the application's source code (i.e., inside a `tests` directory that's beside the `src` directory).
 
@@ -127,7 +127,7 @@ If you wish to use `cargo test` and have overridden your default target to be in
 
 Integration tests use the helper types from `linera_sdk::test` to set up a simulated Linera network, and publish blocks to microchains in order to execute the application.
 
-### [Example](https://linera-dev.respeer.ai/#/sdk/testing?id=example-1)
+### [Example](https://linera-dev.respeer.ai/#/zh_CN/sdk/testing?id=example-1)
 
 A simple test that sends a message between application instances on different chains is shown below.
 

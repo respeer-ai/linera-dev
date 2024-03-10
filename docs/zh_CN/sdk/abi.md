@@ -6,7 +6,7 @@ ABIs are usually defined in `src/lib.rs` and compiled across all architectures (
 
 For a reference guide, check out the [documentation of the crate](https://docs.rs/linera-base/latest/linera_base/abi/).
 
-## [Defining a marker struct](https://linera-dev.respeer.ai/#/sdk/abi?id=defining-a-marker-struct)
+## [Defining a marker struct](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=defining-a-marker-struct)
 
 The library part of your application (generally in `src/lib.rs`) must define a public empty struct that implements the `Abi` trait.
 
@@ -24,7 +24,7 @@ pub trait Abi: ContractAbi + ServiceAbi {}
 
 Next, we're going to implement each of the two traits.
 
-## [Contract ABI](https://linera-dev.respeer.ai/#/sdk/abi?id=contract-abi)
+## [Contract ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=contract-abi)
 
 The `ContractAbi` trait defines the data types that your application uses in a contract. Each type represents a specific part of the contract's behavior:
 
@@ -89,7 +89,7 @@ impl ContractAbi for CounterAbi {
 }
 ```
 
-## [Service ABI](https://linera-dev.respeer.ai/#/sdk/abi?id=service-abi)
+## [Service ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=service-abi)
 
 The `ServiceAbi` is in principle very similar to the `ContractAbi`, just for the service component of your application.
 

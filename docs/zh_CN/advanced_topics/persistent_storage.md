@@ -2,7 +2,7 @@
 
 Validators run the servers and the data is stored in persistent storage. As a consequence we need a tool for working with persistent storage and so we have added `linera-db` for that purpose.
 
-## [Available persistent storage](https://linera-dev.respeer.ai/#/advanced_topics/persistent_storage?id=available-persistent-storage)
+## [Available persistent storage](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/persistent_storage?id=available-persistent-storage)
 
 The persistent storage that are available right now are `RocksDB`, `DynamoDB` and `ScyllaDB`. Each has its own strengths and weaknesses.
 
@@ -14,7 +14,7 @@ There is no fundamental obstacle to the addition of other persistent storage sol
 
 In addition, the `DynamoDB` and `ScyllaDB` have the notion of a table which means that a given remote location can be used for several completely independent purposes.
 
-## [The `linera-db` tool](https://linera-dev.respeer.ai/#/advanced_topics/persistent_storage?id=the-linera-db-tool)
+## [The `linera-db` tool](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/persistent_storage?id=the-linera-db-tool)
 
 When operating on a persistent storage some global operations can be required. The command line tool `linera-db` helps in making them work.
 

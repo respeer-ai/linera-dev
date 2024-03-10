@@ -18,7 +18,7 @@ You can also use [`ExecutionOutcome::with_message`](https://docs.rs/linera-sdk/l
 
 During block execution in the *sending* chain, messages are returned via `ExecutionOutcome`s. The returned message is then placed in the *target* chain inbox for processing. There is no guarantee that it will be handled: For this to happen, an owner of the target chain needs to include it in the `incoming_messages` in one of their blocks. When that happens, the contract's `execute_message` method gets called on their chain.
 
-## [Example: Fungible Token](https://linera-dev.respeer.ai/#/sdk/messages?id=example-fungible-token)
+## [Example: Fungible Token](https://linera-dev.respeer.ai/#/zh_CN/sdk/messages?id=example-fungible-token)
 
 In the [`fungible` example application](https://github.com/linera-io/linera-protocol/tree/main/examples/fungible), such a message can be the transfer of tokens from one chain to another. If the sender includes a `Transfer` operation on their chain, it decreases their account balance and sends a `Credit` message to the recipient's chain:
 
