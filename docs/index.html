@@ -40,7 +40,10 @@
     <script>
      window.$docsify = {
        homepage: 'en_US/README.md',
-       loadSidebar: 'en_US/_sidebar.md',
+       loadSidebar: true
+       alias: {
+         '/en_US/_sidebar.md': '/_sidebar.md'
+       },
        search: {
          maxAge: 86400000,
          paths: 'auto',
