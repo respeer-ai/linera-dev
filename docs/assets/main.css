@@ -1,0 +1,14 @@
+body {
+  font-size: 20px;
+}
+
+.sidebar-nav {
+  p {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+.sidebar-nav ul li a {
+  font-size: 20px;
+}
