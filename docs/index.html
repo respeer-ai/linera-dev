@@ -35,7 +35,6 @@
     <div id="app"></div>
 
     <script src="//unpkg.com/vue/dist/vue.min.js"></script>
-    <script src="//unpkg.com/vue-material@beta"></script>
 
     <script>
      window.$docsify = {
@@ -51,36 +50,6 @@
        routerMode: 'history',
      };
 
-     Vue.use(VueMaterial.default)
-
-     Vue.config.devtools = (
-       location.hostname === 'localhost'
-     );
-
-     var vm = new Vue({
-       el: '#app',
-       data: {
-         tabNamespaces: {},
-         version: 'nightly',
-         language: 'cpp',
-       },
-       methods: {
-         onTabChange: (namespace, tab) => {
-           if (tab === vm.$data.tabNamespaces[namespace]) {
-             return;
-           }
-           vm.$data.tabNamespaces[namespace] = tab;
-         },
-         onVersionChange: (selectDom) => {
-           console.log({ version: selectDom.value });
-         },
-         onLanguageChange: (selectDom) => {
-           console.log({ language: selectDom.value });
-         },
-       },
-     });
-
-     window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = vm.constructor;
     </script>
     <script src="//unpkg.com/docsify@4/lib/docsify.min.js"></script>
     <script src="//unpkg.com/docsify@4/lib/plugins/ga.min.js"></script>
