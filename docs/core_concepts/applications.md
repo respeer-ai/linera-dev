@@ -2,11 +2,11 @@
 
 The programming model of Linera is designed so that developers can take advantage of microchains to scale their applications.
 
-Linera uses the WebAssembly Virtual Machine (Wasm) to execute user applications. Currently, the [Linera SDK](https://linera.dev/sdk.html) is focused on the [Rust](https://www.rust-lang.org/) programming language.
+Linera uses the WebAssembly Virtual Machine (Wasm) to execute user applications. Currently, the [Linera SDK](https://linera-dev.respeer.ai/#/sdk) is focused on the [Rust](https://www.rust-lang.org/) programming language.
 
 Linera applications are structured using the familiar notion of **Rust crate**: the external interfaces of an application (including initialization parameters, operations, messages, and cross-application calls) generally go into the library part of its crate, while the core of each application is compiled into binary files for the Wasm architecture.
 
-## [The Application Deployment Lifecycle](https://linera.dev/core_concepts/applications.html#the-application-deployment-lifecycle)
+## [The Application Deployment Lifecycle](https://linera-dev.respeer.ai/#/core_concepts/applications?id=the-application-deployment-lifecycle)
 
 Linera Applications are designed to be powerful yet re-usable. For this reason there is a distinction between the bytecode and an application instance on the network.
 
@@ -25,17 +25,17 @@ linera publish-and-create <contract-path> <service-path> <init-args>
 
 This will publish the bytecode as well as initialize the application for you.
 
-## [Anatomy of an Application](https://linera.dev/core_concepts/applications.html#anatomy-of-an-application)
+## [Anatomy of an Application](https://linera-dev.respeer.ai/#/core_concepts/applications?id=anatomy-of-an-application)
 
 An **application** is broken into two major components, the *contract* and the *service*.
 
-The **contract** is gas-metered, and is the part of the application which executes operations and messages, make cross-application calls and modifies the application's state. The details are covered in more depth in the [SDK docs](https://linera.dev/sdk.html).
+The **contract** is gas-metered, and is the part of the application which executes operations and messages, make cross-application calls and modifies the application's state. The details are covered in more depth in the [SDK docs](https://linera-dev.respeer.ai/#/sdk).
 
 The **service** is non-metered and read-only. It is used primarily to query the state of an application and populate the presentation layer (think front-end) with the data required for a user interface.
 
-Finally, the application's state is shared by the contract and service in the form of a [View](https://linera.dev/advanced_topics/views.html), but more on that later.
+Finally, the application's state is shared by the contract and service in the form of a [View](https://linera-dev.respeer.ai/#/advanced_topics/views), but more on that later.
 
-## [Operations and Messages](https://linera.dev/core_concepts/applications.html#operations-and-messages)
+## [Operations and Messages](https://linera-dev.respeer.ai/#/core_concepts/applications?id=operations-and-messages)
 
 > For this section we'll be using a simplified version of the example application called "fungible" where users can send tokens to each other.
 
@@ -70,7 +70,7 @@ pub enum Message {
 }
 ```
 
-### [Authentication](https://linera.dev/core_concepts/applications.html#authentication)
+### [Authentication](https://linera-dev.respeer.ai/#/core_concepts/applications?id=authentication)
 
 Operations are always authenticated and messages may be authenticated. The signer of a block becomes the authenticator of all the operations in that block. As operations are executed by applications, messages can be created to be sent to other chains. When they are created, they can be configured to be authenticated. In that case, the message receives the same authentication as the operation that created it. If handling an incoming message creates new messages, those may also be configured to have the same authentication as the received message.
 
@@ -110,7 +110,7 @@ An example where this is used is in the Fungible application, where a `Claim` op
 
 With the `Claim` operation, users can store their tokens on another chain where they're able to produce blocks or where they trust the owner will produce blocks receiving their messages. Only they are able to move their tokens, even on chains where ownership is shared or where they are not able to produce blocks.
 
-## [Registering an Application across Chains](https://linera.dev/core_concepts/applications.html#registering-an-application-across-chains)
+## [Registering an Application across Chains](https://linera-dev.respeer.ai/#/core_concepts/applications?id=registering-an-application-across-chains)
 
 If Alice is using an application on her chain and starts interacting with Bob via the application, e.g. sends him some tokens using the `fungible` example, the application automatically gets registered on Bob's chain, too, as soon as he handles the incoming cross-chain messages. After that, he can execute the application's operations on his chain, too, and e.g. send tokens to someone.
 

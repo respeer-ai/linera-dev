@@ -77,7 +77,7 @@ impl WithServiceAbi for Counter {
 }
 ```
 
-## [Adding GraphQL compatibility](https://linera.dev/sdk/service.html#adding-graphql-compatibility)
+## [Adding GraphQL compatibility](https://linera-dev.respeer.ai/#/sdk/service?id=adding-graphql-compatibility)
 
 Finally, we want our application to have GraphQL compatibility. To achieve this we need a `QueryRoot` for intercepting queries and a `MutationRoot` for introspection queries for mutations.
 

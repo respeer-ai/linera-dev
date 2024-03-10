@@ -14,7 +14,7 @@ linera service
 
 This will run the node service on port 8080 by default (this can be overridden using the `--port` flag).
 
-## [A Note on GraphQL](https://linera.dev/core_concepts/node_service.html#a-note-on-graphql)
+## [A Note on GraphQL](https://linera-dev.respeer.ai/#/core_concepts/node_service?id=a-note-on-graphql)
 
 Linera uses GraphQL as the query language for interfacing with different parts of the system. GraphQL enables clients to craft queries such that they receive exactly what they want and nothing more.
 
@@ -22,7 +22,7 @@ GraphQL is used extensively during application development, especially to query 
 
 To learn more about GraphQL check out the [official docs](https://graphql.org/learn/).
 
-## [GraphiQL IDE](https://linera.dev/core_concepts/node_service.html#graphiql-ide)
+## [GraphiQL IDE](https://linera-dev.respeer.ai/#/core_concepts/node_service?id=graphiql-ide)
 
 Conveniently, the node service exposes a GraphQL IDE called GraphiQL. To use GraphiQL start the node service and navigate to `localhost:8080/`.
 
@@ -30,11 +30,11 @@ Using the schema explorer on the left of the GraphiQL IDE you can dynamically ex
 
 ![graphiql.png](node_service.assets/graphiql.png)
 
-## [GraphQL System API](https://linera.dev/core_concepts/node_service.html#graphql-system-api)
+## [GraphQL System API](https://linera-dev.respeer.ai/#/core_concepts/node_service?id=graphql-system-api)
 
 The node service also exposes a GraphQL API which corresponds to the set of system operations. You can explore the full set of operations by clicking on `MutationRoot`.
 
-## [GraphQL Application API](https://linera.dev/core_concepts/node_service.html#graphql-application-api)
+## [GraphQL Application API](https://linera-dev.respeer.ai/#/core_concepts/node_service?id=graphql-application-api)
 
 To interact with an application, we run the Linera client in service mode. It exposes a GraphQL API for every application running on any owned chain at `localhost:8080/chains/<chain-id>/applications/<application-id>`.
 

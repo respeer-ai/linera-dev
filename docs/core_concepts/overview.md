@@ -4,7 +4,7 @@ Linera is a decentralized infrastructure optimized for Web3 applications that re
 
 The core idea of the Linera protocol is to run many lightweight blockchains, called **microchains**, in parallel in a single set of validators.
 
-## [How does it work?](https://linera.dev/core_concepts/overview.html#how-does-it-work)
+## [How does it work?](https://linera-dev.respeer.ai/#/core_concepts/overview?id=how-does-it-work)
 
 In Linera, user wallets operate their own microchains. The owner of a chain chooses when to add new blocks to the chain and what goes inside the blocks. Such chains with a single user are called **user chains**.
 
@@ -38,7 +38,7 @@ The number of applications present on a single chain is not limited. On the same
 
 The current Linera SDK uses **Rust** as a source language to create Wasm applications. It relies on the normal Rust toolchains so that Rust programmers can work in their preferred environments.
 
-## [How does Linera compare to existing multi-chain infrastructure?](https://linera.dev/core_concepts/overview.html#how-does-linera-compare-to-existing-multi-chain-infrastructure)
+## [How does Linera compare to existing multi-chain infrastructure?](https://linera-dev.respeer.ai/#/core_concepts/overview?id=how-does-linera-compare-to-existing-multi-chain-infrastructure)
 
 Linera is the first infrastructure designed to support many chains in parallel, and notably an arbitrary number of **user chains** meant to be operated by user wallets.
 
@@ -54,7 +54,7 @@ In contrast, Linera is optimized for a large number of user chains:
 
 > Besides user chains, the [Linera protocol](https://linera.io/whitepaper) is designed to support other types of microchains, called "permissioned" and "public" chains. Public chains are operated by validators. In this regard, they are similar to classical blockchains. Permissioned chains are meant to be used for temporary interactions between users, such as atomic swaps.
 
-## [Why build on top of Linera?](https://linera.dev/core_concepts/overview.html#why-build-on-top-of-linera)
+## [Why build on top of Linera?](https://linera-dev.respeer.ai/#/core_concepts/overview?id=why-build-on-top-of-linera)
 
 We believe that many high-value use cases are currently out of reach of existing Web3 infrastructures because of the challenges of serving **many active users** simultaneously without degrading user experience (unpredictable fees, latency, etc).
 
@@ -70,7 +70,7 @@ Lightweight user chains are instrumental in providing elastic scalability but th
 
 This means that Web UIs connected to a wallet will be able to query the state of the user chain directly (no API provider, no light client) using familiar frameworks (React/GraphQL). Furthermore, wallets will be able to leverage the full node as well for security purposes, including to display meaningful confirmation messages to users.
 
-## [What is the current state of the development of Linera?](https://linera.dev/core_concepts/overview.html#what-is-the-current-state-of-the-development-of-linera)
+## [What is the current state of the development of Linera?](https://linera-dev.respeer.ai/#/core_concepts/overview?id=what-is-the-current-state-of-the-development-of-linera)
 
 The [reference open-source implementation](https://github.com/linera-io/linera-protocol) of Linera is under active development. It already includes a Web3 SDK with the necessary features to prototype simple Web3 applications and test them locally on the same machine. Notably, Web UIs (possibly reactive) can already be built on top of Wasm-embedded GraphQL services, and tested locally in the browser.
 
@@ -81,7 +81,7 @@ The main limitations of our current Web3 SDK include:
 
 The main development workstreams of Linera, beyond its SDK, can be broken down as follows.
 
-### [Core Protocol](https://linera.dev/core_concepts/overview.html#core-protocol)
+### [Core Protocol](https://linera-dev.respeer.ai/#/core_concepts/overview?id=core-protocol)
 
 -  User chains
 -  Permissioned chain (core protocol only)
@@ -104,7 +104,7 @@ The main development workstreams of Linera, beyond its SDK, can be broken down a
 -  Governance on the admin chain (e.g. DPoS, onboarding of validators)
 -  Auditing procedures
 
-### [Wasm VM integration](https://linera.dev/core_concepts/overview.html#wasm-vm-integration)
+### [Wasm VM integration](https://linera-dev.respeer.ai/#/core_concepts/overview?id=wasm-vm-integration)
 
 -  Support for the Wasmer VM
 -  Support for the Wasmtime VM (experimental)
@@ -118,7 +118,7 @@ The main development workstreams of Linera, beyond its SDK, can be broken down a
 -  Improve host/guest stub generation to make mocks easier (currently wit-bindgen)
 -  Compile user full node to Wasm/JS
 
-### [Storage](https://linera.dev/core_concepts/overview.html#storage)
+### [Storage](https://linera-dev.respeer.ai/#/core_concepts/overview?id=storage)
 
 -  Object management library ("linera-views") on top of Key-Value store abstraction
 -  Support for Rocksdb
@@ -132,7 +132,7 @@ The main development workstreams of Linera, beyond its SDK, can be broken down a
 -  Tooling for debugging
 -  Make the storage library easy to use outside of Linera
 
-### [Validator Infrastructure](https://linera.dev/core_concepts/overview.html#validator-infrastructure)
+### [Validator Infrastructure](https://linera-dev.respeer.ai/#/core_concepts/overview?id=validator-infrastructure)
 
 -  Simple TCP/UDP networking (used for benchmarks only)
 -  GRPC networking
@@ -143,7 +143,7 @@ The main development workstreams of Linera, beyond its SDK, can be broken down a
 -  New frontend to support dynamic shard assignment
 -  Cloud integration to demonstrate elastic scaling
 
-### [Web3 SDK](https://linera.dev/core_concepts/overview.html#web3-sdk)
+### [Web3 SDK](https://linera-dev.respeer.ai/#/core_concepts/overview?id=web3-sdk)
 
 -  Initial traits for contract and service interfaces
 -  Support for unit testing
