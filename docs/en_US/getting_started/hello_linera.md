@@ -1,12 +1,12 @@
 # 1.2. Hello, Linera
 
-# [Hello, Linera](https://linera-dev.respeer.ai/#/getting_started/hello_linera?id=hello-linera)
+# [Hello, Linera](https://linera-dev.respeer.ai/#/en_US/getting_started/hello_linera?id=hello-linera)
 
 This section is about interacting with the Devnet, running a local development network, then compiling and deploying your first application from scratch.
 
-By the end of this section, you'll have a [microchain](https://linera-dev.respeer.ai/#/core_concepts/microchains) on the Devnet and/or on your local network, and a working application that can be queried using GraphQL.
+By the end of this section, you'll have a [microchain](https://linera-dev.respeer.ai/#/en_US/core_concepts/microchains) on the Devnet and/or on your local network, and a working application that can be queried using GraphQL.
 
-## [Using the Devnet](https://linera-dev.respeer.ai/#/getting_started/hello_linera?id=using-the-devnet)
+## [Using the Devnet](https://linera-dev.respeer.ai/#/en_US/getting_started/hello_linera?id=using-the-devnet)
 
 The Linera Devnet is a deployment of the Linera protocol that's useful for developers. It should not be considered stable, and can be restarted from a clean slate and new genesis at any time.
 
@@ -18,11 +18,11 @@ linera wallet init --with-new-chain --faucet https://faucet.devnet.linera.net
 
 This creates a new microchain on Devnet with some initial test tokens, and the chain is automatically added to the newly instantiated wallet.
 
-> Make sure to use a Linera toolchain [compatible with the current Devnet](https://linera-dev.respeer.ai/#/getting_started/installation?id=installing-from-cratesio).
+> Make sure to use a Linera toolchain [compatible with the current Devnet](https://linera-dev.respeer.ai/#/en_US/getting_started/installation?id=installing-from-cratesio).
 
-## [Starting a Local Test Network](https://linera-dev.respeer.ai/#/getting_started/hello_linera?id=starting-a-local-test-network)
+## [Starting a Local Test Network](https://linera-dev.respeer.ai/#/en_US/getting_started/hello_linera?id=starting-a-local-test-network)
 
-Another option is to start your own local development network. A development network consists of a number of [validators](https://linera-dev.respeer.ai/#/advanced_topics/validators), each of which consist of an ingress proxy (aka. a "load balancer") and a number of workers (aka. "physical shards").
+Another option is to start your own local development network. A development network consists of a number of [validators](https://linera-dev.respeer.ai/#/en_US/advanced_topics/validators), each of which consist of an ingress proxy (aka. a "load balancer") and a number of workers (aka. "physical shards").
 
 To start a local network, run the following command:
 
@@ -34,7 +34,7 @@ This will start a validator with the default number of shards and create a tempo
 
 This will set up a number of initial chains and create an initial wallet to operate them.
 
-### [Using the Initial Test Wallet](https://linera-dev.respeer.ai/#/getting_started/hello_linera?id=using-the-initial-test-wallet)
+### [Using the Initial Test Wallet](https://linera-dev.respeer.ai/#/en_US/getting_started/hello_linera?id=using-the-initial-test-wallet)
 
 `linera net up` prints Bash statements on its standard output to help you configure your terminal to use the initial wallet of the new test network, for instance:
 
@@ -45,13 +45,13 @@ export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/
 
 This wallet is only valid for the lifetime of a single network. Every time a local network is restarted, the wallet needs to be reconfigured.
 
-## [Interacting with the Network](https://linera-dev.respeer.ai/#/getting_started/hello_linera?id=interacting-with-the-network)
+## [Interacting with the Network](https://linera-dev.respeer.ai/#/en_US/getting_started/hello_linera?id=interacting-with-the-network)
 
 > In the following examples, we assume that either the wallet was initialized to interact with the Devnet or the variables `LINERA_WALLET` and `LINERA_STORAGE` are both set and point to the initial wallet of the running local network.
 
 The main way of interacting with the network and deploying applications is using the `linera` client.
 
-To check that the network is working, you can synchronize your [default chain](https://linera-dev.respeer.ai/#/core_concepts/wallets) with the rest of the network and display the chain balance as follows:
+To check that the network is working, you can synchronize your [default chain](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets) with the rest of the network and display the chain balance as follows:
 
 ```bash
 linera sync
@@ -60,7 +60,7 @@ linera query-balance
 
 You should see an output number, e.g. `10`.
 
-## [Building an Example Application](https://linera-dev.respeer.ai/#/getting_started/hello_linera?id=building-an-example-application)
+## [Building an Example Application](https://linera-dev.respeer.ai/#/en_US/getting_started/hello_linera?id=building-an-example-application)
 
 Applications running on Linera are [Wasm](https://webassembly.org/) bytecode. Each validator and client has a built-in Wasm virtual machine (VM) which can execute bytecode.
 
@@ -72,7 +72,7 @@ cd examples/counter && cargo build --release
 
 > Note: This will automatically build Wasm, not native code, thanks to the configuration file `examples/.cargo/config.toml`.
 
-## [Publishing your Application](https://linera-dev.respeer.ai/#/getting_started/hello_linera?id=publishing-your-application)
+## [Publishing your Application](https://linera-dev.respeer.ai/#/en_US/getting_started/hello_linera?id=publishing-your-application)
 
 You can publish the bytecode and create an application using it on your local network using the `linera` client's `publish-and-create` command and provide:
 
@@ -88,15 +88,15 @@ linera publish-and-create \
 
 Congratulations! You've published your first application on Linera!
 
-## [Querying your Application](https://linera-dev.respeer.ai/#/getting_started/hello_linera?id=querying-your-application)
+## [Querying your Application](https://linera-dev.respeer.ai/#/en_US/getting_started/hello_linera?id=querying-your-application)
 
-Now let's query your application to get the current counter value. To do that, we need to use the client running in [*service* mode](https://linera-dev.respeer.ai/#/core_concepts/node_service). This will expose a bunch of APIs locally which we can use to interact with applications on the network.
+Now let's query your application to get the current counter value. To do that, we need to use the client running in [*service* mode](https://linera-dev.respeer.ai/#/en_US/core_concepts/node_service). This will expose a bunch of APIs locally which we can use to interact with applications on the network.
 
 ```bash
 linera service
 ```
 
-Navigate to `http://localhost:8080` in your browser to access the GraphiQL, the [GraphQL](https://graphql.org/) IDE. We'll look at this in more detail in a [later section](https://linera-dev.respeer.ai/#/core_concepts/node_service?id=graphiql-ide); for now, list the applications deployed on your default chain e476… by running:
+Navigate to `http://localhost:8080` in your browser to access the GraphiQL, the [GraphQL](https://graphql.org/) IDE. We'll look at this in more detail in a [later section](https://linera-dev.respeer.ai/#/en_US/core_concepts/node_service?id=graphiql-ide); for now, list the applications deployed on your default chain e476… by running:
 
 ```gql
 query {

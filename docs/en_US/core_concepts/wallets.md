@@ -2,13 +2,13 @@
 
 As in traditional blockchains, Linera wallets are in charge of holding user private keys. However, instead of signing transactions, Linera wallets are meant to sign blocks and propose them to extend the chains owned by their users.
 
-In practice, wallets include a node which tracks a subset of Linera chains. We will see in the [next section](https://linera-dev.respeer.ai/#/core_concepts/node_service) how a Linera wallet can run a GraphQL service to expose the state of its chains to web frontends.
+In practice, wallets include a node which tracks a subset of Linera chains. We will see in the [next section](https://linera-dev.respeer.ai/#/en_US/core_concepts/node_service) how a Linera wallet can run a GraphQL service to expose the state of its chains to web frontends.
 
 > The command-line tool `linera` is the main way for developers to interact with a Linera network and manage the user wallets present locally on the system.
 
-Note that this command-line tool is intended mainly for development purposes. Our goal is that end users eventually manage their wallets in a [browser extension](https://linera-dev.respeer.ai/#/core_concepts/overview?id=web3-sdk).
+Note that this command-line tool is intended mainly for development purposes. Our goal is that end users eventually manage their wallets in a [browser extension](https://linera-dev.respeer.ai/#/en_US/core_concepts/overview?id=web3-sdk).
 
-## [Selecting a Wallet](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=selecting-a-wallet)
+## [Selecting a Wallet](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets?id=selecting-a-wallet)
 
 The private state of a wallet is conventionally stored in a file `wallet.json`, while the state of its node is stored in a file `linera.db`.
 
@@ -18,9 +18,9 @@ You may also define the environment variables `LINERA_STORAGE` and `LINERA_WALLE
 
 Finally, if `LINERA_STORAGE_$I` and `LINERA_WALLET_$I` are defined for some number `I`, you may call `linera --with-wallet $I` (or `linera -w $I` for short).
 
-## [Chain Management](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=chain-management)
+## [Chain Management](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets?id=chain-management)
 
-### [Listing Chains](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=listing-chains)
+### [Listing Chains](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets?id=listing-chains)
 
 To list the chains present in your wallet, you may use the command `show`:
 
@@ -45,7 +45,7 @@ linera wallet show
 
 Each row represents a chain present in the wallet. On the left is the unique identifier on the chain, and on the right is metadata for that chain associated with the latest block.
 
-### [Default Chain](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=default-chain)
+### [Default Chain](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets?id=default-chain)
 
 Each wallet has a default chain that all commands apply to unless you specify another `--chain` on the command line.
 
@@ -63,11 +63,11 @@ To change the default chain for your wallet, user the `set-default` command:
 linera wallet set-default <chain-id>
 ```
 
-### [Opening a Chain](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=opening-a-chain)
+### [Opening a Chain](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets?id=opening-a-chain)
 
 The Linera protocol defines semantics for how new chains are created, we call this "opening a chain". A chain cannot be opened in a vacuum, it needs to be created by an existing chain on the network.
 
-#### [Open a Chain for Your Own Wallet](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=open-a-chain-for-your-own-wallet)
+#### [Open a Chain for Your Own Wallet](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets?id=open-a-chain-for-your-own-wallet)
 
 To open a chain for your own wallet, you can use the `open-chain` command:
 
@@ -77,7 +77,7 @@ linera open-chain
 
 This will create a new chain (using the wallet's default chain) and add it to the wallet. Use the `wallet show` command to see your existing chains.
 
-#### [Open a Chain for Another Wallet](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=open-a-chain-for-another-wallet)
+#### [Open a Chain for Another Wallet](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets?id=open-a-chain-for-another-wallet)
 
 Opening a chain for another `wallet` requires an extra two steps. Let's initialize a second wallet:
 
@@ -108,7 +108,7 @@ Finally, to add the chain to `wallet2` for the given unassigned key we use the `
  linera --wallet wallet2.json assign --key 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 --message-id e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000000000000
 ```
 
-## [Setting up Extra Wallets Automatically with `linera net up`](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=setting-up-extra-wallets-automatically-with-linera-net-up)
+## [Setting up Extra Wallets Automatically with `linera net up`](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets?id=setting-up-extra-wallets-automatically-with-linera-net-up)
 
 For testing, rather than using `linera open-chain` and `linera assign` as above, it is often more convenient to pass the option `--extra-wallets N` to `linera net up`.
 
@@ -116,7 +116,7 @@ This option will create create `N` additional user wallets and output Bash comma
 
 Once all the environment variables are defined, you may switch between wallets using `linera --with-wallet I` or `linera -w I` for short.
 
-## [Automation in Bash](https://linera-dev.respeer.ai/#/core_concepts/wallets?id=automation-in-bash)
+## [Automation in Bash](https://linera-dev.respeer.ai/#/en_US/core_concepts/wallets?id=automation-in-bash)
 
 To automate the process of setting the variables `LINERA_WALLET*` and `LINERA_STORAGE*` after creating a local test network in a shell, we provide a Bash helper function `linera_spawn_and_read_wallet_variables`.
 

@@ -24,7 +24,7 @@ The `application` argument is the callee's application ID, and `A` is the callee
 
 `forwarded_sessions` are session data that need to be consumed within this transaction. Sessions will be explained in a separate section.
 
-## [Example: Crowd-Funding](https://linera-dev.respeer.ai/#/sdk/composition?id=example-crowd-funding)
+## [Example: Crowd-Funding](https://linera-dev.respeer.ai/#/en_US/sdk/composition?id=example-crowd-funding)
 
 The `crowd-funding` example application allows the application creator to launch a campaign with a funding target. That target can be an amount specified in any type of token based on the `fungible` application. Others can then pledge tokens of that type to the campaign, and if the target is not reached by the deadline, they are refunded.
 

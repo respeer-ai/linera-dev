@@ -2,9 +2,9 @@
 
 The first step to deploy your application is to configure a wallet. This will determine where the application will be deployed: either to a local net or to the devnet.
 
-## [Local Net](https://linera-dev.respeer.ai/#/sdk/deploy?id=local-net)
+## [Local Net](https://linera-dev.respeer.ai/#/en_US/sdk/deploy?id=local-net)
 
-To configure the local network, follow the steps in the [Getting Started section](https://linera-dev.respeer.ai/#/getting_started/hello_linera?id=using-the-initial-test-wallet).
+To configure the local network, follow the steps in the [Getting Started section](https://linera-dev.respeer.ai/#/en_US/getting_started/hello_linera?id=using-the-initial-test-wallet).
 
 Afterwards, the `LINERA_WALLET` and the `LINERA_STORAGE` environment variables should be set and can be used in the `publish-and-create` command to deploy the application while also specifying:
 
@@ -18,7 +18,7 @@ linera publish-and-create \
   --json-argument "42"
 ```
 
-## [Devnet](https://linera-dev.respeer.ai/#/sdk/deploy?id=devnet)
+## [Devnet](https://linera-dev.respeer.ai/#/en_US/sdk/deploy?id=devnet)
 
 To configure the wallet for the devnet while creating a new microchain, the following command can be used:
 
@@ -38,6 +38,6 @@ linera publish-and-create \
   --json-argument "42"
 ```
 
-## [Interacting with the Application](https://linera-dev.respeer.ai/#/sdk/deploy?id=interacting-with-the-application)
+## [Interacting with the Application](https://linera-dev.respeer.ai/#/en_US/sdk/deploy?id=interacting-with-the-application)
 
-To interact with the deployed application, a [node service](https://linera-dev.respeer.ai/#/core_concepts/node_service) must be used.
+To interact with the deployed application, a [node service](https://linera-dev.respeer.ai/#/en_US/core_concepts/node_service) must be used.
