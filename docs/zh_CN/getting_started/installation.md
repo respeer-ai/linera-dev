@@ -1,4 +1,4 @@
-# 1.1. Installation
+# 1.1. 安装
 
 Let's start with the installation of the Linera development tools.
 
