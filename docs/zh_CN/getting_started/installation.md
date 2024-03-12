@@ -11,7 +11,7 @@ Linera工具链由以下两个crate构成（译者注：crate即为rust发布包
 - `linera-service`：包含下述可执行文件：
   - `linera` -- Linera的基础客户端工具，用于操作钱包，
   - `linera-proxy` -- 代理服务，用作验证者的接入点，
-  - - `linera-server` -- 验证者的工作节点运行的服务，隐藏在代理服务后面。
+  - `linera-server` -- 验证者的工作节点运行的服务，隐藏在代理服务后面。
 
 ## [运行环境](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=requirements)
 
