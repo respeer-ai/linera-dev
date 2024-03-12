@@ -2,11 +2,21 @@ body {
   font-size: 20px;
 }
 
-.sidebar-nav {
-  p {
-    font-size: 20px;
-    font-weight: 600;
-  }
+body > nav {
+  display: block !important;
+}
+
+.sidebar {
+  width: 340px;
+}
+
+.sidebar .sidebar-nav {
+  padding: 0 24px 0 24px;
+}
+
+.sidebar-nav p {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .sidebar-nav ul li a {
