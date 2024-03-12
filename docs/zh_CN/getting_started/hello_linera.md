@@ -2,83 +2,85 @@
 
 # [Hello, Linera](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=hello-linera)
 
-This section is about interacting with the Devnet, running a local development network, then compiling and deploying your first application from scratch.
+本节我们将讲解Linera官方Devnet交互方式和运行本地开测试网的步骤，然后从0开始编译并部署第一个Linera应用。
 
-By the end of this section, you'll have a [microchain](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains) on the Devnet and/or on your local network, and a working application that can be queried using GraphQL.
+本小节结束后，你将能够在Linera官方Devnet和你自己的本地测试网上创建一条[微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains)，并运行一个应用，该应用可以通过GraphQL访问。
 
-## [Using the Devnet](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-devnet)
+## [使用Devnet](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-devnet)
 
-The Linera Devnet is a deployment of the Linera protocol that's useful for developers. It should not be considered stable, and can be restarted from a clean slate and new genesis at any time.
+Linera Devnet是部署给开发者使用，开发者需要知道Devnet是不稳定的，并且可能随时使用新的创世设置重启。
 
-To interact with the Devnet, some tokens are needed. A Faucet service is available to create new microchains and obtain some test tokens. To do so, this must be configured when initializing the wallet:
+为了能够与Devnet交互，我们需要一些token。通过如下命令初始化并设置钱包后，我们可以从水龙头服务领取一些测试token：
 
 ```bash
 linera wallet init --with-new-chain --faucet https://faucet.devnet.linera.net
 ```
 
-This creates a new microchain on Devnet with some initial test tokens, and the chain is automatically added to the newly instantiated wallet.
+上面的命令将在Devnet上创建一条微链，该微链持有一定数量的测试token，并且自动被加入到新创建的钱包。
 
-> Make sure to use a Linera toolchain [compatible with the current Devnet](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio).
+> 确定你使用的Linera工具链[与当前的Devnet兼容](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio)。
 
-## [Starting a Local Test Network](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=starting-a-local-test-network)
+## [启动本地测试网](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=starting-a-local-test-network)
 
-Another option is to start your own local development network. A development network consists of a number of [validators](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/validators), each of which consist of an ingress proxy (aka. a "load balancer") and a number of workers (aka. "physical shards").
+你也可以在本地环境启动本地测试网络。测试网络包含一些[验证器](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/validators)，每个验证其都包含一个入口代理(即负载均衡器)(译者注：原文为ingress，等同于微服务集群中的网关代理，用于将请求根据预设规则路由到对应的服务)和一些工作节点(即物理分片)。
 
-To start a local network, run the following command:
+通过执行以下命令启动本地测试网：
 
 ```bash
 linera net up
 ```
 
-This will start a validator with the default number of shards and create a temporary directory storing the entire network state.
+上述命令将会启动一个具有默认分片设置的验证器，并创建一个临时目录来存储网络状态。
 
-This will set up a number of initial chains and create an initial wallet to operate them.
+同时，该命令会创建一些初始微链，并创建一个可以操作这些微链的钱包。
 
-### [Using the Initial Test Wallet](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-initial-test-wallet)
+### [使用测试网络初始钱包](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-initial-test-wallet)
 
-`linera net up` prints Bash statements on its standard output to help you configure your terminal to use the initial wallet of the new test network, for instance:
+命令`linera net up`在终端中打印了Bash设置(如下面的例子)，这些设置可以帮助开发者设置他们的终端，以使用测试网络的初始钱包。
 
 ```bash
 export LINERA_WALLET="/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/.tmpvJ6lJI/wallet.json"
 export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/.tmpvJ6lJI/linera.db"
 ```
 
-This wallet is only valid for the lifetime of a single network. Every time a local network is restarted, the wallet needs to be reconfigured.
+该钱包仅仅在测试网络执行期间有效，每次重启测试网络，该钱包都需要重新配置。
 
-## [Interacting with the Network](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=interacting-with-the-network)
+## [与网络交互](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=interacting-with-the-network)
 
-> In the following examples, we assume that either the wallet was initialized to interact with the Devnet or the variables `LINERA_WALLET` and `LINERA_STORAGE` are both set and point to the initial wallet of the running local network.
+> 在后面的例子中，我们假设终端已经将钱包设置好直接访问Devnet，或者`LINERA_WALLET`和`LINERA_STORAGE`环境变量已经设置为本地测试网络的初始钱包。
 
-The main way of interacting with the network and deploying applications is using the `linera` client.
+`linera`客户端时与Linera网络和应用交互的基本方法。
 
-To check that the network is working, you can synchronize your [default chain](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets) with the rest of the network and display the chain balance as follows:
+你可以通过如下命令同步[default微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets)并显示微链余额来确认网络是否正常工作：
 
 ```bash
 linera sync
 linera query-balance
 ```
 
-You should see an output number, e.g. `10`.
+如果一切正常，你将会看到一个数字，例如`10`。
 
-## [Building an Example Application](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=building-an-example-application)
+## [构建示例应用](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=building-an-example-application)
 
-Applications running on Linera are [Wasm](https://webassembly.org/) bytecode. Each validator and client has a built-in Wasm virtual machine (VM) which can execute bytecode.
+运行在Linera网络上的应用是[Wasm](https://webassembly.org/)字节码。每个验证其和客户端上都会运行一个内置的Wasm虚拟机(VM)，用来执行字节码。
 
-Let's build the `counter` application from the `examples/` subdirectory:
+下面我们将构建`examples/`子目录中的`counter`应用：
 
 ```bash
 cd examples/counter && cargo build --release
 ```
 
-> Note: This will automatically build Wasm, not native code, thanks to the configuration file `examples/.cargo/config.toml`.
+> 注意：由于在`examples/.cargo/config.toml`中的预先配置，上面的命令将会自动编译Wasm字节码，而不是主机二进制代码。
 
-## [Publishing your Application](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=publishing-your-application)
+## [发布应用](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=publishing-your-application)
 
 You can publish the bytecode and create an application using it on your local network using the `linera` client's `publish-and-create` command and provide:
 
-1. The location of the contract bytecode
-2. The location of the service bytecode
-3. The JSON encoded initialization arguments
+使用`linera`客户端中的`publish-and-create`命令， 你可以发布字节码，同时创建一个Linera应用，该命令需要以下参数：
+
+1. 合约字节码的路径
+2. 服务字节码的路径
+3. 初始化参数的JSON文本
 
 ```bash
 linera publish-and-create \
@@ -86,17 +88,17 @@ linera publish-and-create \
   --json-argument "42"
 ```
 
-Congratulations! You've published your first application on Linera!
+恭喜你！到此你已经成功发布了第一个Linera应用！
 
-## [Querying your Application](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=querying-your-application)
+## [查询应用](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=querying-your-application)
 
-Now let's query your application to get the current counter value. To do that, we need to use the client running in [*service* mode](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service). This will expose a bunch of APIs locally which we can use to interact with applications on the network.
+现在我们可以查询上面部署的应用，获取当前的计数值。查询应用需要使用客户端的[*服务*模式](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)运行一个Linera节点服务，我们将通过该节点服务提供的一些列APIs与应用交互。
 
 ```bash
 linera service
 ```
 
-Navigate to `http://localhost:8080` in your browser to access the GraphiQL, the [GraphQL](https://graphql.org/) IDE. We'll look at this in more detail in a [later section](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphiql-ide); for now, list the applications deployed on your default chain e476… by running:
+打开你的浏览器，在地址栏输入`http://localhost:8080`访问上面运行的节点服务器内置的GraphiQL用户界面([GraphQL](https://graphql.org/) IDE)。[后面的章节](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphiql-ide)我们会提供更多GraphiQL的使用细节，现在，我们通过下面的命令获得default微链(e476…)上的应用列表：
 
 ```gql
 query {
@@ -110,11 +112,11 @@ query {
 }
 ```
 
-Since we've only deployed one application, the results returned have a single entry.
+鉴于我们只部署了一个应用，上面的请求只返回一个结果。
 
-At the bottom of the returned JSON there is a field `link`. To interact with your application copy and paste the link into a new browser tab.
+上面的查询请求返回的应用列表中，每一个应用都包含`link`字段。将`link`字段的值填入到浏览器地址栏并确定，我们就可以与对应的应用交互了！
 
-Finally, to query the counter value, run:
+最后，执行下面的查询获得计数值：
 
 ```gql
 query {
@@ -122,4 +124,4 @@ query {
 }
 ```
 
-This will return a value of `42`, which is the initialization argument we specified when deploying our application.
+上面的查询请求将会返回`42`，这是我们在部署`counter`应用的时候设置的初始参数。
