@@ -3,10 +3,6 @@ body {
   padding: 24px;
 }
 
-body > nav {
-  display: block !important;
-}
-
 .sidebar {
   width: 340px;
 }
