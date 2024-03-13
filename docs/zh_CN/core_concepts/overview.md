@@ -1,20 +1,22 @@
-# Overview
+# 概览
 
-Linera is a decentralized infrastructure optimized for Web3 applications that require guaranteed performance for an unlimited number of active users.
+Linera是一个去中心化的Web3基础设施，特别服务于海量活跃用户并发访问时依然需要保障服务性能的Web3应用。
 
-The core idea of the Linera protocol is to run many lightweight blockchains, called **microchains**, in parallel in a single set of validators.
+Linera协议的核心在于使用同一组验证其并发运行大量称为**微链**的轻量级区块链。
 
-## [How does it work?](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=how-does-it-work)
+## [工作机制](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=how-does-it-work)
 
-In Linera, user wallets operate their own microchains. The owner of a chain chooses when to add new blocks to the chain and what goes inside the blocks. Such chains with a single user are called **user chains**.
+在Linera中，用户钱包操作用户自己的微链，微链的所有者决定何时创建新区块，以及区块中包含什么内容。如果微链中只包含所有者一个用户，我们将这样的微链称为**用户链**。
 
-Users may add new blocks to their chains in order to process **incoming messages** from other chains or to execute secure **operations** on their accounts, for instance to transfer assets to another user.
+微链的所有者创建区块以处理下列事件：
+- 处理从其他微链发送给本链**消息**
+- 执行用户账户安全**操作**，例如给另一个用户(译者注：通常在另一条微链上)转账
 
-Importantly, validators ensure that all new blocks are **valid**. For instance, transfer operations must originate from accounts with sufficient funds; and incoming messages must have been actually sent from another chain. Blocks are verified by validators in the same way for every chain.
+需要指出的是，验证器确保所有新区块都**有效**。例如，转账操作应该来自余额足够的账户；收到的消息确实从另一条微链发出。验证器使用同样的方法验证每一条微链的区块。
 
-A Linera **application** is a Wasm program that defines its own state and operations. Users can publish bytecode and initialize an application on one chain, and it will be automatically deployed to all chains where it is needed, with a separate state on each chain.
+Linera**应用**是一个Wasm程序，其中包含状态和操作。用户可以在一条微链上发布字节码创建并初始化应用。如果该应用在其他微链(译者注：并非发布应用的微链)被调用，应用将会被自动部署到其他微链。每个应用在每条微链上拥有独立的状态存储。
 
-To ensure coordination across chains, an application may rely on asynchronous **cross-chain messages**. Message payloads are application-specific and opaque to the rest of the system.
+应用依赖于异步**跨链消息**确保不同微链上的应用实例跨链协作。异步消息的载荷部分(payload)在应用内部解析，系统其余部分不需要感知消息载荷。
 
 ```ignore
                                ┌───┐     ┌───┐     ┌───┐
@@ -34,37 +36,37 @@ To ensure coordination across chains, an application may rely on asynchronous **
                                └───┘     └───┘     └───┘
 ```
 
-The number of applications present on a single chain is not limited. On the same chain, applications are **composed** as usual using synchronous calls.
+单条微链上的应用数量可以是无限的。同一条微链上的应用实例之间通过异步调用**组合**。
 
-The current Linera SDK uses **Rust** as a source language to create Wasm applications. It relies on the normal Rust toolchains so that Rust programmers can work in their preferred environments.
+最新的Linera SDK基于Rust进行开发，其上的应用也需要通过使用Rust编程语言，然后编译成Wasm应用。Rust程序员可以使用通用的Rust工具链和他们最喜欢的开发环境开发Linera应用。
 
-## [How does Linera compare to existing multi-chain infrastructure?](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=how-does-linera-compare-to-existing-multi-chain-infrastructure)
+## [Linera和其他多链架构的比较](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=how-does-linera-compare-to-existing-multi-chain-infrastructure)
 
-Linera is the first infrastructure designed to support many chains in parallel, and notably an arbitrary number of **user chains** meant to be operated by user wallets.
+Linera是第一个设计支持并发执行很多链的架构，尤其是通过用户钱包操作任意数量的**用户链**。
 
-In traditional multi-chain infrastructures, each chain usually runs a full blockchain protocol in a separate set of validators. Creating a new chain or exchanging messages between chains is expensive. As a result, the total number of chains is generally limited. Some chains may be specialized to a given use case: these are called "app chains".
+传统多链架构中，每一条平行链由一组验证器执行，其中包含一个完整的区块链协议。这样的架构创建新的平行链或者在平行链之间交换消息成本是高昂的，因而平行链的数量通常是有限的。很多平行链只能处理特定场景，这样的链也被称为`应用链`。
 
-In contrast, Linera is optimized for a large number of user chains:
+相反，Linera是为了并发运行大量的用户链设计和优化的：
 
-- Users only create blocks in their chain when needed;
-- Creating a microchain does not require onboarding validators;
-- All chains have the same level of security;
-- Microchains communicate efficiently using the internal networks of validators;
-- Validators are internally sharded (like a regular web service) and may adjust their capacity elastically by adding or removing internal workers.
+- 用户仅在需要的时候在自己的微链创建新区块；
+- 创建新的微链不需要添加验证器；
+- 所有微链具有相同安全级别；
+- 微链之间通过验证器的内部网络高效通信；
+- 验证器像常规Web服务一样内部分片，因此可以通过增加或减少工作节点弹性调整验证器的能力。
 
-> Besides user chains, the [Linera protocol](https://linera.io/whitepaper) is designed to support other types of microchains, called "permissioned" and "public" chains. Public chains are operated by validators. In this regard, they are similar to classical blockchains. Permissioned chains are meant to be used for temporary interactions between users, such as atomic swaps.
+> 除了用户链，[Linera协议](https://linera.io/whitepaper)也支持其他类型微链，称为`许可链`和`公开链`。公开链和经典区块链一样，由验证器操作(译者注：即由验证器创建新区块，这里验证器就是矿工)。许可链通常用户用户之间的临时交互，比如原子交换。
 
-## [Why build on top of Linera?](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=why-build-on-top-of-linera)
+## [为什么要在Linera上开发?](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=why-build-on-top-of-linera)
 
-We believe that many high-value use cases are currently out of reach of existing Web3 infrastructures because of the challenges of serving **many active users** simultaneously without degrading user experience (unpredictable fees, latency, etc).
+我们认为，当前的Web3基础设施服务于**海量活跃用户**并发访问的场景时，不能保证同等服务质量(不可预测的手续费，延迟等)，导致很多高价值的应用场景不能实施。
 
-Examples of applications that require processing time-sensitive transactions created by many simultaneous users include:
+如下的应用场景中，海量用户将会创建大量交易，这些交易需要在规定时间内完成处理：
 
-- real-time micro-payments and micro-rewards,
-- social data feeds,
-- real-time auction systems,
-- turn-based games,
-- version control systems for software, data pipelines, or AI training pipelines.
+- 实时微支付和微奖励，
+- 社交数据流，
+- 实时拍卖系统，
+- 回合制游戏，
+- 软件、数据流水线或者AI训练流水线的版本控制系统。
 
 Lightweight user chains are instrumental in providing elastic scalability but they have other benefits as well. Because user chains have fewer blocks than traditional blockchains, in Linera, the full-nodes of user chains will be embedded into the users' wallets, typically deployed as a browser extension.
 
