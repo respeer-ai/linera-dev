@@ -1,5 +1,3 @@
-# Linera开发手册
-
 ![The Linera banner](../README.assets/Linera-Header_1920x284px.svg)
 
 # [Linera开发手册](https://linera-dev.respeer.ai/#/zh_CN/introduction?id=the-linera-dev.respeer.ai/#eloper-manual)
