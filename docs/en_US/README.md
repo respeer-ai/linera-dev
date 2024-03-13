@@ -37,6 +37,6 @@
 - YouTube [https://www.youtube.com/@linera_io](https://www.youtube.com/@linera_io)
 - Twitter [https://twitter.com/linera_io](https://twitter.com/linera_io)
 - Linera Commuity [https://t.me/linera_official](https://t.me/linera_official)
-- Media [https://medium.com/@linera](https://medium.com/@linera)
+- Medium [https://medium.com/@linera](https://medium.com/@linera)
 - Discord [https://discord.com/invite/linera](https://discord.com/invite/linera)
 - LinkedIn [https://www.linkedin.com/company/linera-io](https://www.linkedin.com/company/linera-io)
