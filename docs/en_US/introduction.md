@@ -1,7 +1,3 @@
-# The Linera Developer Manual
-
-
-
 ![The Linera banner](../introduction.assets/Linera-Header_1920x284px.svg)
 
 # [The Linera Developer Manual](https://linera-dev.respeer.ai/#/en_US/introduction?id=the-linera-dev.respeer.ai/#eloper-manual)
