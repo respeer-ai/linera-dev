@@ -28,7 +28,7 @@ Conveniently, the node service exposes a GraphQL IDE called GraphiQL. To use Gra
 
 Using the schema explorer on the left of the GraphiQL IDE you can dynamically explore the state of the system and your applications.
 
-![graphiql.png](../node_service.assets/graphiql.png)
+![graphiql.png](../../node_service.assets/graphiql.png)
 
 ## [GraphQL System API](https://linera-dev.respeer.ai/#/en_US/core_concepts/node_service?id=graphql-system-api)
 
