@@ -22,14 +22,40 @@ body {
 
 .sidebar-toggle {
   padding: 10px;
+  border: 0;
   outline: none;
+  bottom: 500px;
   position: absolute;
   top: 0;
-  left: 300px;
+  left: 350px;
+  text-align: center;
+  transition: opacity .3s;
   width: 50px;
 }
 
+.sidebar-toggle .sidebar-toggle-button:hover {
+  opacity: .4;
+}
+
+.sidebar-toggle span {
+  display: block;
+  margin-bottom: 4px;
+  width: 16px;
+  height: 2px
+}
+
+body.sticky .sidebar,
+body.sticky .sidebar-toggle {
+  position: fixed;
+  transition: transform .25s ease;
+}
+
+body.close .sidebar {
+  transform: translateX(-340px)
+}
+
 body.close .sidebar-toggle {
-  transform: translateX(-300px);
+  transform: translateX(-340px);
+  transition: transform .25s ease;
   width: 50px;
 }
