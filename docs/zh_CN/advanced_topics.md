@@ -1,3 +1,3 @@
-# Advanced Topics
+# 进阶主题
 
-In this section, we present additional topics related to the Linera protocol.
+在本章中，我们将会讲解Linera协议的一些更加深入的概念。
