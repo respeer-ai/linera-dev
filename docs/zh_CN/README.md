@@ -1,17 +1,10 @@
 ![The Linera banner](../README.assets/Linera-Header_1920x284px.svg)
 
-# [Linera开发手册](https://linera-dev.respeer.ai/#/zh_CN/introduction?id=the-linera-dev.respeer.ai/#eloper-manual)
+# Linera开发者参考
 
-欢迎阅读Linera开发手册，Linera是一个为**高扩展、低延迟的Web3应用**设计的去中心化协议。
-
-本文档主要面向希望通过在Linera Rust SDK上构建应用原型，以了解Linera及其编程模型的开发者。
-
-> **更新：在Linera Devnet发布和测试Web3应用**
->
-> 安装[Linera CLI工具](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio)，然后按照[此处](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-devnet)的命令创建微链，并将第一个应用发布到当前Devnet。
-
-如果你想加入我们的社区参与Linera生态系统开发，你可以检出我们的[GitHub仓库](https://github.com/linera-io/linera-protocol)，浏览我们的[网站](https://linera.io/)，或者通过[youtube](https://www.youtube.com/@linera_io)，[twitter](https://twitter.com/linera_io)，[telegram](https://t.me/linera_official)，或[discord](https://discord.gg/linera)等社交媒体找到我们。
-
-现在，让我们开始Linera旅程吧！
-
-[Linera开发手册](https://linera-dev.respeer.ai/#/zh_CN/introduction)
+- Linera开发者手册(英文) [https://linera.dev](https://linera.dev)
+- Linera开发者手册(中文) [https://linera-dev.respeer.ai](https://linera-dev.respeer.ai)
+- Linera官网 [https://linera.io](https://linera.io)
+- Linera白皮书V2(英文) [英文白皮书V2 PDF](https://static1.squarespace.com/static/62d6e9b8bf6051136f934527/t/64ddbbe4cb495e1b1b37f678/1692253157602/Linera_whitepaper_v2.pdf)
+- Linera白皮书V2(英文) [英文白皮书V2 Markdown](https://github.com/respeer-ai/linera-whitepaper/blob/master/LineraWhitepaperEN.md)
+- Linera白皮书V2(中文) [中文白皮书V2 Markdown](https://github.com/respeer-ai/linera-whitepaper/blob/master/LineraWhitepaperCN.md)
