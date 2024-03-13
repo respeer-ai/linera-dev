@@ -68,22 +68,22 @@ Linera是第一个设计支持并发执行很多链的架构，尤其是通过�
 - 回合制游戏，
 - 软件、数据流水线或者AI训练流水线的版本控制系统。
 
-Lightweight user chains are instrumental in providing elastic scalability but they have other benefits as well. Because user chains have fewer blocks than traditional blockchains, in Linera, the full-nodes of user chains will be embedded into the users' wallets, typically deployed as a browser extension.
+除了提供弹性扩展能力，轻量级用户链还给系统带来了其他好处。相比传统区块链，Linera的轻量级用户链的区块少得多，因此可以将用户链的全节点(译者注：此处指维护用户所拥有的微链的服务)嵌入到用户钱包，这些钱包通常以浏览器插件的方式部署。
 
-This means that Web UIs connected to a wallet will be able to query the state of the user chain directly (no API provider, no light client) using familiar frameworks (React/GraphQL). Furthermore, wallets will be able to leverage the full node as well for security purposes, including to display meaningful confirmation messages to users.
+这样的实现意味着连接到钱包的Web应用界面可以通过成熟的前端框架(React/GraphQL)直接(不需要对接API提供商，不需要轻客户端)查询用户链状态。此外，钱包可以以多种方式，例如向用户展示有意义的消息确认信息，增强全节点的安全性。
 
-## [What is the current state of the development of Linera?](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=what-is-the-current-state-of-the-development-of-linera)
+## [Linera开发状态](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=what-is-the-current-state-of-the-development-of-linera)
 
-The [reference open-source implementation](https://github.com/linera-io/linera-protocol) of Linera is under active development. It already includes a Web3 SDK with the necessary features to prototype simple Web3 applications and test them locally on the same machine. Notably, Web UIs (possibly reactive) can already be built on top of Wasm-embedded GraphQL services, and tested locally in the browser.
+Linera协议的[开源参考实现](https://github.com/linera-io/linera-protocol)当前正在积极开发中。参考实现中提供封装好的Web3 SDK，其中包含构建简单的Web3应用所需的必要功能，当前实现支持开发者在同一台机器上的本地网络测试他们的应用。值得指出的是，开发者已经可以基于内嵌的Wasm GraphQL服务构建(可能是响应式的)Web应用界面，并通过浏览器执行测试。
 
-The main limitations of our current Web3 SDK include:
+当前版本Web3 SDK有下面的已知限制：
 
-- Web UIs need to query a local HTTP service acting as a wallet. This setup is meant to be temporary and for testing only: in the future, web UIs will securely connect to a Wallet installed as a browser extension, as usual.
-- Only user chains are currently available for testing and documented in this manual. Support for other types of chain (called "public" and "permissioned") will be added later.
+- Web用户界面需要请求作为钱包的本地HTTP服务。该服务是临时的，且仅作为测试用途。将来的版本中，与其他区块链相同，Web用户界面将会通过安全通道连接到浏览器钱包插件。
+- 本文档撰写时，Linera SDK仅能支持用户链，其他类型的微链(称为“公开链”和“许可链”)将在未来支持。
 
-The main development workstreams of Linera, beyond its SDK, can be broken down as follows.
+Linera的开发工作流可以拆分如下，其中包含除了SDK之外的其他开发工作：
 
-### [Core Protocol](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=core-protocol)
+### [核心协议](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=core-protocol)
 
 -  User chains
 -  Permissioned chain (core protocol only)
@@ -106,7 +106,7 @@ The main development workstreams of Linera, beyond its SDK, can be broken down a
 -  Governance on the admin chain (e.g. DPoS, onboarding of validators)
 -  Auditing procedures
 
-### [Wasm VM integration](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=wasm-vm-integration)
+### [集成Wasm虚拟机](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=wasm-vm-integration)
 
 -  Support for the Wasmer VM
 -  Support for the Wasmtime VM (experimental)
@@ -120,7 +120,7 @@ The main development workstreams of Linera, beyond its SDK, can be broken down a
 -  Improve host/guest stub generation to make mocks easier (currently wit-bindgen)
 -  Compile user full node to Wasm/JS
 
-### [Storage](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=storage)
+### [存储](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=storage)
 
 -  Object management library ("linera-views") on top of Key-Value store abstraction
 -  Support for Rocksdb
@@ -134,7 +134,7 @@ The main development workstreams of Linera, beyond its SDK, can be broken down a
 -  Tooling for debugging
 -  Make the storage library easy to use outside of Linera
 
-### [Validator Infrastructure](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=validator-infrastructure)
+### [验证器基础设施](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=validator-infrastructure)
 
 -  Simple TCP/UDP networking (used for benchmarks only)
 -  GRPC networking
