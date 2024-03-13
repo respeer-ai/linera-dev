@@ -1,3 +1,3 @@
-# The Linera Protocol
+# Linera下一
 
-We now describe the main concepts of the Linera protocol in more details.
+现在，我们将更加深入地讲解Linera协议中的基础概念。
