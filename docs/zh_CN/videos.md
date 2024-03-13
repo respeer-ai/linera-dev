@@ -1,9 +1,9 @@
-# Videos
+# 视频
 
-We're consistently improving the SDK and creating new material. We recorded the following tutorial videos for the Linera Developer Summer School 2023:
+Linera团队将持续迭代Linera SDK，并为开发者创建更多编程教学资料。以下是我们为2023年的Linera Developer Summer School录制的教学视频：
 
-- [Build and deploy your first applications](https://www.youtube.com/watch?v=Zr6BWodQ0sI)
-- [Add testing, logging, and more to your app](https://www.youtube.com/watch?v=Aq9jCeEl02k)
-- [Use cross-application calls to call other apps](https://www.youtube.com/watch?v=5M5Ju35AnPE)
+- [构建并部署第一个Linera应用](https://www.youtube.com/watch?v=Zr6BWodQ0sI)
+- [为你的应用添加测试、日志等](https://www.youtube.com/watch?v=Aq9jCeEl02k)
+- [调用其他应用](https://www.youtube.com/watch?v=5M5Ju35AnPE)
 
-*Happy viewing!*
+*开始你的Linera快乐旅程吧!*
