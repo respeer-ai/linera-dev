@@ -19,3 +19,17 @@ body {
 .sidebar-nav ul li a {
   font-size: 20px;
 }
+
+.sidebar-toggle {
+  padding: 10px;
+  outline: none;
+  position: absolute;
+  top: 0;
+  left: 300px;
+  width: 50px;
+}
+
+body.close .sidebar-toggle {
+  transform: translateX(-300px);
+  width: 50px;
+}
