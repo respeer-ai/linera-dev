@@ -85,80 +85,78 @@ Linera的开发工作流可以拆分如下，其中包含除了SDK之外的其�
 
 ### [核心协议](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=core-protocol)
 
--  User chains
--  Permissioned chain (core protocol only)
--  Cross-chain messages
--  Cross-chain pub/sub channels (initial version)
--  Bytecode publishing
--  Application creation
--  Reconfigurations of validators
--  Initial support for gas fees
--  Initial support for storage fees and storage limits
--  External services to help users create their first chain
--  Permissioned chains (adding operation access control, demo of atomic swaps, etc)
--  Public chains (adding leader election, inbox constraints, etc)
--  Support for easy onboarding of user chains into a new application (removing the need to accept requests)
--  Improved pub/sub channels (removing the need to accept subscriptions)
--  Blob storage for applications (generalizing bytecode storage)
--  Support for archiving chains
--  Wallet-friendly chain clients (compile to Wasm/JS, do not maintain execution states for other chains)
--  General tokenomics and incentives for all stakeholders
--  Governance on the admin chain (e.g. DPoS, onboarding of validators)
--  Auditing procedures
+-  用户链
+-  许可链(仅核心协议)
+-  跨链消息
+-  跨链发布/订阅(初始版本)
+-  发布字节码
+-  创建应用
+-  重新配置验证器
+-  交易手续费的初始版本支持
+-  存储费用和存储限制的初始版本支持
+-  帮助用户创建第一条微链的外部服务
+-  许可链(添加操作访问控制，原子交换demo等)
+-  公开链(添加领导者选举，收件箱约束等)
+-  支持新应用部署到用户链的简洁流程(不再需要接受请求)
+-  改进发布/订阅频道(不再需要接受订阅)
+-  应用程序Blob存储(字节码存储)
+-  支持归档微链
+-  钱包友好的微链客户端(编译成Wasm/JS，不维护其他微链的执行状态)
+-  适用于所有利益相关者的经济模型和激励模型
+-  Admin微链治理(例如DPoS，添加新验证器)
+-  审计流程
 
 ### [集成Wasm虚拟机](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=wasm-vm-integration)
 
--  Support for the Wasmer VM
--  Support for the Wasmtime VM (experimental)
--  Test gas metering and deterministic execution across VMs
--  Composing Wasm applications on the same chain (initial version)
--  Enhanced composability with "sessions"
--  Support for non-blocking (yet deterministic) calls to storage
--  Support for read-only GraphQL services in Wasm
--  Support for mocked system APIs (initial version)
--  More efficient cross-application calls
--  Improve host/guest stub generation to make mocks easier (currently wit-bindgen)
--  Compile user full node to Wasm/JS
+-  支持Wasmer虚拟机
+-  支持Wasmtime虚拟机(测试)
+-  测试Gas计量与虚拟机执行确定性
+-  在同一条微链组合应用(初始版本)
+-  使用“会话”改进应用组合
+-  支持非阻塞(确定性)访问存储
+-  支持Wasm实现的只读GraphQL
+-  支持Mocked系统APIs(初始版本)
+-  优化跨应用调用效率
+-  改进服务端/客户端stub生成，更加容易mock(当前为wit-bindgen)
+-  将用户全节点编译为Wasm/JS
 
 ### [存储](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=storage)
 
--  Object management library ("linera-views") on top of Key-Value store abstraction
--  Support for Rocksdb
--  Experimental support for DynamoDb
--  Initial derive macros for GraphQL
--  Initial support for ScyllaDb
--  Make library fully extensible by users (requires better GraphQL macros)
--  Performance benchmarks and improvements (including faster state hashing)
--  Production-grade support for the chosen main database
--  Support global object locks (needed for dynamic sharding)
--  Tooling for debugging
--  Make the storage library easy to use outside of Linera
+-  基于KV存储抽象的对象管理库(“linera-views”)
+-  支持Rocksdb
+-  试验支持DynamoDb
+-  支持GraphQL derive宏的初始版本
+-  开始支持ScyllaDb
+-  在依赖库中支持用户完全可扩展(需要更好的GraphQL宏定义)
+-  性能benchmark测试和改进(包括更快的状态哈希)
+-  基础数据库的产品级支持
+-  支持全局对象锁(动态分片需要)
+-  调试工具
+-  存储库在Linera外更加容易使用
 
 ### [验证器基础设施](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=validator-infrastructure)
 
--  Simple TCP/UDP networking (used for benchmarks only)
--  GRPC networking
--  Basic frontend (aka. proxy) supporting fixed internal shards
--  Observability
--  Initial kubernetes support in CI
--  Initial deployment using a cloud provider
--  New frontend to support dynamic shard assignment
--  Cloud integration to demonstrate elastic scaling
+-  简单TCP/UDP网络(仅做benchmark用)
+-  GRPC网络
+-  支持固定分片的基础服务前端(即代理)
+-  可观测性
+-  CI开始支持kubernetes
+-  在一个云服务商部署
+-  支持动态分片的服务前端
+-  集成云端服务实现弹性扩容
 
 ### [Web3 SDK](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=web3-sdk)
 
--  Initial traits for contract and service interfaces
--  Support for unit testing
--  Support for integration testing
--  Local GraphQL service to query and browse system state
--  Local GraphQL service to query and browse application states
--  Use GraphQL mutations to execute operations and create blocks
--  Initial support for unit tests
--  Support for integration tests
--  Initial ABIs for contract and service interfaces
--  Allowing message sender to pay for message execution fees
--  Bindings to use native cryptographic primitives from Wasm
--  Allowing applications to pay for user fees
--  Allowing applications to use permissioned chains and public chains
--  Wallet as a browser extension (no VM)
--  Wallet as a browser extension (with Wasm VM)
+-  合约和服务接口的初始traits
+-  支持单元测试
+-  支持集成测试
+-  可以查询和浏览系统状态的本地GraphQL服务
+-  可以查询和浏览应用状态的本地GraphQL服务
+-  支持通过GraphQL mutations执行操作并创建区块
+-  合约和服务接口的初始ABIs
+-  支持消息发送者支付消息执行费用
+-  实现原生密码学原语的Wasm绑定层
+-  支持应用支付用户手续费
+-  支持应用使用许可链和公开链
+-  浏览器插件钱包(无虚拟机)
+-  浏览器插件钱包(包含Wasm虚拟机)
