@@ -1,23 +1,23 @@
-# 2.2. Microchains
+# 2.2. 微链
 
-This section provides an introduction to microchains, the main building block of the Linera Protocol. For a more formal treatment refer to the [whitepaper](https://linera.io/whitepaper).
+本节将介绍Linera协议的基础构建单元，微链。微链的正式阐述参见[白皮书](https://linera.io/whitepaper)。
 
-## [Background](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains?id=background)
+## [背景](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains?id=background)
 
-A **microchain** is a chain of blocks describing successive changes to a shared state. We will use the terms *chain* and *microchain* interchangeably. Linera microchains are similar to the familiar notion of blockchain, with the following important specificities:
+**微链**是一系列区块的串联，这些区块描述了对于某共享状态的持续修改。在此我们不严格区分*链*和*微链*，而将这两者互换使用。除了我们熟知的经典区块链特性，Linera中的微链还具有下列重要特性：
 
-- An arbitrary number of microchains can coexist in a Linera network, all sharing the same set of validators and the same level of security. Creating a new microchain only takes one transaction on an existing chain.
-- The task of proposing new blocks in a microchain can be assumed either by validators or by end users (or rather their wallets) depending on the configuration of a chain. Specifically, microchains can be *single-owner*, *permissioned*, or *public*, depending on who is authorized to propose blocks.
+- Linera网络中可以存在任意数量的微链，这些微链共享一组验证器，拥有同样的安全级别。创建微链之需要在已有微链上执行一条交易即可完成。
+- 根据微链的不同配置，微链的新区块可能由验证器创建，或由终端用户(或者说他们的钱包)创建。特别地，根据微链中谁被授权创建区块，可以将微链分为*单所有者链*，*许可链*或*公开链*。
 
-## [Cross-Chain Messaging](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains?id=cross-chain-messaging)
+## [跨链消息](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains?id=cross-chain-messaging)
 
-In traditional networks with a single blockchain, every transaction can access the entire execution state. This is not the case in Linera where the state of a microchain is only affected by its own blocks.
+传统区块链通常为单链，每条交易都可以访问完整执行状态。与传统区块链不同，Linera中的微链执行状态只会被自己的区块改变。
 
-Cross-chain messaging is a way for different microchains to communicate with each other asynchronously. This method allows applications and data to be distributed across multiple chains for better scalability. When an application on one chain sends a message to another chain, a cross-chain request is created. These requests are implemented using remote procedure calls (RPCs) within the validators' internal network, ensuring that each request is executed only once.
+跨链消息是一种不同微链之间的异步通信方法。这种方法允许应用和数据可以在不同微链之间传播，从而实现更好的扩展性。当一条微链上的应用向另一条微链发送消息时，就会创建一个跨链请求。跨链请求使用远程过程调用(RPCs)实现，在验证器的内部网络之间传输。每个跨链请求将确保仅被执行一次。
 
-Instead of immediately modifying the target chain, messages are placed first in the target chain's **inbox**. When an owner of the target chain creates its next block in the future, they may reference a selection of messages taken from the current inbox in the new block. This executes the selected messages and applies their messages to the chain state.
+跨链消息到达目标微链后，将被放置在目标微链的**收件箱**，不会直接修改微链状态。当链的所有者准备创建下一个区块，链所有者将会从收件箱选取消息，构成新区块。执行这些被选中进入下一个区块的消息将会修改微链状态。
 
-Below is an example set of chains sending asynchronous messages to each other over consecutive blocks.
+下面的示意图描述了一组微链之间互相发送跨链消息的示例。
 
 ```ignore
                                ┌───┐     ┌───┐     ┌───┐
@@ -37,10 +37,10 @@ Below is an example set of chains sending asynchronous messages to each other ov
                                └───┘     └───┘     └───┘
 ```
 
-The Linera protocol allows receivers to discard messages but not to change the ordering of selected messages inside the communication queue between two chains. If a selected message fails to execute, it is skipped during the execution of the receiver's block. The current implementation of the Linera client always selects as many messages as possible from inboxes, and never discards messages.
+Linera协议允许接收方丢弃消息，但是不允许接收方修改通信队列内的消息顺序。如果某条消息最终不会被选中，当接收方创建新区块并执行时，将会忽略该消息。当前Linera客户端实现将会从收件箱选取尽量多的消息，且从不丢弃。
 
-## [Chain Ownership Semantics](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains?id=chain-ownership-semantics)
+## [链的所有权语义](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains?id=chain-ownership-semantics)
 
-Only single-owner chains are currently supported in the Linera SDK. However, microchains can create new microchains for other users, and control of a chain can be transferred to another user by changing the owner ID. A chain is permanently deactivated when its owner ID is set to `None`.
+当前Linera SDK版本只支持单所有者链。然而，微链可以为其他用户创建微链，微链的控制权也可以通过修改所有者ID转移给其他用户。如果微链的所有者ID被设置为`None`，该微链将永远停用。
 
-For more detail and examples on how to open and close chains, see the wallet section on [chain management](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=opening-a-chain).
+关于创建和停止微链的更多细节和示例，可以参见[微链管理](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=opening-a-chain)的钱包章节。
