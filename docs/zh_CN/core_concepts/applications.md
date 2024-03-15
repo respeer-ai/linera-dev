@@ -1,23 +1,25 @@
-# 2.5. Applications
+# 2.5. 应用
 
-The programming model of Linera is designed so that developers can take advantage of microchains to scale their applications.
+Linera的编程模型设计旨在让开发者借助微链的帮助扩展他们的应用。
 
-Linera uses the WebAssembly Virtual Machine (Wasm) to execute user applications. Currently, the [Linera SDK](https://linera-dev.respeer.ai/#/zh_CN/sdk) is focused on the [Rust](https://www.rust-lang.org/) programming language.
+Linera使用WebAssembly(Wasm)虚拟机执行应用程序。当前，[Linera SDK](https://linera-dev.respeer.ai/#/zh_CN/sdk)主要针对[Rust](https://www.rust-lang.org/)编程语言。
 
-Linera applications are structured using the familiar notion of **Rust crate**: the external interfaces of an application (including initialization parameters, operations, messages, and cross-application calls) generally go into the library part of its crate, while the core of each application is compiled into binary files for the Wasm architecture.
+Linera应用基于Rust开发者熟悉的**Rust crate**组织：应用程序依赖的外部接口(包括初始化参数、操作、消息和跨链调用)通常都有函数库的crate提供，应用程序核心部分将被编译为Wasm体系结构的二进制文件。
 
-## [The Application Deployment Lifecycle](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=the-application-deployment-lifecycle)
+## [应用开发流程](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=the-application-deployment-lifecycle)
 
-Linera Applications are designed to be powerful yet re-usable. For this reason there is a distinction between the bytecode and an application instance on the network.
+Linera应用是可重用的，因此，应用的字节码和网络上正在运行的应用实例是不同的。
 
-Applications undergo a lifecycle transition aimed at making development easy and flexible:
+为了应用程序开发更加灵活，应用程序将会经历以下生命周期：
 
-1. The bytecode is built from a Rust project with the `linera-sdk` dependency.
-2. The bytecode is published to the network on a microchain, and assigned an identifier.
-3. A user can create a new application instance, by providing the bytecode identifier and initialization arguments. This process returns an application identifier which can be used to reference and interact with the application.
-4. The same bytecode identifier can be used as many times is needed by as many users are needed to create distinct applications.
+1. 将基于`linera-sdk`开发的Rust项目编译成字节码，
+2. 将字节码发布到网络上的某一微链，并为其创建标识符，
+3. 用户提供字节码标识符和初始化参数，创建一个新的应用程序实例，并获得应用标识。用户可以通过应用标识与应用交互。
+4. 不同用户可以使用相同的字节码标识符创建不同的应用程序实例。
 
 Importantly, the application deployment lifecycle is abstracted from the user, and an application can be published with a single command:
+
+
 
 ```bash
 linera publish-and-create <contract-path> <service-path> <init-args>
