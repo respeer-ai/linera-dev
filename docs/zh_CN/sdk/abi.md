@@ -6,7 +6,7 @@ ABIs通常定义在`src/lib.rs`文件中，可以编译为所有体系结构目�
 
 ABI的参考文档可以查看[crate文档](https://docs.rs/linera-base/latest/linera_base/abi/)。
 
-## [Defining a marker struct](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=defining-a-marker-struct)
+## [结构声明](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=defining-a-marker-struct)
 
 应用中提供给外部调用的接口(通常定义在`src/lib.rs`文件中)必须定义一个公开的空结构，其中实现了`Abi` trait。
 
