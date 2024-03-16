@@ -17,52 +17,49 @@ Linera应用是可重用的，因此，应用的字节码和网络上正在运�
 3. 用户提供字节码标识符和初始化参数，创建一个新的应用程序实例，并获得应用标识。用户可以通过应用标识与应用交互。
 4. 不同用户可以使用相同的字节码标识符创建不同的应用程序实例。
 
-Importantly, the application deployment lifecycle is abstracted from the user, and an application can be published with a single command:
-
-
+应用部署过程是用户的抽象(译者注：这句话没有搞懂)，开发者可以通过执行下面的命令发布一个应用：
 
 ```bash
 linera publish-and-create <contract-path> <service-path> <init-args>
 ```
 
-This will publish the bytecode as well as initialize the application for you.
+上面的命令除了发布字节码，也会在微链上创建一个应用实例。
 
-## [Anatomy of an Application](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=anatomy-of-an-application)
+## [应用程序剖析](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=anatomy-of-an-application)
 
-An **application** is broken into two major components, the *contract* and the *service*.
+一个**应用程序**可以分为两个主要组件，*合约*和*服务*。
 
-The **contract** is gas-metered, and is the part of the application which executes operations and messages, make cross-application calls and modifies the application's state. The details are covered in more depth in the [SDK docs](https://linera-dev.respeer.ai/#/zh_CN/sdk).
+**合约**是gas计量的，应用程序在合约中执行操作、处理跨链消息、发起跨链调用和修改应用状态。关于合约在[SDK文档](https://linera-dev.respeer.ai/#/zh_CN/sdk)中包含更加详细的说明。
 
-The **service** is non-metered and read-only. It is used primarily to query the state of an application and populate the presentation layer (think front-end) with the data required for a user interface.
+**服务**是只读的，服务的执行不消耗gas。服务主要用于查询应用状态，通过用户接口将查询结果返回到表示层(通常为前端)。
 
-Finally, the application's state is shared by the contract and service in the form of a [View](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views), but more on that later.
+最后，合约和服务通过一种称为[视图](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)的形式共享应用状态，稍后我们将会详细介绍这一部分。
 
 ## [Operations and Messages](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=operations-and-messages)
 
-> For this section we'll be using a simplified version of the example application called "fungible" where users can send tokens to each other.
+> 本节我们将使用示例应用"fungible"来展示完整的应用程序部署流程，用户可以通过该应用互相转账。
 
-At the system-level, interacting with an application can be done via operations and messages.
+从系统层面来说，用户与应用的交互可以通过操作和消息完成。
 
-**Operations** are defined by an application developer and each application can have a completely different set of operations. Chain owners then actively create operations and put them in their block proposals to interact with an application.
+**操作**是应用开发者定义的，每个应用可以拥有完全不同的操作集合，链所有者创建操作，并将操作包含到新区块中，实现与应用交互。
 
-Taking the "fungible token" application as an example, an operation for a user to transfer funds to another user would look like this:
+以"fungible token"为例，给另一个用户发送资金的操作定义如下：
 
 ```rust
 #[derive(Debug, Deserialize, Serialize)]
 pub enum Operation {
-    /// A transfer from a (locally owned) account to a (possibly remote) account.
+    /// 从一个本地账户到另一个(可能远程)账户的转账
     Transfer {
         owner: AccountOwner,
         amount: Amount,
         target_account: Account,
     },
-    // Meant to be extended here
 }
 ```
 
-**Messages** result from the execution of operations or other messages. Messages can be sent from one chain to another. Block proposers also actively include messages in their block proposal, but unlike with operations, they are only allowed to include them in the right order (possibly skipping some), and only if they were actually created by another chain (or the same chain, earlier).
+**消息**是操作或者其他消息执行的结果，可以在不同微链之间传递。区块创建者可以将消息包含在区块内，但是与操作不同，只有那些被其他微链(或者相同微链此前)创建的消息，才能按照正确顺序添加到区块中(意味着有些消息可能被忽略)。
 
-In our "fungible token" application, a message to credit an account would look like this:
+在"fungible token"应用中，给账户几张的消息定义如下：
 
 ```rust
 #[derive(Debug, Deserialize, Serialize)]
@@ -72,15 +69,15 @@ pub enum Message {
 }
 ```
 
-### [Authentication](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=authentication)
+### [认证](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=authentication)
 
-Operations are always authenticated and messages may be authenticated. The signer of a block becomes the authenticator of all the operations in that block. As operations are executed by applications, messages can be created to be sent to other chains. When they are created, they can be configured to be authenticated. In that case, the message receives the same authentication as the operation that created it. If handling an incoming message creates new messages, those may also be configured to have the same authentication as the received message.
+操作总是认证过的，给区块签名认证的角色天然就是本区块内包含的操作的认证者。消息也可以认证。执行操作时，应用程序可以创建消息并发送给其他微链，这些消息可以设置为认证过的。在这种情况下，接收方将收到与创建该消息的操作拥有相同认证信息的消息。同样，如果处理消息时创建了新消息，新消息也可以配置与旧消息相同的认证信息。
 
-In other words, the block signer can have its authority propagated across chains through series of messages. This allows applications to safely store user state in chains that the user may not have the authority to produce blocks. The application may also allow only the authorized user to change that state, and not even the chain owner is able to override that.
+换句话说，区块签名者可以通过一系列的消息跨链广播其认证信息，这样，应用程序就可以安全地在微链上存储那些不能创建区块的用户状态。应用程序甚至可以仅允许被授权的用户更改其状态，且就算链所有者也不能修改这样的授权。
 
-The figure below shows four chains (A, B, C, D) and some blocks produced in them. In this example, each chain is owned by a single owner (aka. address). Owners are in charge of producing blocks and sign new blocks using their signing keys. Some blocks show the operations and incoming messages they accept, where the authentication is shown inside parenthesis. All operations produced are authenticated by the block proposer, and if these are all single user chains, the proposer is always the chain owner. Messages that have authentication use the one from the operation or message that created it.
+下面的图表展示了4条微链(A, B, C, D)以及这些魏链上产生的区块。在这个示例中，每条微链都只有一个所有者(即地址)，所有者们负责创建新区块和使用他们的签名密钥验证新区块。图例中的有些区块展示了其中包含的操作和消息，操作和消息的验证信息在括号的附加内容中显示。可以看到，所有的操作都是被区块创建者认证过的，如果微链上只有一个用户(即链所有者)，区块创建者就是链所有者。消息携带的认证信息总是与创建消息的操作或消息相同。
 
-One example in the figure is that chain A produced a block with Operation 1, which is authenticated by the owner of chain A (written `(a)`). That operations sent a message to chain B, and assuming the message was sent with the authentication forwarding enabled, it is received and executed in chain B with the authentication of `(a)`. Another example is that chain D produced a block with Operation 2, which is authenticated by the owner of chain D (written `(d)`). That operation sent a message to chain C, which is executed with authentication of `(d)` like the example before. Handling that message in chain C produced a new message, which was sent to chain B. That message, when received by chain B is executed with the authentication of `(d)`.
+其中的一个例子，微链A创建了一个区块，其中包含操作1，操作1由微链A的所有者认证(写作`(a)`)。操作1将向微链B发送一条消息，这条消息携带了发送者的认证信息，微链B将会接受该消息及其认证信息`(a)`。另一个例子是微链D创建了一个包含操作2的区块，该区块由微链D的所有者认证(写作`(d)`)。就像前面的例子一样，操作2向微链C发送了一条携带认证信息的消息，微链C处理该消息是，创建了一条新消息，并发送给微链B。当微链B收到消息时，同时也会收到最早的消息认证信息`(d)`。
 
 ```ignore
                             ┌───┐     ┌─────────────────┐     ┌───┐
@@ -108,20 +105,20 @@ One example in the figure is that chain A produced a block with Operation 1, whi
                             └─────────────────┘     └───┘     └───┘
 ```
 
-An example where this is used is in the Fungible application, where a `Claim` operation allows retrieving money from a chain the user does not control (but the user still trusts will produce a block receiving their message). Without the `Claim` operation, users would only be able to store their tokens on their own chains, and multi-owner and public chains would have their tokens shared between anyone able to produce a block.
+"Fungible"应用中有另一个转账例子，其中的`Claim`操作允许用户从另一条用户没有控制权(但用户信任该微链会创建新区块接受用户发送的消息)的微链提取资金。如果没有`Claim`操作，用户将仅能在自己的微链存入资金，而多所有者微链和公开微链的资金将在所有有能力创建区块的用户之间共享(译者注：最后一句意思不是很明确)。
 
-With the `Claim` operation, users can store their tokens on another chain where they're able to produce blocks or where they trust the owner will produce blocks receiving their messages. Only they are able to move their tokens, even on chains where ownership is shared or where they are not able to produce blocks.
+`Claim`操作允许用户在其他微链上存入资金，只要用户能够在该微链创建区块，或者相信该微链的所有者会创建区块处理他们的消息。这样的操作也确保即使微链有多个所有者，或者用户无权创建新区块时，用户的资金依然只有用户自己能动用。
 
-## [Registering an Application across Chains](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=registering-an-application-across-chains)
+## [注册跨链应用](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=registering-an-application-across-chains)
 
-If Alice is using an application on her chain and starts interacting with Bob via the application, e.g. sends him some tokens using the `fungible` example, the application automatically gets registered on Bob's chain, too, as soon as he handles the incoming cross-chain messages. After that, he can execute the application's operations on his chain, too, and e.g. send tokens to someone.
+如果Alick使用她自己的微链上的应用与Bob的应用交互，例如，通过`fungible`应用向Bob发送一些资金，那么，当Bob的微链接收到Alice发出的消息，并开始处理该消息时，应用就会在Bob的微链上自动注册。应用注册完成后，Bob就可以在自己的微链上执行应用操作，例如，给某人发送一些资金。
 
-But there are also cases where Bob may want to start using an application he doesn't have yet. E.g. maybe Alice regularly makes posts using the `social` example, and Bob wants to subscribe to her.
+某些情况下，Bob想使用那些他的微链上没有的应用，该怎么办？例如，Alice运营了一个`social`应用，她会定期更新帖子，而Bob想订阅Alice的内容。
 
-In that case, trying to execute an application-specific operation would fail, because the application is not registered on his chain. He needs to request it from Alice first:
+此时，Bob将不能执行`social`应用的操作，因为该应用没有在他的微链注册。Bob首先需要向Alice请求该应用：
 
 ```bash
 linera request-application <application-id> --target-chain-id <alices-chain-id>
 ```
 
-Once Alice processes his message (which happens automatically if she is running the client in service mode), he can start using the application.
+一旦Alice处理Bob的请求消息(当Alice将Linera客户端运行在服务模式，消息将被自动处理)，Bob就可以在他的微链上访问`social`应用。
