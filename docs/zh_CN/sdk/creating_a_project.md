@@ -1,16 +1,16 @@
-# 3.1. Creating a Project
+# 3.1. 创建项目
 
-To create your Linera project, use the `linera project new` command. The command should be executed outside the `linera-protocol` folder. It sets up the scaffolding and requisite files:
+使用`linera project new`命令创建Linera项目，该命令应该在`linera-protocol`目录外执行，执行`linera project new`将会帮助开发者建立应用脚手架和必要文件：
 
 ```bash
 linera project new my-counter
 ```
 
-`linera project new` bootstraps your project by creating the following key files:
+`linera project new`创建下列关键文件，作为项目的引导程序：
 
-- `Cargo.toml`: your project's manifest filled with the necessary dependencies to create an app;
-- `src/lib.rs`: the application's ABI definition;
-- `src/state.rs`: the application's state;
-- `src/contract.rs`: the application's contract, and the binary target for the contract bytecode;
-- `src/service.rs`: the application's service, and the binary target for the service bytecode.
-- `.cargo/config.toml`: modifies the default target used by `cargo` to be `wasm32-unknown-unknown`
+- `Cargo.toml`: 项目manifest，其中包含创建应用的必要依赖；
+- `src/lib.rs`: 应用的ABI定义；
+- `src/state.rs`: 应用状态；
+- `src/contract.rs`: 应用合约，将被编译为合约字节码；
+- `src/service.rs`: 应用服务，将被编译为服务字节码；
+- `.cargo/config.toml`: 项目编译器配置，设定`cargo`默认编译`wasm32-unknown-unknown`架构目标文件。
