@@ -1,32 +1,31 @@
-# 3.3. Defining the ABI
+# 3.3. 定义ABI
 
-The Application Binary Interface (ABI) of a Linera application defines how to interact with this application from other parts of the system. It includes the data structures, data types, and functions exposed by on-chain contracts and services.
+Linera应用程序的应用程序二进制接口(ABI)定义了系统其他部分与应用的交互方式，其中包含数据结构，数据类型，以及链上合约和服务提供的函数。
 
-ABIs are usually defined in `src/lib.rs` and compiled across all architectures (Wasm and native).
+ABIs通常定义在`src/lib.rs`文件中，可以编译为所有体系结构目标文件(Wasm和原生)。
 
-For a reference guide, check out the [documentation of the crate](https://docs.rs/linera-base/latest/linera_base/abi/).
+ABI的参考文档可以查看[crate文档](https://docs.rs/linera-base/latest/linera_base/abi/)。
 
 ## [Defining a marker struct](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=defining-a-marker-struct)
 
-The library part of your application (generally in `src/lib.rs`) must define a public empty struct that implements the `Abi` trait.
+应用中提供给外部调用的接口(通常定义在`src/lib.rs`文件中)必须定义一个公开的空结构，其中实现了`Abi` trait。
 
 ```rust
 struct CounterAbi;
 ```
 
-The `Abi` trait combines the `ContractAbi` and `ServiceAbi` traits to include the types that your application exports.
+`Abi` trait聚合了`ContractAbi`和`ServiceAbi` traits，其中包含应用导出的所有数据类型和接口。
 
 ```rust
-/// A trait that includes all the types exported by a Linera application (both contract
-/// and service).
+/// 包含Linera应用导出的所有数据类型和接口的trait(包含合约和服务)
 pub trait Abi: ContractAbi + ServiceAbi {}
 ```
 
-Next, we're going to implement each of the two traits.
+接下来，我们将会实现上面提到的两个traits。
 
-## [Contract ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=contract-abi)
+## [合约ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=contract-abi)
 
-The `ContractAbi` trait defines the data types that your application uses in a contract. Each type represents a specific part of the contract's behavior:
+`ContractAbi` trait定义了应用程序的合约中使用的数据类型，每种类型都表示合约的一部分特定行为：
 
 ```rust
 /// A trait that includes all the types exported by a Linera application contract.
@@ -72,9 +71,9 @@ pub trait ContractAbi {
 }
 ```
 
-All these types must implement the `Serialize`, `DeserializeOwned`, `Send`, `Sync`, `Debug` traits, and have a `'static` lifetime.
+所有类型都必须实现`Serialize`, `DeserializeOwned`, `Send`, `Sync`, `Debug` traits，并且具有`'static`生命周期。
 
-In our example, we would like to change our `InitializationArgument`, `Operation` to `u64`, like so:
+在我们的例子中，我们将`InitializationArgument`, `Operation`成员修改为`u64`类型，如下：
 
 ```rust
 impl ContractAbi for CounterAbi {
@@ -89,11 +88,9 @@ impl ContractAbi for CounterAbi {
 }
 ```
 
-## [Service ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=service-abi)
+## [服务ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=service-abi)
 
-The `ServiceAbi` is in principle very similar to the `ContractAbi`, just for the service component of your application.
-
-The `ServiceAbi` trait defines the types used by the service part of your application:
+概念上，`ServiceAbi`与`ContractAbi`雷同，所不同者，`ServiceAbi`提供的是应用程序的服务部分数据类型和接口。
 
 ```rust
 /// A trait that includes all the types exported by a Linera application service.
@@ -109,7 +106,7 @@ pub trait ServiceAbi {
 }
 ```
 
-For our Counter example, we'll be using GraphQL to query our application so our `ServiceAbi` should reflect that:
+在计数器示例中，我们将会使用GraphQL请求应用程序，因此`ServiceAbi`需要定义如下：
 
 ```rust
 impl ServiceAbi for CounterAbi {
