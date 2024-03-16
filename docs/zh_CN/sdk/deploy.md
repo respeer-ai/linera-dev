@@ -6,8 +6,6 @@
 
 参考[开始章节](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-initial-test-wallet)配置本地测试网。
 
-Afterwards, the `LINERA_WALLET` and the `LINERA_STORAGE` environment variables should be set and can be used in the `publish-and-create` command to deploy the application while also specifying:
-
 然后，我们需要设置`LINERA_WALLET`和`LINERA_STORAGE`环境变量，这些变量将会在执行`publish-and-create`命令时用到。此外，我们还需要指定下列参数：
 
 1. 合约字节码路径
@@ -27,8 +25,6 @@ linera publish-and-create \
 ```bash
 linera wallet init --with-new-chain --faucet https://faucet.devnet.linera.net
 ```
-
-The Faucet will provide the new chain with some tokens, which can then be used to deploy the application with the `publish-and-create` command. It requires specifying:
 
 开发网水龙头将创建一条新的微链，该微链有一些token，可以用于执行`publish-and-create`命令在开发网部署应用。在开发网部署命令同样需要指定下列参数：
 
