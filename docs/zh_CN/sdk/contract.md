@@ -1,8 +1,8 @@
-# 3.4. Writing the Contract Binary
+# 3.4. 编写合约代码
 
-The contract binary is the first component of a Linera application. It can actually change the state of the application.
+合约是Linera应用程序的第一个组件，合约的执行将实际上改变应用状态。
 
-To create a contract, we need to implement the `Contract` trait, which is as follows:
+我们需要实现如下的`Contract` trait来实现一个合约：
 
 ```rust
 #[async_trait]
@@ -54,21 +54,21 @@ pub trait Contract: WithContractAbi + ContractAbi + Send + Sized {
 }
 ```
 
-The full trait definition can be found [here](https://github.com/linera-io/linera-protocol/blob/main/linera-sdk/src/lib.rs).
+完整的trait定义可以参见[这里](https://github.com/linera-io/linera-protocol/blob/main/linera-sdk/src/lib.rs)。
 
-There's quite a bit going on here, so let's break it down and take one method at a time.
+合约里面发生了很多事情，因此我们将其拆分开，每次实现一个方法。
 
-For this application, we'll be using the `initialize` and `execute_operation` methods.
+在示例应用中，我们将会使用`initialize`和`execute_operation`方法。
 
-## [Initializing our Application](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=initializing-our-application)
+## [初始化应用](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=initializing-our-application)
 
-The first thing we need to do is initialize our application by using `Contract::initialize`.
+首先，我们需要使用`Contract::initialize`初始化应用。
 
-`Contract::initialize` is only called once when the application is created and only on the microchain that created the application.
+`Contract::initialize`仅在应用被创建时调用一次，并且仅发生在创建应用的微链上。
 
-Deployment on other microchains will use the `Default` implementation of the application state if `SimpleStateStorage` is used, or the `Default` value of all sub-views in the state if the `ViewStateStorage` is used.
+当应用在其他微链部署，根据应用状态的不同约束，应用将使用不同的初始化参数。如果应用状态被`SimpleStateStorage`修饰，应用状态将初始化为默认值；如果应用状态被`ViewStateStorage`修饰，应用状态将使用所有子视图的默认值进行初始化。
 
-For our example application, we'll want to initialize the state of the application to an arbitrary number that can be specified on application creation using its initialization parameters:
+在我们的示例中，我们希望应用可以通过初始化参数指定任何数值作为计数器的初值：
 
 ```rust
     async fn initialize(
@@ -81,11 +81,11 @@ For our example application, we'll want to initialize the state of the applicati
     }
 ```
 
-## [Implementing the Increment Operation](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=implementing-the-increment-operation)
+## [实现增加操作](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=implementing-the-increment-operation)
 
-Now that we have our counter's state and a way to initialize it to any value we would like, a way to increment our counter's value. Changes made by block proposers to application states are broadly called 'operations'.
+现在，我们实现了一个计数器状态，该计数器可以通过传递任意数值初始化，我们需要一个方法来增加计数器的值。区块创建者修改应用状态的行为统称为'操作'。
 
-To create a new operation, we need to use the method `Contract::execute_operation`. In the counter's case, it will be receiving a `u64` which is used to increment the counter:
+我们需要使用方法`Contract::execute_operation`来创建一个新的操作。在计数器示例中，该方法将会收到一个`u64`类型的数值，用来作为计数值的增量。
 
 ```rust
     async fn execute_operation(
@@ -99,9 +99,9 @@ To create a new operation, we need to use the method `Contract::execute_operatio
     }
 ```
 
-## [Declaring the ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=declaring-the-abi)
+## [声明ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=declaring-the-abi)
 
-Finally, to link our `Contract` trait implementation with the ABI of the application, the following code is added:
+最后，我们通过如下的代码将上面实现的`Contract` trait与应用程序的ABI相关联：
 
 ```rust
 impl WithContractAbi for Counter {
