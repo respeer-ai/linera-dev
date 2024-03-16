@@ -1,26 +1,26 @@
-# 3.7. Cross-Chain Messages
+# 3.7. 跨链消息
 
-On Linera, applications are meant to be multi-chain: They are instantiated on every chain where they are used. An application has the same application ID and bytecode everywhere, but a separate state on every chain. To coordinate, the instances can send *cross-chain messages* to each other. A message sent by an application is always handled by the *same* application on the target chain: The handling code is guaranteed to be the same as the sending code, but the state may be different.
+在Linera上，应用天然是跨链的：当一个应用在一条新微链被使用，该应用将在新微链初始化。一个应用在不同微链上拥有同样的应用ID与字节码，但是每条微链的应用状态是独立的。不同微链的应用实例可以通过发送*跨链消息*互相协调。发送消息与接收消息的应用总是*同一个*：这意味着消息总是被同样的代码片段处理，但是其状态可能是不同的。
 
-For your application, you can specify any serializable type as the `Message` type in your `ContractAbi` implementation. To send a message, return it among the [`ExecutionOutcome`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ExecutionOutcome.html)'s `messages`:
+我们可以在应用的`ContractAbi`实现中指定任何可以序列化的类型作为`Message`类型。当我们需要发送一条消息，将其包含在[`ExecutionOutcome`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ExecutionOutcome.html)函数返回值`messages`中即可：
 
 ```rust
     pub messages: Vec<OutgoingMessage<Message>>,
 ```
 
-`OutgoingMessage`'s `destination` field specifies either a single destination chain, or a channel, so that it gets sent to all subscribers.
+`OutgoingMessage`的`destination`成员可以是一条微链，也可以是一个频道。如果是一个频道，消息将被发送给所有订阅者。
 
-If the `authenticated` field is `true`, the callee is allowed to perform actions that require authentication on behalf of the signer of the original block that caused this call.
+如果`authenticated`为`true`，被调用者将可以执行需要引发此条用的原始区块签名者认证的行为。
 
-The `message` field contains the message itself, of the type you specified in the `ContractAbi`.
+`message`成员包含消息本身，其类型为此前我们在`ContractAbi`中指定的消息类型。
 
-You can also use [`ExecutionOutcome::with_message`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ExecutionOutcome.html#method.with_message) and [`with_authenticated_message`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ExecutionOutcome.html#method.with_authenticated_message) for convenience.
+方便起见，我们也可以使用[`ExecutionOutcome::with_message`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ExecutionOutcome.html#method.with_message)和[`with_authenticated_message`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ExecutionOutcome.html#method.with_authenticated_message)构造消息.
 
-During block execution in the *sending* chain, messages are returned via `ExecutionOutcome`s. The returned message is then placed in the *target* chain inbox for processing. There is no guarantee that it will be handled: For this to happen, an owner of the target chain needs to include it in the `incoming_messages` in one of their blocks. When that happens, the contract's `execute_message` method gets called on their chain.
+*发送*微链执行区块时，可以通过`ExecutionOutcome`返回消息，这些消息将被放在*目标*微链的收件箱，等待处理。这些消息不是一定被处理：当目标微链的所有者(之一)将消息放到区块的`incoming_messages`中，合约的`execute_message`将会在目标微链被调用，消息就被处理了。
 
-## [Example: Fungible Token](https://linera-dev.respeer.ai/#/zh_CN/sdk/messages?id=example-fungible-token)
+## [示例: 同质化Token](https://linera-dev.respeer.ai/#/zh_CN/sdk/messages?id=example-fungible-token)
 
-In the [`fungible` example application](https://github.com/linera-io/linera-protocol/tree/main/examples/fungible), such a message can be the transfer of tokens from one chain to another. If the sender includes a `Transfer` operation on their chain, it decreases their account balance and sends a `Credit` message to the recipient's chain:
+在[`fungible`示例应用](https://github.com/linera-io/linera-protocol/tree/main/examples/fungible)中，从一条微链向另一条微链转账就是一条消息。如果发送者在他的微链上包含一个`Transfer`操作，当操作被执行时，发送者的账户余额将减少，同时发送一个`Credit`消息到接收者的微链：
 
 ```rust
 async fn execute_operation(
@@ -47,7 +47,7 @@ async fn execute_operation(
 }
 ```
 
-On the recipient's chain, `execute_message` is called, which increases their account balance.
+接收者微链这一侧，`execute_message`将会执行，增加接收者的余额。
 
 ```rust
 async fn execute_message(
