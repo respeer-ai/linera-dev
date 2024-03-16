@@ -1,12 +1,12 @@
-# 3.2. Creating the Application State
+# 3.2. 创建应用状态
 
-The `struct` which defines your application's state can be found in `src/state.rs`.
+`src/state.rs`文件中包含定义应用状态的`struct`。
 
-To represent our counter, we're going to need a single `u64`. To persist the counter we'll be using Linera's [view](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views) paradigm.
+我们使用`u64`来表示应用中的计数值，并使用Linear的[View](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)模型持久化存储计数值。
 
-Views are a little like an [ORM](https://en.wikipedia.org/wiki/Object–relational_mapping), however instead of mapping data structures to a relational database like Postgres, they are instead mapped onto key-value stores like [RocksDB](https://rocksdb.org/).
+Views有点儿像[ORM](https://en.wikipedia.org/wiki/Object–relational_mapping)，与ORM通常用于将数据结构映射到像Postgres这样的关系数据库不完全一样的是，Views将数据结构映射到像[RocksDB](https://rocksdb.org/)一样的KV存储。
 
-In vanilla Rust, we might represent our Counter as so:
+原生的Rust中，我们用如下结构描述计数器：
 
 ```rust
 // do not use this
@@ -15,7 +15,7 @@ struct Counter {
 }
 ```
 
-However, to persist your data, you'll need to replace the existing `Application` state struct in `src/state.rs` with the following view:
+然而，为了持久化存储数据，我们需要将`src/state.rs`中的所有`应用`状态用下面的View替换：
 
 ```rust
 /// The application state.
@@ -26,14 +26,14 @@ pub struct Counter {
 }
 ```
 
-and all other occurrences of `Application` in your app.
-
 The `RegisterView<T>` supports modifying a single value of type `T`. There are different types of views for different use-cases, but the majority of common data structures have already been implemented:
 
-- A `Vec` or `VecDeque` corresponds to a `LogView`
-- A `BTreeMap` corresponds to a `MapView` if its values are primitive, or to `CollectionView` if its values are other views;
-- A `Queue` corresponds to a `QueueView`
+`RegisterView<T>`支持修改一个`T`类型的数值。不同应用场景我们将会使用不同的视图类型，但是主要的公共数据类型都已经实现：
 
-For an exhaustive list refer to the Views [documentation](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views).
+- `Vec`或`VecDeque`对应`LogView`
+- 如果`BTreeMap`的元素为元类型，对应`MapView`，否则对应`CollectionView`
+- `Queue`对应`QueueView`
 
-Finally, run `cargo check` to ensure that your changes compile.
+Views的详细列表参见[文档](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)。
+
+最后，执行`cargo check`编译上面的修改。
