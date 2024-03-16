@@ -1,4 +1,4 @@
-# 3.10. Writing Tests
+# 3.10. 编写测试
 
 Linera applications can be tested using unit tests or integration tests. Both are a bit different than usual Rust tests. Unit tests are executed inside a WebAssembly virtual machine in an environment that simulates a single microchain and a single application. System APIs are only available if they are mocked using helper functions from `linera_sdk::test`.
 
