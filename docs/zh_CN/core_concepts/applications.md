@@ -35,7 +35,7 @@ linera publish-and-create <contract-path> <service-path> <init-args>
 
 最后，合约和服务通过一种称为[视图](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)的形式共享应用状态，稍后我们将会详细介绍这一部分。
 
-## [Operations and Messages](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=operations-and-messages)
+## [操作和消息](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=operations-and-messages)
 
 > 本节我们将使用示例应用"fungible"来展示完整的应用程序部署流程，用户可以通过该应用互相转账。
 
