@@ -1,10 +1,10 @@
-# 3.5. Writing the Service Binary
+# 3.5. 编写服务代码
 
-The service binary is the second component of a Linera application. It is compiled into a separate Bytecode from the contract and is run independently. It is not metered (meaning that querying an application's service does not consume gas), and can be thought of as a read-only view into your application.
+Linera应用的第二个组件是服务程序，服务程序编译的字节码与合约字节码是分离的，且独立执行。服务程序不进行计量(意味着请求应用服务程序不消耗gas)，可以认为服务程序是应用的只读视图。
 
-Application states can be arbitrarily complex, and most of the time you don't want to expose this state in its entirety to those who would like to interact with your app. Instead, you might prefer to define a distinct set of queries that can be made against your application.
+应用状态可以是复杂的，大部分时候开发者不会将全部状态暴露给与应用交互的用户，而代之以一系列预先明确定义的请求集合。
 
-The `Service` trait is how you define the interface into your application. The `Service` trait is defined as follows:
+`Service` trait中定义了应用交互接口：
 
 ```rust
 /// The service interface of a Linera application.
@@ -25,17 +25,17 @@ pub trait Service: WithServiceAbi + ServiceAbi {
 }
 ```
 
-The full service trait definition can be found [here](https://github.com/linera-io/linera-protocol/blob/main/linera-sdk/src/lib.rs).
+完整的`Service` trait定义参见[这里](https://github.com/linera-io/linera-protocol/blob/main/linera-sdk/src/lib.rs)。
 
-Let's implement `Service` for our counter application.
+现在让我们实现技术程序的`Service`部分。
 
-First, we want to generate the necessary boilerplate for implementing the service [WIT interface](https://component-model.bytecodealliance.org/design/wit.html), export the necessary resource types and functions so that the host (the process running the bytecode) can call the service. Happily, there is a macro to perform this code generation, so just add the following to `service.rs`:
+首先，我们希望生成实现服务的模板文件[WIT接口](https://component-model.bytecodealliance.org/design/wit.html)，用来导出主机(执行字节码的进程)访问服务的必要资源类型和函数。Linera SDK中有预先定义的宏来执行需要的代码生成过程，因此我们只需要在`service.rs`文件中添加如下代码即可：
 
 ```rust
 linera_sdk::service!(Counter);
 ```
 
-Next, we need to implement the `Service` for `Counter`. To do this we need to define `Service`'s associated types and implement `handle_query`, as well as define the `Error` type:
+接下来，让我们开始实现`计数器`应用的`Service`。如下，我们需要定义`Service`的相关类型，实现`handle_query`，并且定义`Error`类型：
 
 ```rust
 #[async_trait]
@@ -69,7 +69,7 @@ pub enum Error {
 }
 ```
 
-Finally, as before, the following code is needed to incorporate the ABI definitions into your `Service` implementation:
+最后，与合约到吗一样，我们需要将`Service`实现与ABI定义相关联：
 
 ```rust
 impl WithServiceAbi for Counter {
@@ -77,9 +77,9 @@ impl WithServiceAbi for Counter {
 }
 ```
 
-## [Adding GraphQL compatibility](https://linera-dev.respeer.ai/#/zh_CN/sdk/service?id=adding-graphql-compatibility)
+## [GraphQL支持](https://linera-dev.respeer.ai/#/zh_CN/sdk/service?id=adding-graphql-compatibility)
 
-Finally, we want our application to have GraphQL compatibility. To achieve this we need a `QueryRoot` for intercepting queries and a `MutationRoot` for introspection queries for mutations.
+我们希望应用支持GraphQL请求，因此，我们需要一个`QueryRoot`拦截查询请求，以及一个`MutationRoot`拦截修改请求。
 
 ```rust
 struct MutationRoot;
@@ -103,4 +103,5 @@ impl QueryRoot {
 }
 ```
 
-We haven't included the imports in the above code; they are left as an exercise to the reader (but remember to import `async_graphql::Object`). If you want the full source code and associated tests check out the [examples section](https://github.com/linera-io/linera-protocol/blob/main/examples/counter/src/service.rs) on GitHub.
+上面的示例中我们没有包含依赖导入部分，我们将这一部分留给读者作为练习(记得导入`async_graphql::Object`)。完整的示例代码可以从GitHub上的[示例](https://github.com/linera-io/linera-protocol/blob/main/examples/counter/src/service.rs)找到。
+
