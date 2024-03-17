@@ -1,39 +1,39 @@
 # 5.1. Glossary
 
-- **Address**: A unique public alphanumeric identifier used to designate the identity of an entity on the Linera network.
-- **Admin Chain**: The Linera Network has one designated *admin chain* where validators can join or leave and where new epochs are defined.
-- **Application**: Similar to a smart-contract on Ethereum, an application is code deployed on the Linera network which is executed by all validators. An application has a metered *contract* which executes 'business logic' and modifies state and an unmetered 'service' which is a read-only view into an application's state.
-- **Byzantine Fault-Tolerant (BFT)**: A system which can operate correctly and achieve consensus even if components of the system fail or act maliciously.
-- **Block Height**: The number of blocks preceding a given block on a specific microchain.
-- **Block Proposal**: A candidate block proposed by a chain owner which may be selected at the next block height.
-- **Bytecode**: A collection of bytes corresponding to a program that can be run by the Wasm virtual machine.
-- **Client**: The `linera` program, which is a local node and wallet operated by users to make requests to the network. In Linera, clients drive the network by proposing new blocks and validators are mostly reactive.
-- **Certificate**: A value with signatures from a quorum of validators. Values can be confirmed blocks, meaning that the block has been added to the chain and is final. There are other values that are used for reaching consensus, before certifying a confirmed block.
-- **Committee**: The set of all validators for a particular *epoch*, together with their voting weights.
-- **Chain Owner**: The owner of a *user chain* or *permissioned chain*. This is represented as the alphanumeric identifier derived from the hash of the owner's public key.
-- **Channel**: A broadcast mechanism enabling publish-subscribe behavior across chains.
-- **Contract**: The metered part of an application which executes business logic and can modify the application's state.
-- **Cross-Application Call**: A call from one application to another on the *same chain*.
-- **Cross-Chain Message**: A message containing a data payload which is sent from one chain to another. Cross-Chain messages are the asynchronous communication primitive which enable communication on the same application running on different chains.
-- **Epoch**: A period of time when a particular set of validators with particular voting weights can certify new blocks. Since each chain has to transition explicitly from one epoch to the next, epochs can overlap.
-- **Genesis Configuration**: The configuration determining the state of a newly created network; the voting weights of the initial set of validators, the initial fee structure, and initial chains that the network starts with.
-- **Inbox**: A commutative data structure storing incoming messages for a given chain.
-- **Message**: See 'Cross-Chain Message'.
-- **Microchain**: A lightweight chain of blocks holding a subset of the network's state running on every validator. This is used interchangeably with 'chain'. *All* Linera chains are microchains.
-- **Network**: The totality of all protocol participants. A network is the combination of committee, clients and auditors.
-- **Operation**: Operations are transactions directly added to a block by the creator (and signer) of the block. Users typically use operations to start interacting with an application on their own chain.
-- **Permissioned Chain**: A microchain which is owned by more than one user. Users take turns proposing blocks and the likelihood of selection is proportional to their *weight*.
-- **Project**: The collection of files and dependencies which are built into the bytecode which is instantiated as an application on the Linera Network.
-- **Public Chain**: A microchain with full BFT consensus with a strict set of permissions relied on for the operation of the network,
-- **Quorum**: A set of validators representing > ⅔ of the total stake. A quorum is required to create a certificate.
-- **Single-Owner Chain**: See 'User Chain'.
-- **Service**: An unmetered read-only view into an application's state.
-- **Shard**: A logical subset of all microchains on a given validator. This corresponds directly to a physical *worker*.
-- **Stake**: An amount of tokens pledged by a validator or auditor, as a collateral to guarantee their honest and correct participation in the network.
-- **User Chain**: Used interchangeably with *Single-Owner Chain*. User chains are chains which are owned by a single user on the network. Only the chain owner can propose blocks, and therefore only the chain owner can forcibly advance the state of a user chain.
-- **Validator**: Validators run the servers that allow users to download and create blocks. They validate, execute and cryptographically certify the blocks of all the chains.
-- **View**: Views are like an Object-Relational Mapping (ORM) for mapping complex types onto key-value stores. Views group complex state changes into a set of elementary operations and commit them atomically. They are full or partial in-memory representations of complex types saved on disk in a key-value store
-- **Wallet**: A file containing a user's public and private keys along with configuration and information regarding the chains they own.
-- **WebAssembly (Wasm)**: A binary compilation target and instruction format that runs on a stack-based VM. Linera applications are compiled to Wasm and run on Wasm VMs inside validators and clients.
-- **Web3**: A natural evolution of the internet focusing on decentralization by leveraging blockchains and smart contracts.
-- **Worker**: A process which runs a subset of all microchains on a given validator. This corresponds directly to a logical *shard*.
+- **Address**: 字母数字组成的唯一标识，用于标识Linera网络上的一个实体。
+- **Admin Chain**: Linera网络中的特定*admin chain*，用于供验证器加入或离开网络，和定义新epoch。
+- **Application**: 与以太坊中的智能合约相同，Linera中的应用是一段部署到网络上，由所有验证器执行的代码。一个应用程序中包含计量的*合约*和非计量*服务*，其中合约包含商业逻辑，并修改应用状态，服务提供应用状态的只读视图。
+- **Byzantine Fault-Tolerant (BFT)**: 即使网络中存在失败参与者，或恶意参与者，整个网络也能正确操作并最终达成共识的系统。
+- **Block Height**: 在特定微链上，给定区块之后的区块数。、
+- **Block Proposal**: 链所有者创建的候选区块，可能在下一个区块高度被选中执行。
+- **Bytecode**: 对应一个程序的字节集合，该程序可以被Wasm虚拟机执行。
+- **Client**: `linera`应用程序，作为本地节点和钱包执行，用户通过该应用程序向网络发起请求。在Linera中，客户端通过创建区块驱动网络，而验证器是被动响应的。
+- **Certificate**: 该值由一定数量的验证器生成的签名集合。有些值表示已经确认并被添加到微链的区块，有些值是在区块认证确认之前创建，用于达成共识。
+- **Committee**: 特定*epoch*的验证器及其投票权重集合。
+- **Chain Owner**: *用户链*和*许可链*的所有者，由所有者的公钥哈希计算出来的字母数字标识。
+- **Channel**: 支持跨链发布/订阅行为的广播机制。
+- **Contract**: 应用程序的计量部分，负责执行业务逻辑并修改应用状态。
+- **Cross-Application Call**: *同一条微链*上的一个应用向另一个应用发起的调用。
+- **Cross-Chain Message**: 从一条微链发送到另一条微链的数据载荷。跨链消息是同一应用程序在不同微链上的运行实例之间的通信原语。
+- **Epoch**: 允许一组具有特定投票权重的验证器验证新区块的时间段。由于每条微链必须明确地从一个纪元过渡到下一个纪元，因此纪元可以重叠。
+- **Genesis Configuration**: 确定新创建的网络状态的设置，包含初始验证器集合的投票权重，初始手续费结构，以及网络开始时的初始微链。
+- **Inbox**: 为某条微链存储接收到的消息的累积数据结构。
+- **Message**: 见`跨链消息`。
+- **Microchain**: 管理一部分网络状态子集的轻量级区块链，由每个验证器运行。微链与*链*可以互换使用。Linera中的*所有*链都是微链。
+- **Network**: 协议参与者的整体称谓，由委员会、客户端和审计者组成。
+- **Operation**: 由区块创建者(和签名者)直接添加到区块的交易，用户通常通过操作来与运行在他们的微链上的应用交互。
+- **Permissioned Chain**: 由多名所有者共同拥有的微链，所有者轮流创建区块，而区块被选中确认的概率与所有者的*权重*相关。
+- **Project**: 代码文件和依赖关系的集合，可以被编译为字节码，然后部署到Linera网络上并创建应用。
+- **Public Chain**: 被授予操作网络所需的有限许可的具有完全BFT共识的微链。
+- **Quorum**: 表示超过总质押⅔的一组验证器，创建一个区块证书需要一个quorum投票。
+- **Single-Owner Chain**: 见`用户链`。
+- **Service**: 非计量，提供应用程序状态的只读视图。
+- **Shard**: 一个验证器上的所有微链的逻辑子集，对应于一个物理*工作节点*。
+- **Stake**: 验证器或审计者质押的一定数量的Token，以确保验证器和审计者都是诚实的和正确的。
+- **User Chain**: 与*单所有者链*可以互换使用，为微链上只包含所有者一个用户的微链。这种链上只有所有者有权创建区块，因而只有所有者有能力改变用户链状态。
+- **Validator**: 验证器运行在服务器上，用户可以从验证器下载区块，或将自己的微链的新区快提交给验证器。验证器使用为所有微链执行并验证区块的密码学证明。
+- **View**: 就像ORM一样，视图将复杂数据结构映射到KV存储。视图将复杂状态修改组合为一系列简单操作后自动提交。视图描述保存在硬盘中的KV存储加载到内存中的全部或部分复杂结构。
+- **Wallet**: 包含用户密钥对以及用户所拥有的微链配置和信息的文件。
+- **WebAssembly (Wasm)**: 一种运行在基于堆栈的虚拟机的二进制编译目标和指令集。Linera应用程序编译为Wasm目标，由验证器和客户端的Wasm虚拟机运行。
+- **Web3**: 由区块链和智能合约带来的去中心化能力撬动的互联网自然演变。
+- **Worker**: 在特定的验证器上运行全部微链的一个子集的进程，对应逻辑*分片*。
