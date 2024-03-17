@@ -1,30 +1,28 @@
-# 4.2. Persistent Storage
+# 4.2. 持久化存储
 
-Validators run the servers and the data is stored in persistent storage. As a consequence we need a tool for working with persistent storage and so we have added `linera-db` for that purpose.
+验证器在服务器上运行，其数据存储在持久化存储中，因此我们开发了`linera-db`用于管理持久化存储。
 
-## [Available persistent storage](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/persistent_storage?id=available-persistent-storage)
+## [可用的持久化存储](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/persistent_storage?id=available-persistent-storage)
 
-The persistent storage that are available right now are `RocksDB`, `DynamoDB` and `ScyllaDB`. Each has its own strengths and weaknesses.
+现成可用的持久化存储有`RocksDB`, `DynamoDB`和`ScyllaDB`，几种存储各有优劣。
 
-- [`RocksDB`](https://rocksdb.org/): Data is stored on disk and cannot be shared between shards but is very fast.
-- [`DynamoDB`](https://aws.amazon.com/dynamodb/): Data is stored on a remote storage, that has to be on AWS. Data can be shared between shards.
-- [`ScyllaDB`](https://www.scylladb.com/): Data is stored on a remote storage. Data can be shared between shards.
+- [`RocksDB`](https://rocksdb.org/): 数据存储在本地硬盘上，快，但不能在分片之间共享。
+- [`DynamoDB`](https://aws.amazon.com/dynamodb/): 数据需要存储在托管在AWS上远程存储上，不同分片可以共享数据。
+- [`ScyllaDB`](https://www.scylladb.com/): 数据存储在远程存储，分片之间可以共享数据。
 
-There is no fundamental obstacle to the addition of other persistent storage solutions.
+支持其他持久存储解决方案部存在根本障碍。
 
-In addition, the `DynamoDB` and `ScyllaDB` have the notion of a table which means that a given remote location can be used for several completely independent purposes.
+此外，`DynamoDB`和`ScyllaDB`中具有表的概念，这样一个给定的远程存储可以支持多个不同的业务目标。
 
-## [The `linera-db` tool](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/persistent_storage?id=the-linera-db-tool)
+## [`linera-db`工具](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/persistent_storage?id=the-linera-db-tool)
 
-When operating on a persistent storage some global operations can be required. The command line tool `linera-db` helps in making them work.
+与持久化存储交互需要支持一些全局操作，`linera-db`命令行工具实现了下列命令支持这些操作：
 
-The functionalities are the following:
+- `list_tables`(`DynamoDB`和`ScyllaDB`): 列出持久化存储中所有表
+- `initialize`(`RocksDB`, `DynamoDB`和`ScyllaDB`): 初始化存储
+- `check_existence`(`RocksDB`, `DynamoDB`和`ScyllaDB`): 测试持久化存储是否存在。返回值为0表示存在，1表示不存在
+- `check_absence`(`RocksDB`, `DynamoDB`和`ScyllaDB`): 检查持久化存储是否不存在。返回0表示不存在，1表示存在
+- `delete_all`(`RocksDB`, `DynamoDB`和`ScyllaDB`): 删除持久化存储中的所有表
+- `delete_single`(`DynamoDB`和`ScyllaDB`): 删除持久化存储中的一张表
 
-- `list_tables`(`DynamoDB` and `ScyllaDB`): It lists all the tables that have been created on the persistent storage
-- `initialize`(`RocksDB`, `DynamoDB` and `ScyllaDB`): It initializes a persistent storage.
-- `check_existence`(`RocksDB`, `DynamoDB` and `ScyllaDB`): It tests the existence of a persistent storage. If the error code is 0 then the table exists, if the error code is 1 then the table is absent.
-- `check_absence`(`RocksDB`, `DynamoDB` and `ScyllaDB`): It tests the absence of a persistent storage. If the error code is 0 then the table is absent, if the error code is 1 then the table does not exist.
-- `delete_all`(`RocksDB`, `DynamoDB` and `ScyllaDB`): It deletes all the table of a persistent storage.
-- `delete_single`(`DynamoDB` and `ScyllaDB`): It deletes a single table of a persistent storage.
-
-If some error occurs during the operation, then the error code 2 is returned and 0 if everything went fine with the exception of `check_existence` and `check_absence` for which the value 1 can occur if the connection with the database was established correctly but the result is not what we expected.
+与常用linux命令相同，返回0表示执行正常。错误情况下，除了`check_existence` 和 `check_absence`之外的其他命令将会返回2。执行`check_existence` 和 `check_absence`时，如果与数据库连接正常但返回结果与预期不符，返回值为1。
