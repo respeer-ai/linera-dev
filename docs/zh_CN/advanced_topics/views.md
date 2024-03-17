@@ -1,13 +1,13 @@
-# 4.1. Views
+# 4.1. 视图(Views)
 
-> Views are a specific functionality of the Linera system that allow to have data in memory and then seamlessly flush it to an underlying persistent datastore.
+> Views是Linera系统中的一种特定结构和功能，允许在内存中维护数据，然后无缝将内存中的数据同步到底层持久化存储。
 
-The [full documentation](https://docs.rs/linera-views/latest/linera_views/) is available on the crate documentation with all functions having examples.
+[完整文档](https://docs.rs/linera-views/latest/linera_views/)可以在crate文档找到，文档中所有函数都有相应示例。
 
-Concretely, what is provided is the following:
+具体而言，View提供了如下功能：
 
-- A trait `View` that provides `load`, `rollback`, `clear`, `flush`, `delete`. The idea is that we can do operation on the data and then flush it to the database storing them.
-- Several other traits `HashableView`, `RootView`, `CryptoHashView`, `CryptoHashRootView` that are important for computing hash.
-- A number of standard containers: `MapView`, `SetView`, `LogView`, `QueueView`, `RegisterView` that implement the `View` and `HashableView` traits.
-- Two containers `CollectionView` and `ReentrantCollectionView` that are similar to `MapView` but whose values are views themselves.
-- Derive macros that allow to implement the above mentioned traits on struct data types whose entries are views.
+- 提供`load`, `rollback`, `clear`, `flush`, `delete`方法的`View` trait。Vuew的想法是我们可以对数据进行操作，然后将其刷新到存储数据的数据库。
+- `HashableView`, `RootView`, `CryptoHashView`, `CryptoHashRootView`这几个traits对于hash计算比较重要。
+- 标准容器`MapView`, `SetView`, `LogView`, `QueueView`, `RegisterView`实现了`View`和`HashableView` traits。
+- `CollectionView`和`ReentrantCollectionView`容器与`MapView`一样，除了值就是视图本身(译者注：此处意义不太明确)。
+- 派生宏(derive)允许在成员包含View的结构上实现上面提到的traits。
