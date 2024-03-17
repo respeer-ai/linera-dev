@@ -1,31 +1,31 @@
-# 4.3. Validators
+# 4.3. 验证器
 
-Validators run the servers that allow users to download and create blocks. They validate, execute and cryptographically certify the blocks of all the chains.
+验证器运行在服务器上，用户可以从验证器下载区块，或将自己的微链的新区快提交给验证器。验证器使用为所有微链执行并验证区块的密码学证明。
 
-> In Linera, every chain is backed by the same set of validators and has the same level of security.
+> 在Linera中，所有微链都运行在同一组验证器上，拥有同样的安全级别。
 
-The main function of validators is to guarantee the integrity of the infrastructure in the sense that:
+验证器的主要功能是通过下列方式保障基础设施的完整性：
 
-- Each block is valid, i.e. it has the correct format, its operations are allowed, the received messages are in the correct order, and e.g. the balance was correctly computed.
-- Every message received by one chain was actually sent by another chain.
-- If one block on a particular height is certified, no other block on the same height is.
+- 每一个区块都是有效的，即区块有正确的格式，区块内的操作都是允许的，消息以正确的顺序接收，和账户余额计算正确，诸如此类。
+- 微链接收到的每一条消息都一定是另一条微链发送的。
+- 如果一个区块在某给定高度已经被认证过，那么该高度不应该再有其他区块被认证。
 
-These properties are guaranteed to hold as long as two third of the validators (weighted by their stake) follow the protocol. In the future, deviating from the protocol may cause a validator to be considered malicious and to lose their *stake*.
+只要2/3(按照质押计算)的验证器遵循协议运行，这些特性就能够得到保证。将来，背离协议的验证其将被认为是恶意的，其*质押*将被罚没。
 
-Validators also play a role in the liveness of the system by making sure that the history of the chains stays available. However, since validators do not propose blocks on most chains (see [next section](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/block_creation)), they do *not* guarantee that any particular operation or message will eventually be executed on a chain. Instead, chain owners decide whether and when to propose new blocks, and which operations and messages to include. The current implementation of the Linera client automatically includes all incoming messages in new blocks. The operations are the actions the chain owner explicitly adds, e.g. transfer.
+在可用性方面，验证器也承担重要作用，所有微链的历史纪录都要由验证器维护。然后，验证器并不负责为大多数微链创建区块(见[下一节](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/block_creation))，因而验证器并不保证特定的操作或消息将一定会被微链执行。取而代之的是，链所有者决定何时创建区块，以及选取哪些操作和消息打包。当前实现中，Linera客户端自动将所有接收到的消息包含在新区块。操作在这里指的是链所有者明确添加的行为，例如转账。
 
-## [Architecture of a validator](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/validators?id=architecture-of-a-validator)
+## [验证器架构](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/validators?id=architecture-of-a-validator)
 
-Since every chain uses the same validators, adding more chains does not require adding validators. Instead, it requires each individual validator to scale out by adding more computation units, also known as "workers" or "physical shards".
+由于所有微链都使用同一组验证器，添加新微链并不需要添加验证器。当全部微链需要的计算能力超过验证器的能力，验证器需要支持扩容更多计算单元，这些计算单元称为“工作节点”或“物理分片”。
 
-In the end, a Linera validator resembles a Web2 service made of
+最终，一个Linera验证器就像一个由下列组件组成的Web2服务
 
-- a load balancer (aka. ingress/egress), currently implemented by the binary `linera-proxy`,
-- a number of workers, currently implemented by the binary `linera-server`,
-- a shared database, currently implemented by the abstract interface `linera-storage`.
+- 一个负载均衡器(aka. ingress/egress)，当前由`linera-proxy`可执行文件实现，
+- 一群工作节点，当前由`linera-server`可执行文件实现，
+- 一个共享数据库，当前由`linera-storage`抽象接口实现。
 
 ```ignore
-Example of Linera network
+Linera网络示例
 
                     │                                             │
                     │                                             │
@@ -50,8 +50,8 @@ Example of Linera network
 └───────────────────────────────────────┘     └───────────────────────────────────────┘
 ```
 
-Inside a validator, components communicate using the internal network of the validator. Notably, workers use direct Remote Procedure Calls (RPCs) with each other to deliver cross-chain messages.
+一个验证器内的组件通过验证器内部网络通信，尤其对于工作节点而言，不同工作节点之间直接使用远程过程调用(RPC)提交跨链消息。
 
-Note that the number of workers may vary for each validator. Both the load balancer and the shared database are represented as a single entity but are meant to scale out in production.
+不同验证器的工作节点数量可以是不同的，上面的图例中负载均衡器和共享数据库都只有一个，但实现上他们都是可以水平扩展的。
 
-> For local testing during development, we currently use a single worker and RocksDB as a database.
+> 当前Linera本地测试网只有一个工作节点，使用RocksDB作为数据库。
