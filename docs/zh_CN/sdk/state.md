@@ -26,7 +26,6 @@ pub struct Counter {
 }
 ```
 
-The `RegisterView<T>` supports modifying a single value of type `T`. There are different types of views for different use-cases, but the majority of common data structures have already been implemented:
 
 `RegisterView<T>`支持修改一个`T`类型的数值。不同应用场景我们将会使用不同的视图类型，但是主要的公共数据类型都已经实现：
 
