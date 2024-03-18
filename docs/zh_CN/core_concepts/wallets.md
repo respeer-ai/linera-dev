@@ -47,7 +47,7 @@ linera wallet show
 
 ### [默认微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=default-chain)
 
-每个钱包都有一条默认微链，如果执行命令时未传递`--chain`参数，该命令将使用默认微链。
+每个钱包都有一条默认微链，如果执行命令时未传递`--chain`参数，命令将使用默认微链。
 
 第一条添加到钱包中的微链将被设置成默认微链，可以通过如下命令查看钱包的默认微链：
 

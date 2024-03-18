@@ -10,7 +10,7 @@
 >
 > 安装[Linera CLI工具](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio)，然后按照[此处](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-devnet)的命令创建微链，并将第一个应用发布到当前Devnet。
 
-如果你想加入我们的社区参与Linera生态系统开发，你可以检出我们的[GitHub仓库](https://github.com/linera-io/linera-protocol)，浏览我们的[网站](https://linera.io/)，或者通过[youtube](https://www.youtube.com/@linera_io)，[twitter](https://twitter.com/linera_io)，[telegram](https://t.me/linera_official)，或[discord](https://discord.gg/linera)等社交媒体找到我们。
+如果想加入我们的社区并参与Linera生态开发，可以查看我们的[GitHub仓库](https://github.com/linera-io/linera-protocol)、[网站](https://linera.io/)，或通过[youtube](https://www.youtube.com/@linera_io)，[twitter](https://twitter.com/linera_io)，[telegram](https://t.me/linera_official)，或[discord](https://discord.gg/linera)等社交媒体找到我们。
 
 现在，让我们开始Linera旅程吧！
 

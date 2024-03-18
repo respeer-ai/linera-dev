@@ -2,15 +2,15 @@
 
 # [Hello, Linera](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=hello-linera)
 
-本节我们将讲解Linera官方Devnet交互方式和运行本地开测试网的步骤，然后从0开始编译并部署第一个Linera应用。
+本节我们将讲解Linera官方Devnet交互方式和运行本地测试网的步骤，然后从0开始编译并部署第一个Linera应用。
 
-本小节结束后，你将能够在Linera官方Devnet和你自己的本地测试网上创建一条[微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains)，并运行一个应用，该应用可以通过GraphQL访问。
+本小节结束后，你将能够在Linera官方Devnet和你自己的本地测试网上创建一条[微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains)，并运行一个可以使用GraphQL访问的应用。
 
 ## [使用Devnet](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-devnet)
 
-Linera Devnet是部署给开发者使用，开发者需要知道Devnet是不稳定的，并且可能随时使用新的创世设置重启。
+Linera Devnet是部署给开发者使用，开发者需要知道Devnet是不稳定的，并且随时可能使用新的创世设置重启。
 
-为了能够与Devnet交互，我们需要一些token。通过如下命令初始化并设置钱包后，我们可以从水龙头服务领取一些测试token：
+为了能够与Devnet交互，我们需要一些Token。通过如下命令初始化并设置钱包后，我们可以从水龙头服务领取一些测试Token：
 
 ```bash
 linera wallet init --with-new-chain --faucet https://faucet.devnet.linera.net
@@ -22,7 +22,7 @@ linera wallet init --with-new-chain --faucet https://faucet.devnet.linera.net
 
 ## [启动本地测试网](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=starting-a-local-test-network)
 
-你也可以在本地环境启动本地测试网络。测试网络包含一些[验证器](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/validators)，每个验证其都包含一个入口代理(即负载均衡器)(译者注：原文为ingress，等同于微服务集群中的网关代理，用于将请求根据预设规则路由到对应的服务)和一些工作节点(即物理分片)。
+你也可以在本地环境启动本地测试网络。测试网络包含一些[验证器](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/validators)，每个验证器都包含一个入口代理(即负载均衡器)(译者注：原文为ingress，等同于微服务集群中的网关代理，用于将请求根据预设规则路由到对应的服务)和一些工作节点(即物理分片)。
 
 通过执行以下命令启动本地测试网：
 
@@ -49,7 +49,7 @@ export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/
 
 > 在后面的例子中，我们假设终端已经将钱包设置好直接访问Devnet，或者`LINERA_WALLET`和`LINERA_STORAGE`环境变量已经设置为本地测试网络的初始钱包。
 
-`linera`客户端时与Linera网络和应用交互的基本方法。
+`linera`客户端是与Linera网络和应用交互的基本方式。
 
 你可以通过如下命令同步[default微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets)并显示微链余额来确认网络是否正常工作：
 
@@ -73,8 +73,6 @@ cd examples/counter && cargo build --release
 > 注意：由于在`examples/.cargo/config.toml`中的预先配置，上面的命令将会自动编译Wasm字节码，而不是主机二进制代码。
 
 ## [发布应用](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=publishing-your-application)
-
-You can publish the bytecode and create an application using it on your local network using the `linera` client's `publish-and-create` command and provide:
 
 使用`linera`客户端中的`publish-and-create`命令， 你可以发布字节码，同时创建一个Linera应用，该命令需要以下参数：
 
