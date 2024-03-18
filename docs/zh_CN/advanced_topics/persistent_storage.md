@@ -10,7 +10,7 @@
 - [`DynamoDB`](https://aws.amazon.com/dynamodb/): 数据需要存储在托管在AWS上远程存储上，不同分片可以共享数据。
 - [`ScyllaDB`](https://www.scylladb.com/): 数据存储在远程存储，分片之间可以共享数据。
 
-支持其他持久存储解决方案部存在根本障碍。
+支持其他持久存储解决方案不存在根本障碍。
 
 此外，`DynamoDB`和`ScyllaDB`中具有表的概念，这样一个给定的远程存储可以支持多个不同的业务目标。
 
