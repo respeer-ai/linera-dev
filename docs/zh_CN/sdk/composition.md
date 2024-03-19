@@ -16,7 +16,7 @@ async fn call_application<A: ContractAbi + Send>(
 ) -> Result<(A::Response, Vec<SessionId>), Self::Error> { .. }
 ```
 
-`authenticated`参数设置被调用者是否允许执行那些需要出发此次调用的原始区块签名者认证的行为。
+`authenticated`参数设置被调用者是否允许执行那些需要触发此次调用的原始区块签名者认证的行为。
 
 `application`参数为被调用者的应用ID，`A`为被调用者的ABI声明。
 
