@@ -56,7 +56,7 @@ pub trait Contract: WithContractAbi + ContractAbi + Send + Sized {
 
 完整的trait定义可以参见[这里](https://github.com/linera-io/linera-protocol/blob/main/linera-sdk/src/lib.rs)。
 
-合约里面发生了很多事情，因此我们将其拆分开，每次实现一个方法。
+这里涉及到很多内容，所以让我们逐个进行分解和讨论。
 
 在示例应用中，我们将会使用`initialize`和`execute_operation`方法。
 
