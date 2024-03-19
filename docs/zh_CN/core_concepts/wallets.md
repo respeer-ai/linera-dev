@@ -63,7 +63,7 @@ linera wallet set-default <chain-id>
 
 ### [创建微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=opening-a-chain)
 
-Linera协议实现了创建新微链的语义，称为"opening a chain"。微链需要从网络上已经存在微链创建，不能无中生有。
+Linera协议实现了创建新微链的语义，称为"opening a chain"。微链需要从网络上已经存在的微链创建，不能无中生有。
 
 #### [在你的钱包中创建微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=open-a-chain-for-your-own-wallet)
 
