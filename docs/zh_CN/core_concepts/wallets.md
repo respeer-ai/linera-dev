@@ -2,7 +2,7 @@
 
 与传统区块链的钱包相同，Linera钱包也负责管理用户私钥和签名交易，但除此之外，Linera钱包也会创建区块，并将区块提交到验证器来延伸钱包用户管理的微链。
 
-在实现上，Linera钱包将会包含一个节点服务，该节点服务管理Linera微链的一个子集(译者注：只管理当前钱包用户拥有的微链)。[下一节](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)中我们将会看到在通过Linera钱包提供的GraphQL服务将钱包管理的微链状态提供给Web前端。
+在实现上，Linera钱包将会包含一个节点服务，该节点服务管理Linera微链的一个子集(译者注：只管理当前钱包用户拥有的微链)。[下一节](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)中我们将会看到通过Linera钱包提供的GraphQL服务将钱包管理的微链状态提供给Web前端。
 
 > 开发者主要通过命令行工具`linera`与Linera网络交互，并管理本地用户钱包。
 
