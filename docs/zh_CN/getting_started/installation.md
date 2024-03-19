@@ -87,8 +87,6 @@ c6f5b00b2017e6158dbdc090bf70e3e0fc71f4c6
 
 ## [Bash助手(可选)](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=bash-helper-optional)
 
-Consider adding the output of `linera net helper` to your `~/.bash_profile` to help with [automation](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=automation-in-bash).
-
 可以通过在`~/.bash_profile`文件追加`linera net helper`快速[自动](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=automation-in-bash)设置Linera运行时环境变量
 
 ## [寻求帮助](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=getting-help)

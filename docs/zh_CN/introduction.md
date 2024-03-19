@@ -2,7 +2,7 @@
 
 # [Linera开发手册](https://linera-dev.respeer.ai/#/zh_CN/introduction?id=the-linera-dev.respeer.ai/#eloper-manual)
 
-欢迎阅读Linera开发手册，Linera是一个为**高扩展、低延迟的Web3应用**设计的去中心化协议。
+欢迎阅读Linera开发手册，Linera是一个设计用于**高扩展、低延迟的Web3应用**的去中心化协议。
 
 本文档主要面向希望通过在Linera Rust SDK上构建应用原型，以了解Linera及其编程模型的开发者。
 
