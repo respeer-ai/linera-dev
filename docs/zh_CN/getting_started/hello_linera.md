@@ -90,7 +90,7 @@ linera publish-and-create \
 
 ## [查询应用](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=querying-your-application)
 
-现在我们可以查询上面部署的应用，获取当前的计数值。查询应用需要使用客户端的[*服务*模式](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)运行一个Linera节点服务，我们将通过该节点服务提供的一些列APIs与应用交互。
+现在我们可以查询上面部署的应用，获取当前的计数值。查询应用需要使用客户端的[*服务*模式](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)运行一个Linera节点服务，我们将通过该节点服务提供的一系列APIs与应用交互。
 
 ```bash
 linera service
