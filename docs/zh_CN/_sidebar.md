@@ -34,7 +34,7 @@
 - [进阶主题](zh_CN/advanced_topics.md)
   - [视图](zh_CN/advanced_topics/views.md)
   - [持久化存储](zh_CN/advanced_topics/persistent_storage.md)
-  - [验证者](zh_CN/advanced_topics/validators.md)
+  - [验证器](zh_CN/advanced_topics/validators.md)
   - [创建新区块](zh_CN/advanced_topics/block_creation.md)
 
 
