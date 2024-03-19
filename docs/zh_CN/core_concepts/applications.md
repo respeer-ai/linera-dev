@@ -111,7 +111,7 @@ pub enum Message {
 
 ## [注册跨链应用](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=registering-an-application-across-chains)
 
-如果Alick使用她自己的微链上的应用与Bob的应用交互，例如，通过`fungible`应用向Bob发送一些资金，那么，当Bob的微链接收到Alice发出的消息，并开始处理该消息时，应用就会在Bob的微链上自动注册。应用注册完成后，Bob就可以在自己的微链上执行应用操作，例如，给某人发送一些资金。
+如果Alice使用她自己的微链上的应用与Bob的应用交互，例如，通过`fungible`应用向Bob发送一些资金，那么，当Bob的微链接收到Alice发出的消息，并开始处理该消息时，应用就会在Bob的微链上自动注册。应用注册完成后，Bob就可以在自己的微链上执行应用操作，例如，给某人发送一些资金。
 
 某些情况下，Bob想使用那些他的微链上没有的应用，该怎么办？例如，Alice运营了一个`social`应用，她会定期更新帖子，而Bob想订阅Alice的内容。
 
