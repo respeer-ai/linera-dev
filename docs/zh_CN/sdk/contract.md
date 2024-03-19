@@ -81,9 +81,9 @@ pub trait Contract: WithContractAbi + ContractAbi + Send + Sized {
     }
 ```
 
-## [实现增加操作](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=implementing-the-increment-operation)
+## [实现增量操作](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=implementing-the-increment-operation)
 
-现在，我们实现了一个计数器状态，该计数器可以通过传递任意数值初始化，我们需要一个方法来增加计数器的值。区块创建者修改应用状态的行为统称为'操作'。
+现在，我们实现了一个计数器状态，可以通过传递任意数值初始化，我们需要实现一个方法来增加计数器的值。区块创建者修改应用状态的行为统称为'操作'。
 
 我们需要使用方法`Contract::execute_operation`来创建一个新的操作。在计数器示例中，该方法将会收到一个`u64`类型的数值，用来作为计数值的增量。
 
