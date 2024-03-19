@@ -69,7 +69,7 @@ pub enum Error {
 }
 ```
 
-最后，与合约到吗一样，我们需要将`Service`实现与ABI定义相关联：
+最后，与合约代码一样，我们需要将`Service`实现与ABI定义相关联：
 
 ```rust
 impl WithServiceAbi for Counter {
