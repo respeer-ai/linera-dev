@@ -1,46 +1,39 @@
-
-
-[Linera开发手册](zh_CN/introduction.md)
-
-- [开始](zh_CN/getting_started.md)
-  - [安装](zh_CN/getting_started/installation.md)
-  - [Hello, Linera](zh_CN/getting_started/hello_linera.md)
-
-
-
-- [Linera协议](zh_CN/core_concepts.md)
-  - [概览](zh_CN/core_concepts/overview.md)
-  - [微链](zh_CN/core_concepts/microchains.md)
-  - [钱包](zh_CN/core_concepts/wallets.md)
-  - [Node服务](zh_CN/core_concepts/node_service.md)
-  - [应用](zh_CN/core_concepts/applications.md)
-
-
-
-- [编写Linera应用](zh_CN/sdk.md)
-  - [创建项目](zh_CN/sdk/creating_a_project.md)
-  - [创建应用状态](zh_CN/sdk/state.md)
-  - [定义ABI](zh_CN/sdk/abi.md)
-  - [编写合约代码](zh_CN/sdk/contract.md)
-  - [编写服务代码](zh_CN/sdk/service.md)
-  - [部署应用](zh_CN/sdk/deploy.md)
-  - [跨链消息](zh_CN/sdk/messages.md)
-  - [调用其他应用](zh_CN/sdk/composition.md)
-  - [在应用中打印日志](zh_CN/sdk/logging.md)
-  - [编写测试](zh_CN/sdk/testing.md)
-
-
-
-- [进阶主题](zh_CN/advanced_topics.md)
-  - [视图](zh_CN/advanced_topics/views.md)
-  - [持久化存储](zh_CN/advanced_topics/persistent_storage.md)
-  - [验证器](zh_CN/advanced_topics/validators.md)
-  - [创建新区块](zh_CN/advanced_topics/block_creation.md)
-
-
-
-- [附录](zh_CN/appendix/glossary.md)
-  - [术语表](zh_CN/appendix/glossary.md)
-  - [视频](zh_CN/videos.md)
-
-
+# Linera手册           
+- [Linera手册 ](zh_CN/introduction.md)
+- [**1.** 开发者](zh_CN/developers.md)
+    - [**1.1.** 开始](zh_CN/developers/getting_started.md)     
+        - [**1.1.1.** 安装](zh_CN/developers/getting_started/installation.md)
+        - [**1.1.2.** Linera，你好](zh_CN/developers/getting_started/hello_linera.md)
+    - [**1.2.** Linera协议](zh_CN/developers/core_concepts.md)
+        - [**1.2.1.** 概述](zh_CN/developers/core_concepts/overview.md)
+        - [**1.2.2.** 微链](zh_CN/developers/core_concepts/microchains.md)
+        - [**1.2.3.** 钱包](zh_CN/developers/core_concepts/wallets.md)
+        - [**1.2.4.** 节点服务](zh_CN/developers/core_concepts/node_service.md)
+         - [**1.2.5.** 应用](zh_CN/developers/core_concepts/applications.md)
+    - [**1.3.** 写Linera应用](zh_CN/developers/sdk.md)      
+        - [**1.3.1.** 创建一个项目](zh_CN/developers/sdk/creating_a_project.md)
+        - [**1.3.2.** 创建应用状态](zh_CN/developers/sdk/state.md)
+        - [**1.3.3.** 定义ABI](zh_CN/developers/sdk/abi.md)
+        - [**1.3.4.** 编写合约二进制代码](zh_CN/developers/sdk/contract.md)
+        - [**1.3.5.** 编写服务二进制代码](zh_CN/developers/sdk/service.md)
+        - [**1.3.6.** 部署应用](zh_CN/developers/sdk/deploy.md)
+        - [**1.3.7.** 跨链消息](zh_CN/developers/sdk/messages.md)
+        - [**1.3.8.** 调用其他应用](zh_CN/developers/sdk/composition.md)
+        - [**1.3.9.** 从应用打印日志](zh_CN/developers/sdk/logging.md)
+        - [**1.3.10.** 编写测试](zh_CN/developers/sdk/testing.md)
+    - [**1.4.** 高级话题](zh_CN/developers/advanced_topics.md) 
+        - [**1.4.1.** 概述](zh_CN/developers/advanced_topics/views.md)
+        - [**1.4.2.** 持久存储](zh_CN/developers/advanced_topics/persistent_storage.md)
+        - [**1.4.3.** 合约最终化](zh_CN/developers/advanced_topics/contract_finalize.md)
+        - [**1.4.4.** 验证者](zh_CN/developers/advanced_topics/validators.md)
+        - [**1.4.5.** 创建新区块](zh_CN/developers/advanced_topics/block_creation.md)
+        - [**1.4.6.** 处理资产的应用程序](zh_CN/developers/advanced_topics/assets.md)
+    - [**1.5.** 实验性的](zh_CN/developers/experimental.md)
+        - [**1.5.1.** 机器学习](zh_CN/developers/experimental/ml.md)
+- [**2.** 操作人员](zh_CN/operators.md)
+    - [**2.1.** 开发者网络](zh_CN/operators/devnets.md)
+        - [**2.1.1.** Docker Compose](zh_CN/operators/devnets/compose.md)
+        - [**2.1.2.** kind](zh_CN/operators/devnets/kind.md)
+- [**3.** 附录](zh_CN/appendix.md)
+    - [**3.1.** 名词](zh_CN/appendix/glossary.md)
+    - [**3.2.** 视频](zh_CN/appendix/videos.md)
