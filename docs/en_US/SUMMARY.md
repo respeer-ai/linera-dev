@@ -1,54 +1,39 @@
-# Summary
-
-[The Linera Manual](introduction.md)
-
-- [Developers](developers.md)
-
-  - [Getting Started](developers/getting_started.md)
-
-    - [Installation](developers/getting_started/installation.md)
-    - [Hello, Linera](developers/getting_started/hello_linera.md)
-
-  - [The Linera Protocol](developers/core_concepts.md)
-
-    - [Overview](developers/core_concepts/overview.md)
-    - [Microchains](developers/core_concepts/microchains.md)
-    - [Wallets](developers/core_concepts/wallets.md)
-    - [Node Service](developers/core_concepts/node_service.md)
-    - [Applications](developers/core_concepts/applications.md)
-
-  - [Writing Linera Applications](developers/sdk.md)
-
-    - [Creating a Project](developers/sdk/creating_a_project.md)
-    - [Creating the Application State](developers/sdk/state.md)
-    - [Defining the ABI](developers/sdk/abi.md)
-    - [Writing the Contract Binary](developers/sdk/contract.md)
-    - [Writing the Service Binary](developers/sdk/service.md)
-    - [Deploying the Application](developers/sdk/deploy.md)
-    - [Cross-Chain Messages](developers/sdk/messages.md)
-    - [Calling other Applications](developers/sdk/composition.md)
-    - [Printing Logs from an Application](developers/sdk/logging.md)
-    - [Writing Tests](developers/sdk/testing.md)
-
-  - [Advanced Topics](developers/advanced_topics.md)
-
-    - [Views](developers/advanced_topics/views.md)
-    - [Persistent Storage](developers/advanced_topics/persistent_storage.md)
-    - [Contract Finalization](developers/advanced_topics/contract_finalize.md)
-    - [Validators](developers/advanced_topics/validators.md)
-    - [Creating New Blocks](developers/advanced_topics/block_creation.md)
-    - [Applications that Handle Assets](developers/advanced_topics/assets.md)
-
-  - [Experimental](developers/experimental.md)
-
-    - [Machine Learning](developers/experimental/ml.md)
-
-- [Operators](operators.md)
-
-  - [Devnets](operators/devnets.md)
-    - [Docker Compose](operators/devnets/compose.md)
-    - [kind](operators/devnets/kind.md)
-
-- [Appendix](appendix.md)
-  - [Glossary](appendix/glossary.md)
-  - [Videos](appendix/videos.md)
+ The Linera Manual            
+- [The Linera Manual ](en_US/introduction.md)
+- [**1.** Developers](en_US/developers.md)
+    - [**1.1.** Getting Started](en_US/developers/getting_started.md)     
+        - [**1.1.1.** Installation](en_US/developers/getting_started/installation.md)
+        - [**1.1.2.** Hello, Linera](en_US/developers/getting_started/hello_linera.md)
+    - [**1.2.** The Linera Protocol](en_US/developers/core_concepts.md)
+        - [**1.2.1.** Overview](en_US/developers/core_concepts/overview.md)
+        - [**1.2.2.** Microchains](en_US/developers/core_concepts/microchains.md)
+        - [**1.2.3.** Wallets](en_US/developers/core_concepts/wallets.md)
+        - [**1.2.4.** Node Service](en_US/developers/core_concepts/node_service.md)
+         - [**1.2.5.** Applications](en_US/developers/core_concepts/applications.md)
+    - [**1.3.** Writing Linera Applications](en_US/developers/sdk.md)      
+        - [**1.3.1.** Creating a Project](en_US/developers/sdk/creating_a_project.md)
+        - [**1.3.2.** Creating the Application State](en_US/developers/sdk/state.md)
+        - [**1.3.3.** Defining the ABI](en_US/developers/sdk/abi.md)
+        - [**1.3.4.** Writing the Contract Binary](en_US/developers/sdk/contract.md)
+        - [**1.3.5.** Writing the Service Binary](en_US/developers/sdk/service.md)
+        - [**1.3.6.** Deploying the Application](en_US/developers/sdk/deploy.md)
+        - [**1.3.7.** Cross-Chain Messages](en_US/developers/sdk/messages.md)
+        - [**1.3.8.** Calling other Applications](en_US/developers/sdk/composition.md)
+        - [**1.3.9.** Printing Logs from an Application](en_US/developers/sdk/logging.md)
+        - [**1.3.10.** Writing Tests](en_US/developers/sdk/testing.md)
+    - [**1.4.** Advanced Topics](en_US/developers/advanced_topics.md) 
+        - [**1.4.1.** Views](en_US/developers/advanced_topics/views.md)
+        - [**1.4.2.** Persistent Storage](en_US/developers/advanced_topics/persistent_storage.md)
+        - [**1.4.3.** Contract Finalization](en_US/developers/advanced_topics/contract_finalize.md)
+        - [**1.4.4.** Validators](en_US/developers/advanced_topics/validators.md)
+        - [**1.4.5.** Creating New Blocks](en_US/developers/advanced_topics/block_creation.md)
+        - [**1.4.6.** Applications that Handle Assets](en_US/developers/advanced_topics/assets.md)
+    - [**1.5.** Experimental](en_US/developers/experimental.md)
+        - [**1.5.1.** Machine Learning](en_US/developers/experimental/ml.md)
+- [**2.** Operators](en_US/operators.md)
+    - [**2.1.** Devnets](en_US/operators/devnets.md)
+        - [**2.1.1.** Docker Compose](en_US/operators/devnets/compose.md)
+        - [**2.1.2.** kind](en_US/operators/devnets/kind.md)
+- [**3.** Appendix](en_US/appendix.md)
+    - [**3.1.** Glossary](en_US/appendix/glossary.md)
+    - [**3.2.** Videos](en_US/appendix/videos.md)
