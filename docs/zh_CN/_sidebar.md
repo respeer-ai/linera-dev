@@ -2,7 +2,7 @@
 - [Linera手册 ](zh_CN/introduction.md)
 - [**1.** 开发者](zh_CN/developers.md)
     - [**1.1.** 开始](zh_CN/developers/getting_started.md)     
-        - [**1.1.1.** I安装](zh_CN/developers/getting_started/installation.md)
+        - [**1.1.1.** 安装](zh_CN/developers/getting_started/installation.md)
         - [**1.1.2.** Linera，你好](zh_CN/developers/getting_started/hello_linera.md)
     - [**1.2.** Linera协议](zh_CN/developers/core_concepts.md)
         - [**1.2.1.** 概述](zh_CN/developers/core_concepts/overview.md)
