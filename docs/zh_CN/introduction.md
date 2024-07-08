@@ -2,14 +2,14 @@
 
 # Linera 手册
 
-欢迎阅读 Linera 手册，这是一个为**高度可扩展、低延迟的 Web3 应用**设计的去中心化协议。
+欢迎阅读Linera开发手册，Linera是为**高扩展、低延迟的Web3应用**设计的去中心化协议。
 
-文档分为两部分：
+本文档分为两部分：
 
-1. [开发者](developers.md)部分适用于希望通过 Linera Rust SDK 原型应用了解更多关于 Linera 及其编程模型的开发者。
-2. [操作员](operators.md)部分适用于希望运行 Linera 验证器的操作员。
+1. [开发者](developers.md)部分适用于希望通过Linera Rust SDK原型应用了解关于Linera及其编程模型的开发者。
+2. [运营商](operators.md)部分适用于希望运行Linera验证器的运营商。
 
-> **新功能：在 Linera Devnet 上发布和测试你的 Web3 应用！**
+> **新功能：在Linera Devnet上发布和测试你的Web3应用！**
 >
 > 安装
 > [Linera CLI 工具](developers/getting_started/installation.html#installing-from-cratesio)
