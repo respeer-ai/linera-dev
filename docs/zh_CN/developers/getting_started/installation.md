@@ -18,7 +18,7 @@ Linera工具链当前支持的操作系统总结如下：
 
 | Linux x86 64-bit | Mac OS (M1 / M2) | Mac OS (x86) | Windows  |
 | ---------------- | ---------------- | ------------ | -------- |
-| ✓ 主要平台       | ✓ 可用           | ✓ 可用       | 未经测试 |
+| ✓ 主要平台       | ✓ 可用           | ✓ 可用       | 未测试 |
 
 安装Linera工具链的主要前提条件包括Rust、Wasm和Protoc。在Linux上可以如下安装：
 
@@ -41,7 +41,7 @@ Linera工具链当前支持的操作系统总结如下：
 本手册使用了以下Rust工具链版本：
 
 ```text
-{{#include ../../../linera-protocol/rust-toolchain.toml}}
+{{#include ../../../../linera-protocol/rust-toolchain.toml}}
 ```
 
 ## 从 crates.io 安装
