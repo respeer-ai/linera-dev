@@ -25,7 +25,7 @@
 # Linera短视频合集
 - 微链介绍 [https://www.youtube.com/watch?v=dJP-U9N2ANM](https://www.youtube.com/watch?v=dJP-U9N2ANM)
 - 构建低延迟Web3应用 [https://www.youtube.com/watch?v=M625qNXqeLc](https://www.youtube.com/watch?v=M625qNXqeLc)
-- 让用户拥有子集的区块空间 [https://www.youtube.com/watch?v=u7cpp-dXR3s](https://www.youtube.com/watch?v=u7cpp-dXR3s)
+- 让用户拥有自己的区块空间 [https://www.youtube.com/watch?v=u7cpp-dXR3s](https://www.youtube.com/watch?v=u7cpp-dXR3s)
 - Linera跨链消息 [https://www.youtube.com/watch?v=kA4gSOr3RGQ](https://www.youtube.com/watch?v=kA4gSOr3RGQ)
 - Linera共识机制 [https://www.youtube.com/watch?v=8xtmxIkoGDU](https://www.youtube.com/watch?v=8xtmxIkoGDU)
 - 应用编程Workshop #1 [https://www.youtube.com/watch?v=H3-Eivg6dP8](https://www.youtube.com/watch?v=H3-Eivg6dP8)
