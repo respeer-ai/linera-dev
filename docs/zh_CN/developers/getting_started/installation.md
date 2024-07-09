@@ -2,92 +2,93 @@
 
 让我们从安装Linera开发工具开始。
 
-## 概述
+## [概述](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=overview)
 
-Linera工具链由两个crate组成：
+Linera工具链由以下两个crate构成（译者注：crate即为rust发布包）：
 
-- `linera-sdk` 是用于在Rust中编程Linera应用程序的主要库。
-- `linera-service` 定义了一些二进制文件，包括：
-  - `linera` -- 主要的客户端工具，用于操作开发钱包，
-  - `linera-proxy` -- 代理服务，作为每个验证者的公共入口点，
-  - `linera-server` -- 每个验证者工作节点后面隐藏的服务。
+- `linera-sdk`：Linera Rust应用开发的基础库，其中包含Linera基础类型、函数定义等。
 
-## 要求
+- `linera-service`：包含下述可执行文件：
+  - `linera` -- Linera的基础客户端工具，用于操作钱包，
+  - `linera-proxy` -- 代理服务，用作验证者的接入点，
+  - `linera-server` -- 验证者的工作节点运行的服务，隐藏在代理服务后面。
 
-Linera工具链当前支持的操作系统总结如下：
+## [运行环境](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=requirements)
+
+当前Linera工具链支持在以下操作系统运行：
 
 | Linux x86 64-bit | Mac OS (M1 / M2) | Mac OS (x86) | Windows  |
 | ---------------- | ---------------- | ------------ | -------- |
-| ✓ 主要平台       | ✓ 可用           | ✓ 可用       | 未测试 |
+| ✓ 基础平台  | ✓ 可以工作        | ✓ 可以工作    | 未测试 |
 
-安装Linera工具链的主要前提条件包括Rust、Wasm和Protoc。在Linux上可以如下安装：
+安装Linera工具链前应先安装Rust，Wasm和Protoc，在Linera上安装过程如下：
 
 - Rust和Wasm
-
   - `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
   - `rustup target add wasm32-unknown-unknown`
-
 - Protoc
-
   - `curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v21.11/protoc-21.11-linux-x86_64.zip`
   - `unzip protoc-21.11-linux-x86_64.zip -d $HOME/.local`
-  - If `~/.local` is not in your path, add it:
-    `export PATH="$PATH:$HOME/.local/bin"`
+  - 如果PATH环境变量不包含`~/.local`, 通过`export PATH="$PATH:$HOME/.local/bin"`添加
+- 在特定的Linux发行版上，你可能需要安装诸如`g++`，`libclang-dev`和`libssl-dev`等开发工具和库
 
-- 在某些Linux发行版上，你可能需要安装开发包，如 `g++`、`libclang-dev` 和 `libssl-dev`。
+MacOS支持，以及测试Linera协议的一些附加需求可以参见[GitHub安装文档](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)的安装章节。
 
-关于MacOS支持以及测试Linera协议本身所需的其他要求，请参阅GitHub上的安装部分 [GitHub](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)。
-
-本手册使用了以下Rust工具链版本：
+本手册测试使用的Rust工具链配置如下：
 
 ```text
-{{#include ../../../../linera-protocol/rust-toolchain.toml}}
+{[toolchain]
+channel = "1.77.2"
+components = [ "clippy", "rustfmt", "rust-src" ]
+targets = [ "wasm32-unknown-unknown" ]
+profile = "minimal"
 ```
 
-## 从 crates.io 安装
+## [从crates.io安装](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio)
 
-你可以使用以下命令从 crates.io 安装Linera二进制文件：
+你可以通过如下命令安装Linera工具链
 
 ```bash
-cargo install --locked linera-service@{{#include ../../../RELEASE_VERSION}}
+cargo install linera-sdk@0.11.3
+cargo install linera-service@0.11.3
 ```
 
-并且使用 `linera-sdk` 作为Linera Wasm应用程序的库：
+然后使用`linera-sdk`作为Linera Wasm应用的依赖库：
 
 ```bash
-cargo add linera-sdk@{{#include ../../../RELEASE_VERSION}}
+cargo add linera-sdk@0.11.3
 ```
 
-版本号 `{{#include ../../../RELEASE_VERSION}}` 对应于当前Linera的Devnet，可能会频繁更改。
+版本号`0.11.3`对应当前Linera Devnet，该版本号可能会频繁变更。
 
-## 从 GitHub 安装
+## [从GitHub安装](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-github)
 
-从 [GitHub](https://github.com/linera-io/linera-protocol) 下载源代码：
+从[GitHub](https://github.com/linera-io/linera-protocol)下载源码：
 
 ```bash
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
-git checkout -t origin/{{#include ../../../RELEASE_BRANCH}}  # Current release branch
+git checkout -t origin/devnet_2024_05_07  # 当前发布分支
 ```
 
-要从源代码本地安装Linera工具链，可以运行：
+如果希望从源码安装Linera工具链，执行如下命令：
 
 ```bash
 cargo install --locked --path linera-service
 ```
 
-或者，用于开发和调试，你可以使用调试模式编译的二进制文件，例如使用 `export PATH="$PWD/target/debug:$PATH"`。
+开发者和调试人员可以通过编译调试版本的可执行文件对Linera进行调试，例如，通过`export PATH="$PWD/target/debug:$PATH"`将调试版本可执行文件添加到PATH中。
 
-本手册使用了以下存储库的提交版本： [repository](https://github.com/linera-io/linera-protocol):
+本文档的编写使用[仓库](https://github.com/linera-io/linera-protocol)的如下提交记录进行测试：
 
 ```text
-{{#include ../../../.git/modules/linera-protocol/HEAD}}
+2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
 ```
 
-## Bash 辅助工具（可选）
+## [Bash助手(可选)](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=bash-helper-optional)
 
-考虑将 `linera net helper` 的输出添加到你的 `~/.bash_profile` 中，以帮助进行 [automation](../core_concepts/wallets.md#automation-in-bash)。
+可以通过在`~/.bash_profile`文件追加`linera net helper`快速[自动](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=automation-in-bash)设置Linera运行时环境变量
 
-## 获取帮助
+## [寻求帮助](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=getting-help)
 
-如果安装失败，请联系团队（例如在 [Discord](https://discord.gg/linera) 上寻求帮助，或者在 [GitHub](https://github.com/linera-io/linera-protocol/issues/new) 上 [创建问题](https://github.com/linera-io/linera-protocol/issues/new)。
+如果安装失败，联系我们的团队(例如通过[Discord](https://discord.gg/linera))协助调试，或者在Github[创建一个issue](https://github.com/linera-io/linera-protocol/issues/new)。
