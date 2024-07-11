@@ -1,8 +1,8 @@
-# 编写合约二进制代码
+# 3.4. 编写合约代码
 
-合约二进制代码是 Linera 应用程序的第一个组件，它实际上可以改变应用程序的状态。
+合约是Linera应用程序的第一个组件，合约的执行将实际上改变应用状态。
 
-要创建一个合约，我们需要创建一个新类型，并为其实现 `Contract` trait，其定义如下：
+我们需要实现如下的`Contract` trait来实现一个合约：
 
 ```rust,ignore
 pub trait Contract: WithContractAbi + ContractAbi + Sized {
@@ -33,15 +33,15 @@ pub trait Contract: WithContractAbi + ContractAbi + Sized {
 }
 ```
 
-完整的 trait 定义可以在这里找到： [链接到 GitHub](https://github.com/linera-io/linera-protocol/blob/{{#include ../../../.git/modules/linera-protocol/HEAD}}/linera-sdk/src/lib.rs)。
+完整的trait定义可以参见[这里](https://github.com/linera-io/linera-protocol/blob/main/linera-sdk/src/lib.rs)。
 
-这里涉及的内容比较多，让我们逐步分解并逐个方法来看。
+这里涉及到很多内容，所以让我们逐个进行分解和讨论。
 
-对于这个应用程序，我们将使用 `load`、`execute_operation` 和 `store` 方法。
+在示例应用中，我们将会使用`load`, `execute_operation`和`store`方法。
 
-## 合约生命周期
+## [合约生命周期](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=the-contract-lifecycle)
 
-为了实现应用程序合约，首先创建合约类型：
+实现合约的第一步是创建合约类型：
 
 ```rust,ignore
 pub struct CounterContract {
@@ -50,7 +50,9 @@ pub struct CounterContract {
 }
 ```
 
-这个类型通常至少包含两个字段：之前定义的持久化 `state` 和运行时的句柄。运行时提供了当前执行的信息访问，并允许发送消息等。可以添加其他字段，用于存储仅在当前事务执行期间存在并在之后丢弃的易失性数据。
+合约通常至少包含两个字段：前述章节已经定义的持久化状态`state`和`runtime`句柄。`runtime`句柄可以访问当前执行状态，合约也可以通过`runtime`句柄发送消息，或执行一些其他需要与微链执行状态交互的操作。合约类型中也可以添加其他字段，但这些数据是非持久化的，只存在于当前事务执行期间，当前事务执行完毕后，这些字段存储的数据将被丢弃。
+
+============================================
 
 当执行事务时，通过调用 `Contract::load` 方法创建合约类型。此方法接收一个合约运行时的句柄，合约可以使用它来加载应用程序状态。对于我们的实现，我们将加载状态并创建 `CounterContract` 实例：
 
