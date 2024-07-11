@@ -1,23 +1,23 @@
-# 创建应用程序状态
+# 3.2. 创建应用状态
 
-您的应用程序状态的 `struct` 可以在 `src/state.rs` 中找到。应用程序状态是在事务之间在存储上持久化的数据。
+`src/state.rs`文件中包含定义应用状态的`struct`。
 
-为了表示我们的计数器，我们将需要一个 `u64` 类型的变量。为了持久化计数器，我们将使用 Linera 的 [view](../advanced_topics/views.md) 范例。
+我们使用`u64`来表示应用中的计数值，并使用Linear的[View](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)模型持久化存储计数值。
 
-Views 类似于 [ORM（对象关系映射）](https://en.wikipedia.org/wiki/Object–relational_mapping)，但是不同于将数据结构映射到像 Postgres 这样的关系数据库，它们是映射到像 [RocksDB](https://rocksdb.org/) 这样的键值存储。
+Views有点儿像[ORM](https://en.wikipedia.org/wiki/Object–relational_mapping)，与ORM通常用于将数据结构映射到像Postgres这样的关系数据库不完全一样的是，Views将数据结构映射到像[RocksDB](https://rocksdb.org/)一样的KV存储。
 
-在普通的 Rust 中，我们可能会这样表示我们的计数器：
+原生的Rust中，我们用如下结构描述计数器：
 
-```rust,ignore
+```rust
 // do not use this
 struct Counter {
   value: u64
 }
 ```
 
-然而，为了持久化您的数据，您需要将 `src/state.rs` 中现有的 `Application` 状态结构替换为以下视图：
+然而，为了持久化存储数据，我们需要将`src/state.rs`中的所有`应用`状态用下面的View替换：
 
-```rust,ignore
+```rust
 /// The application state.
 #[derive(RootView, async_graphql::SimpleObject)]
 #[view(context = "ViewStorageContext")]
@@ -26,14 +26,13 @@ pub struct Counter {
 }
 ```
 
-并且在您的整个应用程序中替换所有 `Application` 的出现。
 
-`RegisterView<T>` 支持修改类型为 `T` 的单个值。不同类型的视图适用于不同的用例，但是大多数常见的数据结构已经实现了对应的视图类型：
+`RegisterView<T>`支持修改一个`T`类型的数值。不同应用场景我们将会使用不同的视图类型，但是主要的公共数据类型都已经实现：
 
-- `Vec` 或 `VecDeque` 对应于 `LogView`
-- `BTreeMap` 对应于 `MapView`，如果其值是原始类型，则对应于 `CollectionView` 如果其值是其他视图；
-- `Queue` 对应于 `QueueView`
+- `Vec`或`VecDeque`对应`LogView`
+- 如果`BTreeMap`的元素为元类型，对应`MapView`，否则对应`CollectionView`
+- `Queue`对应`QueueView`
 
-要查看详细列表，请参阅 Views 的 [文档](../advanced_topics/views.md)。
+Views的详细列表参见[文档](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)。
 
-最后，运行 `cargo check` 来确保您的更改能够编译通过。
+最后，执行`cargo check`编译上面的修改。
