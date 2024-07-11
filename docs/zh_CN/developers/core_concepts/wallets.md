@@ -1,28 +1,28 @@
-# 钱包
+# 2.3. 钱包
 
-与传统的区块链类似，Linera 钱包负责保存用户的私钥。但是，与其签署交易不同，Linera 钱包旨在签署区块并提议将其扩展到其用户拥有的链中。
+与传统区块链的钱包相同，Linera钱包也负责管理用户私钥和签名交易，但除此之外，Linera钱包也会创建区块，并将区块提交到验证器来延伸钱包用户管理的微链。
 
-实际上，钱包包含一个节点，该节点跟踪 Linera 链的子集。在下一节中，我们将看到 Linera 钱包如何运行 GraphQL 服务，将其链的状态暴露给 Web 前端。
+在实现上，Linera钱包将会包含一个节点服务，该节点服务管理Linera微链的一个子集(译者注：只管理当前钱包用户拥有的微链)。[下一节](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)中我们将会看到通过Linera钱包提供的GraphQL服务将钱包管理的微链状态提供给Web前端。
 
-> 命令行工具 `linera` 是开发者与 Linera 网络交互并管理本地系统中存在的用户钱包的主要方式。
+> 开发者主要通过命令行工具`linera`与Linera网络交互，并管理本地用户钱包。
 
-请注意，这个命令行工具主要用于开发目的。我们的目标是最终使最终用户可以在 [浏览器扩展](overview.html#web3-sdk) 中管理他们的钱包。
+命令行工具主要针对开发者，对于最终用户，我们将会提供[浏览器插件](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/overview?id=web3-sdk)来管理他们的钱包。
 
-## 选择钱包
+## [选择钱包](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=selecting-a-wallet)
 
-钱包的私有状态通常存储在 `wallet.json` 文件中，而其节点的状态存储在 `linera.db` 文件中。
+按照惯例，我们将钱包的私有状态存储在`wallet.json`文件，节点的状态存储在`linera.db`文件。
 
-要在不同的钱包之间切换，您可以使用 `linera` 工具的 `--wallet` 和 `--storage` 选项，例如： `linera --wallet wallet2.json --storage rocksdb:linera2.db`。
+开发者可以使用`linera`工具的`--wallet`和`--storage`选项切换钱包，例如`linera --wallet wallet2.json --storage rocksdb:linera2.db`。
 
-您也可以定义环境变量 `LINERA_STORAGE` 和 `LINERA_WALLET` 以达到同样的效果。例如，`LINERA_STORAGE=$PWD/wallet2.json` 和 `LINERA_WALLET=$PWD/wallet2.json`。
+除了通过命令行选项，定义不同的`LINERA_STORAGE`和`LINERA_WALLET`环境变量也可以达到一样的效果，例如`LINERA_STORAGE=$PWD/wallet2.json`和`LINERA_WALLET=$PWD/wallet2.json`。
 
-最后，如果为某个编号 `I` 定义了 `LINERA_STORAGE_$I` 和 `LINERA_WALLET_$I`，您可以调用 `linera --with-wallet $I`（或简写为 `linera -w $I`）。
+最后，如果终端中定义了一系列以数字`I`结尾的环境变量`LINERA_STORAGE_$I`和`LINERA_WALLET_$I`，也可以通过执行`linera --with-wallet $I`(或者简写`linera -w $I`)使用不同的钱包。
 
-## 链管理
+## [管理微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=chain-management)
 
-### 列出链
+### [获取微链清单](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=listing-chains)
 
-要列出您的钱包中存在的链，您可以使用 `show` 命令：
+使用`show`命令可以获取钱包中的微链清单：
 
 ```bash
 linera wallet show
@@ -41,59 +41,56 @@ linera wallet show
 │                                                                  ┆ Timestamp:          2023-04-10 13:52:21.885221                                       │
 │                                                                  ┆ Next Block Height:  1                                                                │
 ╰──────────────────────────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────╯
-
 ```
 
-每一行表示钱包中存在的一条链。左边是链的唯一标识符，右边是关联的最新区块的元数据。
+上面的清单中每一行代表钱包中的一条微链，左边是微链的标识符，右边是微链最新区块相关的元数据。
 
-### 默认链
+### [默认微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=default-chain)
 
-每个钱包都有一个默认链，所有命令都将应用于该链，除非您在命令行上指定另一个 `--chain`。
+每个钱包都有一条默认微链，如果执行命令时未传递`--chain`参数，命令将使用默认微链。
 
-默认链在首次向钱包添加链时设置。您可以运行以下命令来检查您钱包的默认链：
+第一条添加到钱包中的微链将被设置成默认微链，可以通过如下命令查看钱包的默认微链：
 
 ```bash
 linera wallet show
 ```
 
-默认链会以绿色文本显示，而不是白色文本。
-
-要更改钱包的默认链，请使用 `set-default` 命令：
+其中微链ID为绿色的行为钱包默认微链。可以通过如下命令改变默认微链：
 
 ```bash
 linera wallet set-default <chain-id>
 ```
 
-### 开放链
+### [创建微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=opening-a-chain)
 
-Linera 协议定义了创建新链的语义，我们称之为 "开放链"。一条链不能在真空中打开，它需要由网络上的现有链创建。
+Linera协议实现了创建新微链的语义，称为"opening a chain"。微链需要从网络上已经存在的微链创建，不能无中生有。
 
-#### 为自己的钱包开放链
+#### [在你的钱包中创建微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=open-a-chain-for-your-own-wallet)
 
-要为自己的钱包开放链，您可以使用 `open-chain` 命令：
+执行`open-chain`命令可以在你的钱包中创建新微链：
 
 ```bash
 linera open-chain
 ```
 
-这将使用钱包的默认链创建一个新链，并将其添加到钱包中。使用 `wallet show` 命令查看您现有的链。
+上面的命令将在默认微链上创建一条新微链，并将其添加到钱包中。执行`linera wallet show`命令可以查看当前所有微链。
 
-#### 为另一个钱包开放链
+#### [在另一个钱包创建微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=open-a-chain-for-another-wallet)
 
-为另一个 `wallet` 开放链需要额外的两个步骤。首先让我们初始化第二个钱包：
+在另一个`钱包`创建新的微链需要两个额外的步骤。首先，需要初始化第二个钱包：
 
 ```bash
 linera --wallet wallet2.json --storage rocksdb:linera2.db wallet init --genesis target/debug/genesis.json
 ```
 
-首先，`wallet2` 必须创建一个未分配的密钥对。该密钥对的公共部分然后发送给作为链创建者的 `wallet`。
+`钱包2`需要使用未分配的密钥对创建，该密钥对的公钥将被发送给`钱包1`的创建者。
 
 ```bash
 linera --wallet wallet2.json keygen
-6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 # this is the public key for the unassigned keypair
+6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 # 上面提到未分配密钥对的公钥
 ```
 
-接下来，使用公钥，`wallet` 可以为 `wallet2` 开放链。
+接下来，`钱包1`使用该公钥即可为`钱包2`创建一条微链。
 
 ```bash
 linera open-chain --to-public-key 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888
@@ -101,17 +98,17 @@ e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a650100000000000000
 fc9384defb0bcd8f6e206ffda32599e24ba715f45ec88d4ac81ec47eb84fa111
 ```
 
-第一行是指定创建新链的跨链消息的消息 ID。第二行是新链的 ID。
+上面的命令中，第一行为命令行输入，第二行和第三行为执行结果。其中，第二行为创建新微链的消息ID，第三行为新微链的ID。
 
-最后，要为给定未分配密钥对的 `wallet2` 添加链，我们使用 `assign` 命令：
+然后，我们使用`assign`命令将新创建的微链添加到`钱包2`，并将其所有者设置为上面提到的公钥：
 
 ```bash
  linera --wallet wallet2.json assign --key 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 --message-id e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000000000000
 ```
 
-#### 使用多个用户开放链
+#### [创建有多个用户的微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=opening-a-chain-with-multiple-users)
 
-`open-chain` 命令是 `open-multi-owner-chain` 的简化版本，后者允许您对新链的所有者集合、类型以及轮次和轮次超时设置进行精细控制。例如，以下命令创建一个具有两个所有者和两个多领导轮次的链：
+`open-chain` 命令是 `open-multi-owner-chain` 的简化版本，后者允许创建者对链所有者、Round和超时进行更加精细的设定。下面的示例命令将创建一条具有两个所有者及两个多领导者Rounds的微链：
 
 ```bash
 linera open-multi-owner-chain \
@@ -121,22 +118,18 @@ linera open-multi-owner-chain \
     --multi-leader-rounds 2
 ```
 
-`change-ownership` 命令为现有链提供了相同的选项，以添加或删除所有者并更改轮次设置。
+`change-ownership`命令使用相同参数，可以移除运行中的微链所有者，及修改微链的Round设置。
 
-## 使用 `linera net up` 自动设置额外的钱包
+## [使用`linera net up`命令自动创建外部钱包](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=setting-up-extra-wallets-automatically-with-linera-net-up)
 
-在测试时，与其像上面那样使用 `linera open-chain` 和 `linera assign`，通常更方便的是将选项 `--extra-wallets N` 传递给 `linera net up`。
+开发者测试的时候，除了通过上面的`linera open-chain`和`linera assign`创建新钱包和微链，也可以通过更加方便的`linera net up`命令创建测试环境，如果需要多个钱包测试，创建时传递`--extra-wallets N`参数即可。该参数将会创建`N`个额外的用户钱包，并将访问不同钱包的环境变量`LINERA_{WALLET,STORAGE}_$I`打印到终端(`I`的范围为`0..=N`，`I=0`表示管理初始微链的钱包)。
 
-此选项将创建 `N` 个额外的用户钱包，并输出 Bash 命令来定义环境变量 `LINERA_{WALLET,STORAGE}_$I`，其中 `I` 在 `0..=N` 范围内（`I=0` 是初始链的钱包）。
+环境都准备就绪后，即可通过执行`linera --with-wallet I`，或者简写的`linera -w I`切换钱包。
 
-一旦所有环境变量都定义好，您可以使用 `linera --with-wallet I` 或 `linera -w I` 简写来在不同的钱包之间切换。
+## [Bash环境自动设置](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=automation-in-bash)
 
-## 在 Bash 中自动化
+我们提供了Bash帮助函数`linera_spawn_and_read_wallet_variables`，用于在本地测试网络创建完毕后自动设置`LINERA_WALLET*`和`LINERA_STORAGE*`环境变量。
 
-为了在创建本地测试网络后自动设置 `LINERA_WALLET*` 和 `LINERA_STORAGE*` 变量的过程，我们提供了一个 Bash 辅助函数 `linera_spawn_and_read_wallet_variables`。
+在终端中执行`source /dev/stdin <<<"$(linera net helper 2>/dev/null)"`，即可在当前终端定义`linera_spawn_and_read_wallet_variables`函数。此外，开发者也可以通过将`linera net helper`添加到`~/.bash_profile`文件中，为将来登录的用户自动设置终端测试环境。
 
-要在您的 shell 中定义 `linera_spawn_and_read_wallet_variables` 函数，请运行 `source /dev/stdin <<<"$(linera net helper 2>/dev/null)"`。您也可以将 `linera net helper` 的输出添加到您的 `~/.bash_profile` 中，以备将来使用。
-
-一旦函数定义好了，调用 `linera_spawn_and_read_wallet_variables linera net up` 而不是 `linera net up`。
-
-这些是 Linera 钱包和链管理的基本概念和操作。如果您有任何进一步的问题或需要进一步的帮助，请随时告诉我！
+当按照上述步骤定义好帮助函数，即可执行`linera_spawn_and_read_wallet_variables linera net up`来创建测试环境。
