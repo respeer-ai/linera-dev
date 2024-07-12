@@ -1,10 +1,10 @@
-# 编写服务二进制文件
+# 3.5. 编写服务代码
 
-服务二进制是 Linera 应用程序的第二个组件。它被编译成与合约分开的字节码，并独立运行。它不计费（意味着查询应用程序的服务不会消耗 gas），可以看作是对应用程序的只读视图。
+Linera应用的第二个组件是服务程序，服务程序编译的字节码与合约字节码是分离的，且独立执行。服务程序不进行计量(意味着请求应用服务程序不消耗gas)，可以认为服务程序是应用的只读视图。
 
-应用程序的状态可以是任意复杂的，大多数情况下，您不希望将其整体暴露给希望与您的应用程序交互的人。相反，您可能更喜欢定义一组明确定义的查询，用于与您的应用程序进行交互。
+应用状态可以是复杂的，大部分时候开发者不会将全部状态暴露给与应用交互的用户，而代之以一系列预先明确定义的请求集合。
 
-`Service` trait 是定义应用程序接口的方式。`Service` trait 的定义如下：
+`Service` trait中定义了应用交互接口：
 
 ```rust,ignore
 pub trait Service: WithServiceAbi + ServiceAbi + Sized {
@@ -19,11 +19,11 @@ pub trait Service: WithServiceAbi + ServiceAbi + Sized {
 }
 ```
 
-完整的服务 trait 定义可以在[这里找到](https://github.com/linera-io/linera-protocol/blob/{{#include ../../../.git/modules/linera-protocol/HEAD}}/linera-sdk/src/lib.rs)。
+完整的`Service` trait定义参见[这里](https://github.com/linera-io/linera-protocol/blob/main/linera-sdk/src/lib.rs)。
 
-让我们为我们的计数应用程序实现 `Service`。
+现在让我们实现计数应用的`Service`部分。
 
-首先，我们类似于合约为服务创建一个新类型：
+与合约类似，我们首先定义服务类型：
 
 ```rust,ignore
 pub struct CounterService {
@@ -31,15 +31,15 @@ pub struct CounterService {
 }
 ```
 
-与 `CounterContract` 类型类似，这种类型通常有两种类型：应用程序的 `state` 和 `runtime`。如果我们不使用它们，可以省略字段，因此在这个示例中我们省略了 `runtime` 字段，因为它仅在构造 `CounterService` 类型时使用。
+与合约类型相同，服务类型通常定义两个字段：应用状态`state`和运行时`runtime`。我们可以忽略实作上不会用到的字段，在本例中，构造`CounterService`不需要`runtime`字段，因此我们只需要定义`state`。
 
-我们需要为实现服务 [WIT 接口](https://component-model.bytecodealliance.org/design/wit.html)生成必要的样板代码，并导出必要的资源类型和函数，以便可以执行服务。幸运的是，有一个宏来执行这些代码生成，所以只需将以下内容添加到 `service.rs`：
+我们需要生成实现服务的模板文件[WIT接口](https://component-model.bytecodealliance.org/design/wit.html)，用来导出主机(执行字节码的进程)访问服务的必要资源类型和函数。Linera SDK中有预先定义的宏来执行需要的代码生成过程，因此我们只需要在`service.rs`文件中添加如下代码即可：
 
 ```rust,ignore
 linera_sdk::service!(CounterService);
 ```
 
-接下来，我们需要为 `CounterService` 类型实现 `Service` trait。第一步是定义 `Service` 的关联类型，即在实例化应用程序时指定的全局参数。在我们的情况下，全局参数未被使用，所以我们可以简单地指定单位类型：
+接下来，我们需要为 `CounterService` 类型实现 `Service` trait。`Service` trait中包含初始化应用需要的全局参数，如果应用程序有自己特定的初始化参数定义，应该在trait的实现中将该参数类型重新声明为应用程序自己的初始化参数类型。本例中我们不需要传递初始化参数，因此将该参数声明为单元类型：
 
 ```rust,ignore
 #[async_trait]
@@ -48,7 +48,7 @@ impl Service for CounterService {
 }
 ```
 
-与合约类似，当实现 `Service` trait 时，我们必须实现一个 `load` 构造函数。构造函数接收运行时句柄，并应使用它来加载应用程序状态：
+与合约类似，当实现 `Service` trait 时，我们必须实现一个 `load` 构造函数，该函数携带`runtime`参数，我们可以用该参数来加载应用程序状态：
 
 ```rust,ignore
     async fn load(runtime: ServiceRuntime<Self>) -> Self {
@@ -59,9 +59,9 @@ impl Service for CounterService {
     }
 ```
 
-服务没有 `store` 方法，因为它们是只读的，不能将任何更改持久化到存储中。
+服务是只读的，不能将任何变更持久化存储，因而没有`store`方法。
 
-服务的实际功能从 `handle_query` 方法开始。我们将接受 GraphQL 查询，并使用 [`async-graphql` crate](https://github.com/async-graphql/async-graphql) 处理它们。为了将查询转发到下一节中将要实现的自定义 GraphQL 处理程序，我们使用以下代码：
+服务功能实现在`handler_query`方法中。客户端向服务发送的GraphQL请求被[`async-graphql` crate](https://github.com/async-graphql/async-graphql)处理，然后被转发到特定的处理程序，我们将在下面的章节讲解该部分的路由细节。下面的代码是实例程序的`handler_query`实现：
 
 ```rust,ignore
     async fn handle_query(&mut self, request: Request) -> Response {
@@ -78,7 +78,7 @@ impl Service for CounterService {
 }
 ```
 
-最后，与之前一样，需要以下代码将 ABI 定义整合到您的 `Service` 实现中：
+最后，与合约代码一样，我们需要将`Service`实现与ABI定义相关联：
 
 ```rust,ignore
 impl WithServiceAbi for Counter {
@@ -86,11 +86,11 @@ impl WithServiceAbi for Counter {
 }
 ```
 
-## 添加 GraphQL 兼容性
+## [GraphQL支持](https://linera-dev.respeer.ai/#/zh_CN/sdk/service?id=adding-graphql-compatibility)
 
-最后，我们希望我们的应用程序具有 GraphQL 兼容性。为了实现这一点，我们需要一个 `QueryRoot` 来响应查询，以及一个 `MutationRoot` 来创建可以放置在块中的序列化 `Operation` 值。
+我们希望应用支持GraphQL请求，因此，我们需要一个`QueryRoot`拦截查询请求，以及一个`MutationRoot`拦截修改请求。`MutationRoot`将序列化`Operation`值，该序列化输出将被打包到新区块。
 
-在 `QueryRoot` 中，我们只创建一个 `value` 查询，返回计数器的值：
+`QueryRoot`实现`value`查询方法，该方法返回计数器当前值：
 
 ```rust,ignore
 struct QueryRoot {
@@ -105,7 +105,7 @@ impl QueryRoot {
 }
 ```
 
-在 `MutationRoot` 中，我们只创建一个 `increment` 方法，返回一个增加计数器值的序列化操作：
+`MutationRoot`中实现`increment`方法，序列化给定的值，合约实现将会使用该序列化结果修改当前计数值：
 
 ```rust,ignore
 struct MutationRoot;
@@ -118,4 +118,4 @@ impl MutationRoot {
 }
 ```
 
-上述代码中没有包括导入部分，留给读者练习（但请记住导入 `async_graphql::Object`）。如果您想要完整的源代码和相关测试，请查看 GitHub 上的[示例部分](https://github.com/linera-io/linera-protocol/blob/{{#include ../../../.git/modules/linera-protocol/HEAD}}/examples/counter/src/service.rs)。
+上面的示例中我们没有包含依赖导入部分，我们将这一部分留给读者作为练习(记得导入`async_graphql::Object`)。完整的示例代码可以从GitHub上的[示例](https://github.com/linera-io/linera-protocol/blob/main/examples/counter/src/service.rs)找到。
