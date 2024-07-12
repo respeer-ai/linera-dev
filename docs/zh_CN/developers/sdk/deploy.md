@@ -4,7 +4,7 @@
 
 ## [本地测试网](https://linera-dev.respeer.ai/#/zh_CN/sdk/deploy?id=local-net)
 
-参考[开始章节](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-initial-test-wallet)配置本地测试网。
+首先，请参考[开始章节](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-initial-test-wallet)配置本地测试网。
 
 然后，我们需要设置`LINERA_WALLET`和`LINERA_STORAGE`环境变量，这些变量将会在执行`publish-and-create`命令时用到。此外，我们还需要指定下列参数：
 
