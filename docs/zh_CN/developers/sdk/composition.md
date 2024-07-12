@@ -33,7 +33,7 @@ pub fn call_application<A: ContractAbi + Send>(
 
 然后，Carol可以通过运行`linera service`，并发送如下请求到Bob的应用质押她的Pugecoin了：
 
-```json
+```
 mutation { pledge(owner: "User:841…6c0", amount: "10") }
 ```
 
