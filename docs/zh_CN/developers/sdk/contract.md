@@ -71,7 +71,7 @@ pub struct CounterContract {
     }
 ```
 
-事实上最后一步可以做的事情不仅仅是保存状态，更多细节参见[合约最终化](../advanced_topics/contract_finalize.md)章节。
+最后一步可以做的事情不仅仅是保存状态，更多细节参见[合约最终化](../advanced_topics/contract_finalize.md)章节。
 
 ## [初始化应用](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=initializing-our-application)
 
@@ -107,7 +107,7 @@ pub struct CounterContract {
 最后，我们通过如下的代码将上面实现的`Contract` trait与应用程序的ABI相关联：
 
 ```rust,ignore
-impl WithContractAbi for Counter {
+impl WithContractAbi for CounterContract {
     type Abi = counter::CounterAbi;
 }
 ```
