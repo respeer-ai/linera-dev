@@ -1,18 +1,18 @@
-# 处理资产的应用程序
+# 1.4.6. 应用程序中的资产
 
-通常情况下，如果您向他人拥有的链发送代币，您依赖于他们确保资产的可用性：如果他们不处理您的消息，您将无法访问您的代币。
+通常，当你向其他人拥有的微链发送一些token，这些token的可用性将取决于接收者的行为：如果接收者不处理消息，则这些token是不可用的。
 
-幸运的是，Linera 提供了基于临时链的解决方案：如果事先知道和限定参与方的数量，我们可以：
+Linera基于临时微链实现了一种解决方案：如果参与各方是有限的，并且事先可知，那么我们可以：
 
-- 使用 `linera change-ownership` 命令使它们成为所有者，
-- 只允许链上一个应用程序的操作，
-- 并允许仅该操作关闭链，使用 `linera change-application-permissions`。
+- 通过`linera change-ownership`将参与各方设置为链所有者，
+- 设置该微链上只允许一个应用的操作，
+- 通过`linera change-application-permissions`设置可以关闭微链的操作。
 
-这样的应用程序应该有一个指定的操作或消息，触发它关闭链：当执行该操作时，它应该将所有剩余的资产退回，并调用运行时的 `close_chain` 方法。
+上述微链上被允许的应用应该有一个指定的操作或消息可以关闭微链：当该操作执行时，所有剩余资产将被退回，然后调用运行时的`close_chain`方法。
 
-一旦链关闭，所有者仍然可以创建拒绝消息的区块。这样，即使资产正在传输中，也可以将其返回。
+微链关闭时，所有者任然可以创建区块拒绝消息，这样，即使资产已经发送，只要没有被接收方确认，就可以安全返回到发送者账户。
 
-[`matching-engine` 示例应用程序](https://github.com/linera-io/linera-protocol/tree/main/examples/matching-engine) 就是这样做的：
+[`matching-engine` 示例程序](https://github.com/linera-io/linera-protocol/tree/main/examples/matching-engine)实现了上述流程：
 
 ```rust,ignore
     async fn execute_operation(&mut self, operation: Operation) -> Self::Response {
@@ -35,4 +35,4 @@
     }
 ```
 
-这使得使用匹配引擎进行原子交换成为可能：如果您提交一个竞价，您可以确保在任何时间点都可以收回您提供的代币或您购买的代币。
+通过上述设计，我们可以在匹配引擎中进行原子交换：当一个竞价被提交后，发送者将确保在任何时间点要么收到购买的token，要么收到自己的token。
