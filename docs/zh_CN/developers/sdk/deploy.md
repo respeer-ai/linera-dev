@@ -1,35 +1,16 @@
-1. # 部署应用程序
+# 3.6. 部署应用
 
-   部署应用程序的第一步是配置钱包。这将决定应用程序部署到本地网络还是开发网络（devnet）。
+要部署应用，首先需要配置一个钱包。不同的钱包配置决定应用将被部署在什么地方：本地测试网，还是开发网。
 
-   ## 本地网络
+## [本地测试网](https://linera-dev.respeer.ai/#/zh_CN/sdk/deploy?id=local-net)
 
-   要配置本地网络，请按照[入门指南部分](../getting_started/hello_linera.html#using-the-initial-test-wallet)中的步骤进行操作。
+参考[开始章节](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-initial-test-wallet)配置本地测试网。
 
-   配置完成后，需要设置 `LINERA_WALLET` 和 `LINERA_STORAGE` 环境变量，并且可以在 `publish-and-create` 命令中使用这些变量来部署应用程序，同时指定以下内容：
+然后，我们需要设置`LINERA_WALLET`和`LINERA_STORAGE`环境变量，这些变量将会在执行`publish-and-create`命令时用到。此外，我们还需要指定下列参数：
 
-   1. 合约字节码的位置
-   2. 服务字节码的位置
-   3. JSON 编码的初始化参数
-
-```bash
-linera publish-and-create \
-  target/wasm32-unknown-unknown/release/my-counter_{contract,service}.wasm \
-  --json-argument "42"
-```
-
-## 开发网络（Devnet）
-
-要为 devnet 配置钱包并创建新的微链，可以使用以下命令：
-
-```bash
-linera wallet init --with-new-chain --faucet https://faucet.{{#include ../../../RELEASE_DOMAIN}}.linera.net
-```
-
-1. Faucet 将为新的链提供一些代币，这些代币可以用于使用 `publish-and-create` 命令部署应用程序。在部署时需要指定以下内容：
-   1. 合约字节码的位置
-   2. 服务字节码的位置
-   3. JSON 编码的初始化参数
+1. 合约字节码路径
+2. 服务字节码路径
+3. 初始化参数的JSON文本
 
 ```bash
 linera publish-and-create \
@@ -37,6 +18,26 @@ linera publish-and-create \
   --json-argument "42"
 ```
 
-## 与应用程序交互
+## [开发网](https://linera-dev.respeer.ai/#/zh_CN/sdk/deploy?id=devnet)
 
-要与部署的应用程序进行交互，必须使用[node service](../core_concepts/node_service.html)。
+如果想在开发网上创建微链，可以使用如下的命令配置钱包：
+
+```bash
+linera wallet init --with-new-chain --faucet https://faucet.devnet.linera.net
+```
+
+开发网水龙头将创建一条新的微链，该微链有一些token，可以用于执行`publish-and-create`命令在开发网部署应用。在开发网部署命令同样需要指定下列参数：
+
+1. 合约字节码路径
+2. 服务字节码路径
+3. 初始化参数的JSON文本
+
+```bash
+linera publish-and-create \
+  target/wasm32-unknown-unknown/release/my-counter_{contract,service}.wasm \
+  --json-argument "42"
+```
+
+## [与应用交互](https://linera-dev.respeer.ai/#/zh_CN/sdk/deploy?id=interacting-with-the-application)
+
+其他用户通过[节点服务](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)与应用交互。
