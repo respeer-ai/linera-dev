@@ -29,6 +29,7 @@ Docker Compose是一个用于编排和管理多容器Docker应用的工具。开
 ```bash
 ## 应该确保主机安装了protoc，rust等工具链
 cargo install --path linera-service
+## 参考[Docker Compose error](https://github.com/docker/compose/issues/8630#issuecomment-1073166114)解决docker compose报错
 cd docker && ./compose.sh
 ```
 
