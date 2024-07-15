@@ -27,6 +27,8 @@ Docker Compose是一个用于编排和管理多容器Docker应用的工具。开
 使用Docker Compose运行本地开发网络需要先clone linera-protocol源码库，然后进入源码clone目录，执行以下命令：
 
 ```bash
+## 应该确保主机安装了protoc，rust等工具链
+cargo install --path linera-service
 cd docker && ./compose.sh
 ```
 
