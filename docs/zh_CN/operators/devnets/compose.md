@@ -1,38 +1,38 @@
-# 使用 Docker Compose 运行开发网络
+# 使用Docker Compose运行开发网络
 
-在这一部分，我们使用 Docker Compose 来运行一个简单的开发网络，只包含一个验证者。
+本章我们将介绍怎么使用Docker Compose运行只包含一个验证者的本地开发网络。
 
-Docker Compose 是一个用于定义和管理多容器 Docker 应用程序的工具。它允许您在一个单独的 YAML 文件（docker-compose.yml）中描述应用程序的服务、网络和卷。使用 Docker Compose，您可以轻松地启动、停止和管理应用程序中的所有容器，只需使用类似 `docker-compose up` 和 `docker-compose down` 的简单命令。
+Docker Compose是一个用于编排和管理多容器Docker应用的工具。开发者可以在一个YAML文件(docker-compose.yaml)中描述应用使用的服务、网络和存储卷。在Docker Compose的帮助下，开发者可以通过像`docker-compose up`和`docker-compose down`这样的简单命令统一启动、停止和管理应用的所有容器。
 
-对于更完整的设置，请考虑使用 Kind，如下一节所述。
+如果开发者需要更加完整的设置，请考虑使用下一章介绍的Kind。
 
 ## 安装
 
-本节涵盖了运行 Linera 网络所需的所有 Docker Compose 安装步骤。
+本节涵盖了运行Linera网络的所有Docker Compose步骤。
 
-注意：此部分仅在 Linux 环境下进行过测试
+注意：本部分仅在Linux环境下测试通过。
 
-### Docker Compose 要求
+### Docker Compose要求
 
-要安装 Docker Compose，请参阅 Docker 文档中的 [安装 Docker Compose](https://docs.docker.com/compose/install/) 部分。
+安装Docker Compose参阅Docker文档的[安装 Docker Compose](https://docs.docker.com/compose/install/)部分。
 
-### 安装 Linera 工具链
+### 安装Linera工具链
 
-要安装 Linera 工具链，请参考 [安装部分](../../developers/getting_started/installation.md#installing-from-github)。
+安装Linera工具链参阅本文档[安装部分](../../developers/getting_started/installation.md#installing-from-github)。
 
-您需要从 GitHub 安装工具链，因为将使用该存储库来运行 Docker Compose 验证者服务。
+由于Docker Compose的安装脚本包含在Linera的Github仓库中，开发者需要从Github安装Linera工具链。
 
-## 使用 Docker Compose 运行
+## 使用Docker Compose运行
 
-要使用 Docker Compose 在本地运行开发网络，请导航到 `linera-protocol` 存储库的根目录，并执行以下命令：
+使用Docker Compose运行本地开发网络需要先clone linera-protocol源码库，然后进入源码clone目录，执行以下命令：
 
 ```bash
 cd docker && ./compose.sh
 ```
 
-这将花费一些时间，因为需要从 Linera 源代码构建 Docker 镜像。当服务准备就绪时，临时钱包和数据库将位于 `docker` 子目录下。
+从源码构建Docker镜像将会会费一些时间。当服务就绪后，将在docker子目录创建临时钱包和数据库。
 
-使用 `linera` 二进制文件与开发网络进行交互：
+开发者可以通过`linera`命令行和开发网络交互：
 
 ```bash
 $ linera --wallet wallet.json --storage rocksdb:linera.db sync
@@ -45,4 +45,5 @@ $ linera --wallet wallet.json --storage rocksdb:linera.db query-balance
 10.
 ```
 
-由于网络是临时的，因此停止脚本会执行清理操作，销毁与网络相关的钱包、存储和卷。
+本章部署的开发网络是临时的，停止脚本将会清理与网络相关的钱包、数据库和存储卷。
+
