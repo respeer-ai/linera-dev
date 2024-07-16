@@ -1,6 +1,6 @@
 The Linera Manual
-- [The Linera Manual](introduction.md)
-- [**1.** Developers](developers.md)
+- [The Linera Manual](en_US/introduction.md)
+- [**1.** Developers](en_US/developers.md)
   -  [**1.1.** Getting Started](en_US/developers/getting_started.md)
     - [**1.1.1.** Installation](en_US/developers/getting_started/installation.md)
     - [**1.1.2.** Hello, Linera](en_US/developers/getting_started/hello_linera.md)

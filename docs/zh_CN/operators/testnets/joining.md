@@ -1,47 +1,38 @@
-# Joining an Existing Testnet
+# 加入现有的测试网
 
-In this section, we use Docker Compose to run a validator and join an existing
-Testnet.
+在本节中，我们使用 Docker Compose 运行一个验证者节点，并加入一个现有的测试网。
 
-## Installation
+## 安装
 
-This section covers everything you need to install to run a Linera validator
-node with Docker Compose.
+本节涵盖了您需要安装以使用 Docker Compose 运行 Linera 验证节点的所有内容。
 
-> Note: This section was only tested under Linux.
+> 注意：本章节仅在Linux系统下测试通过。
 
 ### Docker Compose Requirements
 
-To install Docker Compose see the
-[installing Docker Compose](https://docs.docker.com/compose/install/) section in
-the Docker docs.
+安装Docker Compose请参考下列步骤
+[installing Docker Compose](https://docs.docker.com/compose/install/) 
 
-### Installing the Linera Toolchain
+### 安装Linera工具链
 
-To install the Linera Toolchain refer to the
+要安装 Linera 工具链，请参考下列步骤
 [installation section](../../developers/getting_started/installation.md#installing-from-github).
 
-You want to install the toolchain from GitHub, as you'll be using the repository
-to run the Docker Compose validator service.
+您想要从 GitHub 上安装工具链，因为您将使用该存储库来运行 Docker Compose 验证者服务。
 
-## Setting up a Linera Validator
+## 设置 Linera 验证者
 
-For the next section, we'll be working out of the `docker` subdirectory in the
-`linera-protocol` repository.
+在下一节中，我们将在 `linera-protocol` 存储库的 `docker` 子目录中进行操作。
 
-### Infrastructure Configuration
+### 基础设施设置
 
-Validators run via Docker Compose do not come with a pre-packaged load balancer
-to perform TLS termination (unlike validators running on Kubernetes).
+通过 Docker Compose 运行的验证者节点并不附带预打包的负载均衡器来执行 TLS 终止（与在 Kubernetes 上运行的验证者节点不同）。
 
-Thus, it is required of validator operators to provide TLS termination and
-support long-lived HTTP/2 connections required for the functioning of the Linera
-notification system.
+因此，需要验证者运营商提供TLS终止和支持 Linera 通知系统正常运行所需的长连接。
 
-### Creating your Validator Configuration
+### 创建您的验证者配置
 
-Validators are configured using a TOML file. You can use the following template
-to set up you own validator configuration:
+验证者是使用 TOML 文件进行配置的。 您可以使用以下模板来设置您自己的验证者配置：
 
 ```toml
 server_config_path = "server.json"
@@ -64,15 +55,13 @@ metrics_port = 21100
 
 ```
 
-### Genesis Configuration
+### 创世配置
 
-The genesis configuration describes the committee of validators and chains at
-the point of network creation. It is required for validators to function.
+创世配置描述了网络创建时的验证者委员会和链。 验证者的功能需要它。
 
-Initially, the genesis configuration for each Testnet will be found in a public
-bucket managed by the Linera Protocol core team.
+最初，每个测试网络的创世配置将存储在由 Linera Protocol 核心团队管理的公共存储桶中。
 
-An example can be found here:
+可以参考这个示例：
 
 ```bash
 wget "https://storage.cloud.google.com/linera-io-dev-public/{{#include ../../../RELEASE_DOMAIN}}/genesis.json"
@@ -80,22 +69,17 @@ wget "https://storage.cloud.google.com/linera-io-dev-public/{{#include ../../../
 
 ### Creating Your Keys
 
-Now that the
-[validator configuration](joining.md#creating-your-validator-configuration) has
-been created and the [genesis configuration](joining.md#genesis-configuration)
-is available, the validator private keys can be generated.
+现在，已经创建了[验证者配置](joining.md#creating-your-validator-configuration)，并且[创世配置](joining.md#genesis-configuration)可用，可以生成验证者私钥。
 
-To generate the private keys, the `linera-server` binary is used:
+要生成私钥，使用 `linera-server` 二进制文件：
 
 ```bash
 linera-server generate --validators /path/to/validator/configuration.toml
 ```
 
-This will generate a file called `server.json` with the information required for
-a validator to operate, including a cryptographic keypair.
+这将生成一个名为 `server.json` 的文件，其中包含验证者运行所需的信息，包括密码学密钥对。
 
-The public key will be printed after the command has finished executing, for
-example:
+命令执行完成后，将打印公钥，例如：
 
 ```bash
 $ linera-server generate --validators /path/to/validator/configuration.toml
@@ -111,30 +95,26 @@ $ linera-server generate --validators /path/to/validator/configuration.toml
 The public key, in this case beginning with `92f`, must be communicated to the
 Linera Protocol core team along with the chosen host name for onboarding in the
 next epoch.
+在这种情况下以 `92f` 开头的公钥必须与选择的主机名一起在下一个时期的入职中与 Linera Protocol 核心团队沟通。
 
-> Note: Before being included in the next epoch, validator nodes will receive no
-> traffic from existing users.
+> 注意：在被列入下一个时期之前，验证者节点将不会从现有用户那里接收任何流量。
 
-### Building the Linera Docker image
+### 构建Linera Docker镜像
 
-To build the Linera Docker image, run the following command from the root of the
-`linera-protocol` repository:
+要构建Linera Docker镜像，请从`linera-protocol`存储库的根目录运行以下命令：
 
 ```bash
 $ docker build -f docker/Dockerfile . -t linera
 ```
 
-This can take several minutes.
+这一步需要几分钟时间。
 
-### Running a Validator Node
+### 运行一个验证者节点
 
-Now that the genesis configuration is available at `docker/genesis.json` and the
-server configuration is available at `docker/server.json`, the validator can be
-started by running from inside the `docker` directory:
+现在，创世配置在`docker/genesis.json`中可用，服务器配置在`docker/server.json`中可用，可以通过在`docker`目录内运行以下命令来启动验证者：
 
 ```bash
 cd docker && docker compose up -d
 ```
 
-This will run the Docker Compose deployment in a detached mode. It can take a
-few minutes for the ScyllaDB image to be downloaded and started.
+这将以分离模式运行Docker Compose部署。可能需要几分钟来下载并启动ScyllaDB镜像。
