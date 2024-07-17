@@ -6,7 +6,7 @@ Linera使用WebAssembly(Wasm)虚拟机执行应用程序。当前，[Linera SDK]
 
 Linera应用基于Rust开发者熟悉的**Rust crate**组织：应用程序依赖的外部接口(包括初始化参数、操作、消息和跨链调用)通常都有函数库的crate提供，应用程序核心部分将被编译为Wasm体系结构的二进制文件。
 
-## [应用开发流程](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=the-application-deployment-lifecycle)
+## [应用开发周期](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=the-application-deployment-lifecycle)
 
 Linera应用是可重用的，因此，应用的字节码和网络上正在运行的应用实例是不同的。
 
