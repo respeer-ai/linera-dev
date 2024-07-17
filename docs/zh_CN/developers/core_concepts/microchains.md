@@ -1,4 +1,4 @@
-## 2.2 微链
+# 微链
 
 本节将介绍Linera协议的基础构建单元，微链。微链的正式阐述参见[白皮书](https://linera.io/whitepaper)。
 

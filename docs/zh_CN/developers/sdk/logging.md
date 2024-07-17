@@ -1,4 +1,4 @@
-# 3.9. 在应用中打印日志
+# 在应用中打印日志
 
 应用可以使用[`log` crate](https://crates.io/crates/log)根据重要性打印不同级别的日志。对于开发者和终端用户来说，日志都是有用的。`linera service`命令默认将会打印"info"(`log::info!`, `log::warn!` and `log::error!`)级别以上的应用日志。
 

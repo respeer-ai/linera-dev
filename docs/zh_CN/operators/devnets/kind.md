@@ -14,7 +14,7 @@ Kind(Kubernetes in Docker)是一个在Docker容器节点中运行本地Kubernete
 
 | Linux x86 64-bit | Mac OS (M1 / M2) | Mac OS (x86) | Windows |
 | ---------------- | ---------------- | ------------ | ------- |
-| ✓ 主要平台       | ✓ 工作中         | ✓ 工作中     | 未测试  |
+| ✓ 主要平台       | ✓ 可以工作       | ✓ 可以工作   | 未测试  |
 
 安装Linera工具链之前需要现安装Rust，Wasm和Protoc，在Linux可以按照如下步骤安装：
 
@@ -61,7 +61,7 @@ profile = "minimal"
 ```bash
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
-git checkout -t origin/{{#include ../../../RELEASE_BRANCH}}  # Current release branch
+git checkout -t origin/devnet_2024_05_07  # Current release branch
 ```
 
 然后编译安装：

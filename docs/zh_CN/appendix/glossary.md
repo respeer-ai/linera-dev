@@ -1,4 +1,4 @@
-# 5.1. Glossary
+# Glossary
 
 - **Address**: 字母数字组成的唯一标识，用于标识Linera网络上的一个实体。
 - **Admin Chain**: Linera网络中的特定 _admin chain_，用于供验证器加入或离开网络，和定义新epoch。
