@@ -33,7 +33,6 @@ linera publish-and-create <contract-path> <service-path> <init-args>
 
 **服务**是只读的，服务的执行不消耗gas。服务主要用于查询应用状态，通过用户接口将查询结果返回到表示层(通常为前端)。
 
-最后，合约和服务通过一种称为[视图](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)的形式共享应用状态，稍后我们将会详细介绍这一部分。
 
 ## [操作和消息](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=operations-and-messages)
 
