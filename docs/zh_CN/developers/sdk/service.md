@@ -59,7 +59,7 @@ impl Service for CounterService {
     }
 ```
 
-服务是只读的，不能将任何变更持久化存储，因而没有`store`方法。
+服务是只读的，不能将任何变更持久化存储，因为没有`store`方法。
 
 服务功能实现在`handler_query`方法中。客户端向服务发送的GraphQL请求被[`async-graphql` crate](https://github.com/async-graphql/async-graphql)处理，然后被转发到特定的处理程序，我们将在下面的章节讲解该部分的路由细节。下面的代码是实例程序的`handler_query`实现：
 

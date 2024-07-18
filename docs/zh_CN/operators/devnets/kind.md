@@ -16,7 +16,7 @@ Kind(Kubernetes in Docker)是一个在Docker容器节点中运行本地Kubernete
 | ---------------- | ---------------- | ------------ | ------- |
 | ✓ 主要平台       | ✓ 可以工作       | ✓ 可以工作   | 未测试  |
 
-安装Linera工具链之前需要现安装Rust，Wasm和Protoc，在Linux可以按照如下步骤安装：
+安装Linera工具链之前需要先安装Rust，Wasm和Protoc，在Linux可以按照如下步骤安装：
 
 - Rust和Wasm
 

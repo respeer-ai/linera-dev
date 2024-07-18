@@ -17,7 +17,7 @@ The Linera Manual
     - [**1.3.4.** 编写合约代码](zh_CN/developers/sdk/contract.md)
     - [**1.3.5.** 编写服务代码](zh_CN/developers/sdk/service.md)
     - [**1.3.6.** 部署应用](zh_CN/developers/sdk/deploy.md)
-    - [**1.3.7.** 跨链消](zh_CN/developers/sdk/messages.md)
+    - [**1.3.7.** 跨链消息](zh_CN/developers/sdk/messages.md)
     - [**1.3.8.** 调用其他应用](zh_CN/developers/sdk/composition.md)
     - [**1.3.9.** 在应用中打印日志](zh_CN/developers/sdk/logging.md)
     - [**1.3.10.** 编写测试](zh_CN/developers/sdk/testing.md)
