@@ -86,7 +86,7 @@ impl WithServiceAbi for Counter {
 }
 ```
 
-## [GraphQL支持](https://linera-dev.respeer.ai/#/zh_CN/sdk/service?id=adding-graphql-compatibility)
+## [GraphQL支持](zh_CN/developers/sdk/service.md#GraphQL支持)
 
 我们希望应用支持GraphQL请求，因此，我们需要一个`QueryRoot`拦截查询请求，以及一个`MutationRoot`拦截修改请求。`MutationRoot`将序列化`Operation`值，该序列化输出将被打包到新区块。
 

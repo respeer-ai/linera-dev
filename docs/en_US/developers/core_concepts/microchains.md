@@ -100,4 +100,4 @@ contention. Chains that very often have high activity from multiple owners can
 set the number of multi-leader rounds to 0.
 
 For more detail and examples on how to open and close chains, see the wallet
-section on [chain management](wallets.md#opening-a-chain).
+section on [chain management](en_US/developers/core_concepts/wallets.md#opening-a-chain).

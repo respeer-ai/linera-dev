@@ -6,7 +6,7 @@ require guaranteed performance for an unlimited number of active users.
 The core idea of the Linera protocol is to run many lightweight blockchains,
 called **microchains**, in parallel in a single set of validators.
 
-## How does it work?
+## [How does it work?](en_US/developers/core_concepts/overview.md#how-does-it-work)
 
 In Linera, user wallets operate their own microchains. The owner of a chain
 chooses when to add new blocks to the chain and what goes inside the blocks.
@@ -55,7 +55,7 @@ The current Linera SDK uses **Rust** as a source language to create Wasm
 applications. It relies on the normal Rust toolchains so that Rust programmers
 can work in their preferred environments.
 
-## How does Linera compare to existing multi-chain infrastructure?
+## [How does Linera compare to existing multi-chain infrastructure?](en_US/developers/core_concepts/overview.md#How-does-Linera-compare-to-existing-multi-chain-infrastructure)
 
 Linera is the first infrastructure designed to support many chains in parallel,
 and notably an arbitrary number of **user chains** meant to be operated by user
@@ -86,7 +86,7 @@ In contrast, Linera is optimized for a large number of user chains:
 > they are similar to classical blockchains. Permissioned chains are meant to be
 > used for temporary interactions between users, such as atomic swaps.
 
-## Why build on top of Linera?
+## [Why build on top of Linera?](en_US/developers/core_concepts/overview.md#Why-build-on-top-of-Linera)
 
 We believe that many high-value use cases are currently out of reach of existing
 Web3 infrastructures because of the challenges of serving **many active users**
@@ -118,7 +118,7 @@ frameworks (React/GraphQL). Furthermore, wallets will be able to leverage the
 full node as well for security purposes, including to display meaningful
 confirmation messages to users.
 
-## What is the current state of the development of Linera?
+## [What is the current state of the development of Linera?](en_US/developers/core_concepts/overview.md#What-is-the-current-state-of-the-development-of Linera)
 
 The
 [reference open-source implementation](https://github.com/linera-io/linera-protocol)
@@ -142,7 +142,7 @@ The main limitations of our current Web3 SDK include:
 The main development workstreams of Linera, beyond its SDK, can be broken down
 as follows.
 
-### Core Protocol
+### [Core Protocol](en_US/developers/core_concepts/overview.md#Core-Protocol)
 
 - [x] User chains
 - [x] Permissioned chains (core protocol only)
@@ -154,17 +154,12 @@ as follows.
 - [x] Support for gas fees
 - [x] Support for storage fees and storage limits
 - [x] External service (aka. "Faucet") to help users create their first chain
-- [x] Permissioned chains (adding operation access control, demo of atomic
-      swaps, etc)
+- [x] Permissioned chains (adding operation access control, demo of atomic swaps, etc)
 - [ ] Avoid repeatedly loading chain states from storage
-- [ ] Blob storage usable by system and user applications
-      (generalizing/replacing bytecode storage)
-- [ ] Support for easy onboarding of user chains into a new application
-      (removing the need to accept requests)
-- [ ] Replace pub/sub channels by data streams (removing the need to accept
-      subscriptions)
-- [ ] Allow chain clients to control which chains they track (lazily/actively)
-      and execute (do not execute all tracked chains)
+- [ ] Blob storage usable by system and user applications(generalizing/replacing bytecode storage)
+- [ ] Support for easy onboarding of user chains into a new application (removing the need to accept requests)
+- [ ] Replace pub/sub channels by data streams (removing the need to accept subscriptions)
+- [ ] Allow chain clients to control which chains they track (lazily/actively)  and execute (do not execute all tracked chains)
 - [ ] Multi-signed events to facilitate future bridges to external chains
 - [ ] Public chains (adding leader election, inbox constraints, etc)
 - [ ] Transaction scripts
@@ -174,7 +169,7 @@ as follows.
 - [ ] Governance on the admin chain (e.g. DPoS, onboarding of validators)
 - [ ] Permissionless auditing protocol
 
-### Wasm VM integration
+### [Wasm VM integration](en_US/developers/core_concepts/overview.md#Wasm-VM-integration)
 
 - [x] Support for the Wasmer VM
 - [x] Support for the Wasmtime VM (experimental)
@@ -186,10 +181,9 @@ as follows.
 - [x] Improve host/guest stub generation to make mocks easier
 - [ ] Support for running Wasm applications in the browser
 
-### Storage
+### [Storage](en_US/developers/core_concepts/overview.md#Storage)
 
-- [x] Object management library ("linera-views") on top of Key-Value store
-      abstraction
+- [x] Object management library ("linera-views") on top of Key-Value store abstraction
 - [x] Support for Rocksdb
 - [x] Experimental support for DynamoDb
 - [x] Derive macros for GraphQL
@@ -204,7 +198,7 @@ as follows.
 - [ ] Tooling for debugging
 - [ ] Make the storage library easy to use outside of Linera
 
-### Validator Infrastructure
+### [Validator Infrastructure](en_US/developers/core_concepts/overview.md#Validator-Infrastructure)
 
 - [x] Simple TCP/UDP networking (used for benchmarks only)
 - [x] GRPC networking
@@ -216,7 +210,7 @@ as follows.
 - [ ] Dynamic shard assignment
 - [ ] Cloud integration to demonstrate elastic scaling
 
-### Web3 SDK
+### [Web3 SDK](en_US/developers/core_concepts/overview.md#Web3-SDK)
 
 - [x] Traits for contract and service interfaces
 - [x] Support for unit testing

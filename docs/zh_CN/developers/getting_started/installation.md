@@ -2,7 +2,7 @@
 
 让我们从安装Linera开发工具开始。
 
-## [概述](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=overview)
+## [概述](zh_CN/developers/getting_started/installation.md#概述)
 
 Linera工具链由以下两个crate构成（译者注：crate即为rust发布包）：
 
@@ -13,7 +13,7 @@ Linera工具链由以下两个crate构成（译者注：crate即为rust发布包
   - `linera-proxy` -- 代理服务，用作验证者的接入点，
   - `linera-server` -- 验证者的工作节点运行的服务，隐藏在代理服务后面。
 
-## [运行环境](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=requirements)
+## [运行环境](zh_CN/developers/getting_started/installation.md#运行环境)
 
 当前Linera工具链支持在以下操作系统运行：
 
@@ -44,7 +44,7 @@ targets = [ "wasm32-unknown-unknown" ]
 profile = "minimal"
 ```
 
-## [从crates.io安装](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio)
+## [从crates.io安装](zh_CN/developers/getting_started/installation.md#从crates.io安装)
 
 你可以通过如下命令安装Linera工具链
 
@@ -61,8 +61,7 @@ cargo add linera-sdk@0.11.3
 
 版本号`0.11.3`对应当前Linera Devnet，该版本号可能会频繁变更。
 
-## [从GitHub安装](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-github)
-
+## [从GitHub安装](zh_CN/developers/getting_started/installation.md#从GitHub安装)
 从[GitHub](https://github.com/linera-io/linera-protocol)下载源码：
 
 ```bash
@@ -85,10 +84,10 @@ cargo install --locked --path linera-service
 2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
 ```
 
-## [Bash助手(可选)](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=bash-helper-optional)
+## [Bash助手(可选)](zh_CN/developers/getting_started/installation.md#Bash助手(可选))
 
-可以通过在`~/.bash_profile`文件追加`linera net helper`快速[自动](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=automation-in-bash)设置Linera运行时环境变量
+可以通过在`~/.bash_profile`文件追加`linera net helper`快速[自动](zh_CN/developers/core_concepts/wallets.md#Bash环境自动设置)设置Linera运行时环境变量
 
-## [寻求帮助](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=getting-help)
+## [寻求帮助](zh_CN/developers/getting_started/installation.md#寻求帮助)
 
 如果安装失败，联系我们的团队(例如通过[Discord](https://discord.gg/linera))协助调试，或者在Github[创建一个issue](https://github.com/linera-io/linera-protocol/issues/new)。

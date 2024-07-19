@@ -36,8 +36,7 @@ pub trait Contract: WithContractAbi + ContractAbi + Sized {
 ```
 
 The full trait definition can be found
-[here](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
-/linera-sdk/src/lib.rs).
+[here](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a/linera-sdk/src/lib.rs).
 
 There's quite a bit going on here, so let's break it down and take one method at
 a time.
@@ -91,7 +90,7 @@ implementation we will persist the state back to storage:
 ```
 
 It's possible to do more than just saving the state, and the
-[Contract finalization section](../advanced_topics/contract_finalize.md)
+[Contract finalization section](en_US/developers/advanced_topics/contract_finalize.md)
 provides more details on that.
 
 ## Instantiating our Application

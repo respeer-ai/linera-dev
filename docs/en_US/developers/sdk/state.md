@@ -45,6 +45,6 @@ data structures have already been implemented:
 - A `Queue` corresponds to a `QueueView`
 
 For an exhaustive list refer to the Views
-[documentation](../advanced_topics/views.md).
+[documentation](en_US/developers/advanced_topics/views.md).
 
 Finally, run `cargo check` to ensure that your changes compile.

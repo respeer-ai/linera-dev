@@ -25,7 +25,7 @@ _stake_.
 
 Validators also play a role in the liveness of the system by making sure that
 the history of the chains stays available. However, since validators do not
-propose blocks on most chains (see [next section](block_creation.html)), they do
+propose blocks on most chains (see [next section](en_US/developers/advanced_topics/block_creation.md)), they do
 _not_ guarantee that any particular operation or message will eventually be
 executed on a chain. Instead, chain owners decide whether and when to propose
 new blocks, and which operations and messages to include. The current

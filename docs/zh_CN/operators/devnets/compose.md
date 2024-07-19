@@ -4,7 +4,7 @@
 
 Docker Compose是一个用于编排和管理多容器Docker应用的工具。开发者可以在一个YAML文件(docker-compose.yaml)中描述应用使用的服务、网络和存储卷。在Docker Compose的帮助下，开发者可以通过像`docker-compose up`和`docker-compose down`这样的简单命令统一启动、停止和管理应用的所有容器。
 
-如果开发者需要更加完整的设置，请考虑使用下一章介绍的Kind。
+如果开发者需要更加完整的设置，请考虑使用下一章介绍的[Kind](zh_CN/operators/devnets/kind.md)。
 
 ## 安装
 
@@ -18,7 +18,7 @@ Docker Compose是一个用于编排和管理多容器Docker应用的工具。开
 
 ### 安装Linera工具链
 
-安装Linera工具链参阅本文档[安装部分](../../developers/getting_started/installation.md#installing-from-github)。
+安装Linera工具链参阅本文档[安装部分](zh_CN/developers/getting_started/installation.md#从GitHub安装)。
 
 由于Docker Compose的安装脚本包含在Linera的Github仓库中，开发者需要从Github安装Linera工具链。
 

@@ -2,20 +2,18 @@
 
 验证器在服务器上运行，其数据存储在持久化存储中，因此我们开发了`linera-db`用于管理持久化存储。
 
-## [可用的持久化存储](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/persistent_storage?id=available-persistent-storage)
-
+## [可用的持久化存储](zh_CN/developers/advanced_topics/persistent_storage.md#可用的持久化存储)
 现在可用的持久化存储有`RocksDB`, `DynamoDB`和`ScyllaDB`，几种存储各有优劣。
 
 - [`RocksDB`](https://rocksdb.org/): 数据存储在本地硬盘上，快，但不能在分片之间共享。
-- [`DynamoDB`](https://aws.amazon.com/dynamodb/): 数据需要存储在托管在AWS上远程存储上，不同分片可以共享数据。
+- [`DynamoDB`](https://aws.amazon.com/dynamodb/): 数据需要存储在托管在AWS远程存储上，不同分片可以共享数据。
 - [`ScyllaDB`](https://www.scylladb.com/): 数据存储在远程存储，分片之间可以共享数据。
 
 支持其他持久存储解决方案不存在根本障碍。
 
 此外，`DynamoDB`和`ScyllaDB`中具有表的概念，这样一个给定的远程存储可以支持多个不同的业务目标。
 
-## [`linera-db`工具](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/persistent_storage?id=the-linera-db-tool)
-
+## [`linera-db`工具](zh_CN/developers/advanced_topics/persistent_storage.md#linera-db工具)
 与持久化存储交互需要支持一些全局操作，`linera-db`命令行工具实现了下列命令支持这些操作：
 
 - `list_tables`(`DynamoDB`和`ScyllaDB`): 列出持久化存储中所有表

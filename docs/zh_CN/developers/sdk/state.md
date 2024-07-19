@@ -33,6 +33,6 @@ pub struct Counter {
 - 如果`BTreeMap`的元素为元类型，对应`MapView`，否则对应`CollectionView`
 - `Queue`对应`QueueView`
 
-Views的详细列表参见[文档](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)。
+Views的详细列表参见[文档](zh_CN/developers/advanced_topics/views.md)。
 
 最后，执行`cargo check`编译上面的修改。

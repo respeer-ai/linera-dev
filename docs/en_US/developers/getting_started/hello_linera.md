@@ -7,7 +7,7 @@ By the end of this section, you'll have a
 [microchain](../core_concepts/microchains.md) on the Devnet and/or on your local
 network, and a working application that can be queried using GraphQL.
 
-## Using the Devnet
+## [Using the Devnet](en_US/developers/getting_started/hello_linera.md#using-the-devnet)
 
 The Linera Devnet is a deployment of the Linera protocol that's useful for
 developers. It should not be considered stable, and can be restarted from a
@@ -27,7 +27,7 @@ chain is automatically added to the newly instantiated wallet.
 > Make sure to use a Linera toolchain
 > [compatible with the current Devnet](installation.md#installing-from-cratesio).
 
-## Starting a Local Test Network
+## [Starting a Local Test Network](en_US/developers/getting_started/hello_linera.md#Starting-a-Local-Test-Network)
 
 Another option is to start your own local development network. A development
 network consists of a number of [validators](../advanced_topics/validators.md),
@@ -46,7 +46,7 @@ temporary directory storing the entire network state.
 This will set up a number of initial chains and create an initial wallet to
 operate them.
 
-### Using the Initial Test Wallet
+### [Using the Initial Test Wallet](en_US/developers/getting_started/hello_linera.md#Using-the-Initial-Test-Wallet)
 
 `linera net up` prints Bash statements on its standard output to help you
 configure your terminal to use the initial wallet of the new test network, for
@@ -60,7 +60,7 @@ export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/
 This wallet is only valid for the lifetime of a single network. Every time a
 local network is restarted, the wallet needs to be reconfigured.
 
-## Interacting with the Network
+## [Interacting with the Network](en_US/developers/getting_started/hello_linera.md#Interacting-with-the-Network)
 
 > In the following examples, we assume that either the wallet was initialized to
 > interact with the Devnet or the variables `LINERA_WALLET` and `LINERA_STORAGE`
@@ -80,7 +80,7 @@ linera query-balance
 
 You should see an output number, e.g. `10`.
 
-## Building an Example Application
+## [Building an Example Application](en_US/developers/getting_started/hello_linera.md#Building-an-Example-Application)
 
 Applications running on Linera are [Wasm](https://webassembly.org/) bytecode.
 Each validator and client has a built-in Wasm virtual machine (VM) which can
@@ -92,7 +92,7 @@ Let's build the `counter` application from the `examples/` subdirectory:
 cd examples/counter && cargo build --release --target wasm32-unknown-unknown
 ```
 
-## Publishing your Application
+## [Publishing your Application](en_US/developers/getting_started/hello_linera.md#Publishing-your-Application)
 
 You can publish the bytecode and create an application using it on your local
 network using the `linera` client's `publish-and-create` command and provide:
@@ -109,7 +109,7 @@ linera publish-and-create \
 
 Congratulations! You've published your first application on Linera!
 
-## Querying your Application
+## [Querying your Application](en_US/developers/getting_started/hello_linera.md#Querying-your-Application)
 
 Now let's query your application to get the current counter value. To do that,
 we need to use the client running in

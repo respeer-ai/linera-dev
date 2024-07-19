@@ -6,7 +6,7 @@ ABIs通常定义在`src/lib.rs`文件中，可以编译为所有体系结构目�
 
 ABI的参考文档可以查看[crate文档](https://docs.rs/linera-base/latest/linera_base/abi/)。
 
-## [结构声明](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=defining-a-marker-struct)
+## [结构声明](zh_CN/developers/sdk/abi.md#结构声明)
 
 应用中提供给外部调用的接口(通常定义在`src/lib.rs`文件中)必须定义一个实现了`Abi` trait的公开空结构。
 
@@ -23,7 +23,7 @@ pub trait Abi: ContractAbi + ServiceAbi {}
 
 接下来，我们将会实现上面提到的两个traits。
 
-## [合约ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=contract-abi)
+## [合约ABI](zh_CN/developers/sdk/abi.md#合约ABI)
 
 `ContractAbi` trait定义了应用程序的合约中使用的数据类型，每种类型都表示合约的一部分特定行为：
 
@@ -56,8 +56,7 @@ impl ContractAbi for CounterAbi {
 }
 ```
 
-## [服务ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/abi?id=service-abi)
-
+## [服务ABI](zh_CN/developers/sdk/abi.md#服务ABI)
 概念上，`ServiceAbi`与`ContractAbi`雷同，所不同者，`ServiceAbi`提供的是应用程序的服务部分数据类型和接口。
 
 ```rust,ignore
