@@ -1,4 +1,4 @@
-# 2.5. 应用程序
+# 应用程序
 
 Linera的编程模型设计旨在让开发者借助微链扩展他们的应用。
 
@@ -6,14 +6,14 @@ Linera使用WebAssembly(Wasm)虚拟机执行应用程序。当前，[Linera SDK]
 
 Linera应用基于Rust开发者熟悉的**Rust crate**组织：应用程序依赖的外部接口(包括初始化参数、操作、消息和跨链调用)通常都有函数库的crate提供，应用程序核心部分将被编译为Wasm体系结构的二进制文件。
 
-## [应用开发流程](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=the-application-deployment-lifecycle)
+## [应用开发周期](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=the-application-deployment-lifecycle)
 
 Linera应用是可重用的，因此，应用的字节码和网络上正在运行的应用实例是不同的。
 
 为了应用程序开发更加灵活，应用程序将会经历以下生命周期：
 
-1. 将基于`linera-sdk`开发的Rust项目编译成字节码，
-2. 将字节码发布到网络上的某一微链，并为其创建标识符，
+1. 将基于`linera-sdk`开发的Rust项目编译成字节码。
+2. 将字节码发布到网络上的某一微链，并为其创建标识符。
 3. 用户提供字节码标识符和初始化参数，创建一个新的应用程序实例，并获得应用标识。用户可以通过应用标识与应用交互。
 4. 不同用户可以使用相同的字节码标识符创建不同的应用程序实例。
 
@@ -33,7 +33,6 @@ linera publish-and-create <contract-path> <service-path> <init-args>
 
 **服务**是只读的，服务的执行不消耗gas。服务主要用于查询应用状态，通过用户接口将查询结果返回到表示层(通常为前端)。
 
-最后，合约和服务通过一种称为[视图](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)的形式共享应用状态，稍后我们将会详细介绍这一部分。
 
 ## [操作和消息](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=operations-and-messages)
 
@@ -41,7 +40,7 @@ linera publish-and-create <contract-path> <service-path> <init-args>
 
 从系统层面来说，用户与应用的交互可以通过操作和消息完成。
 
-**操作**是应用开发者定义的，每个应用可以拥有完全不同的操作集合，链所有者创建操作，并将操作包含到新区块中，实现与应用交互。
+**操作**是应用开发者定义的，每个应用可以拥有完全不同的操作集合，链所有者创建操作，并将操作包含到新区块中，实现与应用交互。其他应用程序也可以通过提供一个要执行的操作来调用该应用程序，这被称为跨应用程序调用，始终发生在同一个链内。跨应用程序调用的操作可能会向调用方返回一个响应值。
 
 以"fungible token"为例，给另一个用户发送资金的操作定义如下：
 

@@ -1,10 +1,10 @@
-# 4.2. 持久化存储
+# 持久化存储
 
 验证器在服务器上运行，其数据存储在持久化存储中，因此我们开发了`linera-db`用于管理持久化存储。
 
 ## [可用的持久化存储](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/persistent_storage?id=available-persistent-storage)
 
-现成可用的持久化存储有`RocksDB`, `DynamoDB`和`ScyllaDB`，几种存储各有优劣。
+现在可用的持久化存储有`RocksDB`, `DynamoDB`和`ScyllaDB`，几种存储各有优劣。
 
 - [`RocksDB`](https://rocksdb.org/): 数据存储在本地硬盘上，快，但不能在分片之间共享。
 - [`DynamoDB`](https://aws.amazon.com/dynamodb/): 数据需要存储在托管在AWS上远程存储上，不同分片可以共享数据。

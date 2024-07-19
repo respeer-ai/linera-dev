@@ -1,9 +1,9 @@
-## 2.4. 节点服务
+# 节点服务
 
 到目前为止我们已经展示Linera客户端二进制文件在终端中的用法。除此之外，Linera客户端还可以作为节点运行。Linera节点执行下列功能：
 
-1. 执行区块，
-2. 提供与应用和系统交互的GraphQL API和IDE，
+1. 执行区块。
+2. 提供与应用和系统交互的GraphQL API和IDE。
 3. 监听来自验证器的通知，自动更新本地微链。
 
 将`linera`运行在`service`模式，即可与节点服务交互：
@@ -28,7 +28,7 @@ GraphQL广泛应用于应用开发领域，例如当我们需要从前端请求�
 
 GraphiQL IDE左半部窗口是schema浏览器，其中可以输入GraphQL查询参数，点击`播放`按钮(或者`CTRL^F5`)可以执行查询，查询结果将显示在右半部窗口。`http://localhost:8080`链接可以查看系统状态和应用列表，如果需要查询应用状态，需要使用应用列表返回的`link`。
 
-![graphiql.png](../../node_service.assets/graphiql.png)
+![graphiql.png](graphiql.png)
 
 ## [GraphQL系统API](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphql-system-api)
 

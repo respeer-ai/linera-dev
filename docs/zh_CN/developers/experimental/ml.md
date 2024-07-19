@@ -72,7 +72,7 @@ impl Service for MyService {
 
 模型可以从本地web服务器加载或直接从模型提供者(如Hugging Face)拉取。
 
-至此，我们在服务内存存储了模型和标注。`candle`支持多种量化和非量化的模型权重存储格式(`gguf`, `ggml`, `safetensors`等)。
+至此，我们在服务内存储了模型和标注。`candle`支持多种量化和非量化的模型权重存储格式(`gguf`, `ggml`, `safetensors`等)。
 
 我们可以通过`candle`提供的函数方便地将字节转换为类型化的`struct`，用于执行推理。以下是非量化 Llama 2 模型的示例：
 

@@ -102,7 +102,7 @@ $ docker build -f docker/Dockerfile . -t linera
 
 ### 运行一个验证者节点
 
-现在，通过在`docker`目录内运行以下命令来启动验证者，该验证者降火使用`docker/genesis.json`中的创世配置，和`docker/server.json`中的服务器配置：
+现在，通过在`docker`目录内运行以下命令来启动验证者，该验证者将使用`docker/genesis.json`中的创世配置，和`docker/server.json`中的服务器配置：
 
 ```bash
 cd docker && docker compose up -d

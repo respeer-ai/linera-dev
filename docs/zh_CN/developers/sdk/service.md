@@ -1,4 +1,4 @@
-# 3.5. 编写服务代码
+# 编写服务代码
 
 Linera应用的第二个组件是服务程序，服务程序编译的字节码与合约字节码是分离的，且独立执行。服务程序不进行计量(意味着请求应用服务程序不消耗gas)，可以认为服务程序是应用的只读视图。
 
@@ -31,7 +31,7 @@ pub struct CounterService {
 }
 ```
 
-与合约类型相同，服务类型通常定义两个字段：应用状态`state`和运行时`runtime`。我们可以忽略实作上不会用到的字段，在本例中，构造`CounterService`不需要`runtime`字段，因此我们只需要定义`state`。
+与合约类型相同，服务类型通常定义两个字段：应用状态`state`和运行时`runtime`。我们可以忽略实际上不会用到的字段，在本例中，构造`CounterService`不需要`runtime`字段，因此我们只需要定义`state`。
 
 我们需要生成实现服务的模板文件[WIT接口](https://component-model.bytecodealliance.org/design/wit.html)，用来导出主机(执行字节码的进程)访问服务的必要资源类型和函数。Linera SDK中有预先定义的宏来执行需要的代码生成过程，因此我们只需要在`service.rs`文件中添加如下代码即可：
 
@@ -59,7 +59,7 @@ impl Service for CounterService {
     }
 ```
 
-服务是只读的，不能将任何变更持久化存储，因而没有`store`方法。
+服务是只读的，不能将任何变更持久化存储，因为没有`store`方法。
 
 服务功能实现在`handler_query`方法中。客户端向服务发送的GraphQL请求被[`async-graphql` crate](https://github.com/async-graphql/async-graphql)处理，然后被转发到特定的处理程序，我们将在下面的章节讲解该部分的路由细节。下面的代码是实例程序的`handler_query`实现：
 

@@ -46,7 +46,11 @@ For MacOS support see the installation section on
 This manual was tested with the following Rust toolchain:
 
 ```text
-{{#include ../../../linera-protocol/rust-toolchain.toml}}
+[toolchain]
+channel = "1.77.2"
+components = [ "clippy", "rustfmt", "rust-src" ]
+targets = [ "wasm32-unknown-unknown" ]
+profile = "minimal"
 ```
 
 ### Local Kubernetes Requirements
@@ -68,7 +72,7 @@ To install the `Linera` toolchain, download the Linera source from
 ```bash
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
-git checkout -t origin/{{#include ../../../RELEASE_BRANCH}}  # Current release branch
+git checkout -t origin/devnet_2024_05_07  # Current release branch
 ```
 
 and to install the Linera toolchain:

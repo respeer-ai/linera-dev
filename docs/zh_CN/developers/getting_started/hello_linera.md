@@ -51,7 +51,7 @@ export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/
 
 `linera`客户端是与Linera网络和应用交互的基本方式。
 
-你可以通过如下命令同步[default微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets)并显示微链余额来确认网络是否正常工作：
+你可以通过如下命令同步[默认微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets)并显示微链余额来确认网络是否正常工作：
 
 ```bash
 linera sync
@@ -94,7 +94,7 @@ linera publish-and-create \
 linera service
 ```
 
-打开你的浏览器，在地址栏输入`http://localhost:8080`访问上面运行的节点服务器内置的GraphiQL用户界面([GraphQL](https://graphql.org/) IDE)。[后面的章节](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphiql-ide)我们会提供更多GraphiQL的使用细节，现在，我们通过下面的命令获得default微链(e476…)上的应用列表：
+打开你的浏览器，在地址栏输入`http://localhost:8080`访问上面运行的节点服务器内置的GraphiQL用户界面([GraphQL](https://graphql.org/) IDE)。[后面的章节](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphiql-ide)我们会提供更多GraphiQL的使用细节，现在，我们通过下面的命令获得默认微链(e476…)上的应用列表：
 
 ```gql
 query {
