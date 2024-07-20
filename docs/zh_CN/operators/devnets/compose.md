@@ -33,6 +33,8 @@ cargo install --path linera-service
 cd docker && ./compose.sh
 ```
 
+> 译者注：该流程在Ubuntu 22.04版本测试执行通过。在Ubuntu 20.04版本执行将会因为错误的Docker路径失败，修改Dockerfile中的COPY部分才能正确生成Docker镜像。
+
 从源码构建Docker镜像将会花费一些时间。当服务就绪后，将在docker子目录创建临时钱包和数据库。
 
 开发者可以通过`linera`命令行和开发网络交互：
