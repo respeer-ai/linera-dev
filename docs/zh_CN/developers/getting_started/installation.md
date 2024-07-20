@@ -78,7 +78,7 @@ cargo install --locked --path linera-service
 
 开发者和调试人员可以使用带有调试信息的可执行文件调试Linera，例如，通过`export PATH="$PWD/target/debug:$PATH"`将调试版本可执行文件添加到PATH中。
 
-本文档在[仓库](https://github.com/linera-io/linera-protocol)的如下提交记录测试通过：
+本文档在[Linera代码仓库](https://github.com/linera-io/linera-protocol)的如下提交记录测试通过：
 
 ```text
 2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
