@@ -32,7 +32,7 @@ Linera工具链由以下两个crate构成（译者注：crate即为rust发布包
   - 如果PATH环境变量不包含`~/.local`, 通过`export PATH="$PATH:$HOME/.local/bin"`添加
 - 在特定的Linux发行版上，你可能需要安装诸如`g++`，`libclang-dev`和`libssl-dev`等开发工具和库
 
-MacOS支持，以及测试Linera协议的一些附加需求可以参见[GitHub安装文档](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)的安装章节。
+MacOS支持，以及测试Linera协议的一些附加需求可以参见[GitHub安装文档](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)的相应章节。
 
 本手册测试使用的Rust工具链配置如下：
 
