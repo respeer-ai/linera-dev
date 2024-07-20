@@ -61,13 +61,13 @@ profile = "minimal"
 
 You may install the Linera binaries with
 
-```bash
+```terminal
 cargo install --locked linera-service@0.11.3
 ```
 
 and use `linera-sdk` as a library for Linera Wasm applications:
 
-```bash
+```terminal
 cargo add linera-sdk@0.11.3
 ```
 
