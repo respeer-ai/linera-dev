@@ -90,4 +90,4 @@ cargo install --locked --path linera-service
 
 ## [寻求帮助](zh_CN/developers/getting_started/installation.md#寻求帮助)
 
-如果安装失败，联系我们的团队(例如通过[Discord](https://discord.gg/linera))协助调试，或者在Github[创建一个issue](https://github.com/linera-io/linera-protocol/issues/new)。
+如果安装过程中遇到障碍，可以联系我们的团队(例如通过[Discord](https://discord.gg/linera))协助调试，或者在Github[创建一个issue](https://github.com/linera-io/linera-protocol/issues/new)。
