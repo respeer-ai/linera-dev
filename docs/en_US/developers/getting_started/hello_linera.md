@@ -25,7 +25,7 @@ This creates a new microchain on Devnet with some initial test tokens, and the
 chain is automatically added to the newly instantiated wallet.
 
 > Make sure to use a Linera toolchain
-> [compatible with the current Devnet](installation.md#installing-from-cratesio).
+> [compatible with the current Devnet](en_US/developers/getting_started/installation.md#installing-from-cratesio).
 
 ## [Starting a Local Test Network](en_US/developers/getting_started/hello_linera.md#Starting-a-Local-Test-Network)
 

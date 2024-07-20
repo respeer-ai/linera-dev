@@ -17,7 +17,7 @@ linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.li
 
 上面的命令将在Devnet上创建一条微链，该微链持有一定数量的测试token，并且自动被加入到新创建的钱包。
 
-> 确定你使用的Linera工具链[与当前的Devnet兼容](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio)。
+> 确定你使用的Linera工具链[与当前的Devnet兼容](zh_CN/developers/getting_started/installation.md#从cratesio安装)。
 
 ## [启动本地测试网](zh_CN/developers/getting_started/hello_linera.md#启动本地测试网)
 
