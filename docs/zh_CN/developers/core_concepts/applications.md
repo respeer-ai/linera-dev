@@ -2,12 +2,11 @@
 
 Linera的编程模型设计旨在让开发者借助微链扩展他们的应用。
 
-Linera使用WebAssembly(Wasm)虚拟机执行应用程序。当前，[Linera SDK](https://linera-dev.respeer.ai/#/zh_CN/sdk)主要针对[Rust](https://www.rust-lang.org/)编程语言。
+Linera使用WebAssembly(Wasm)虚拟机执行应用程序。当前，[Linera SDK](zh_CN/developers/sdk.md)主要针对[Rust](https://www.rust-lang.org/)编程语言。
 
 Linera应用基于Rust开发者熟悉的**Rust crate**组织：应用程序依赖的外部接口(包括初始化参数、操作、消息和跨链调用)通常都有函数库的crate提供，应用程序核心部分将被编译为Wasm体系结构的二进制文件。
 
-## [应用开发周期](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=the-application-deployment-lifecycle)
-
+## [应用开发周期](zh_CN/developers/core_concepts/applications.md#应用开发周期)
 Linera应用是可重用的，因此，应用的字节码和网络上正在运行的应用实例是不同的。
 
 为了应用程序开发更加灵活，应用程序将会经历以下生命周期：
@@ -25,16 +24,16 @@ linera publish-and-create <contract-path> <service-path> <init-args>
 
 上面的命令除了发布字节码，也会在微链上创建一个应用实例。
 
-## [应用程序剖析](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=anatomy-of-an-application)
+## [应用程序剖析](zh_CN/developers/core_concepts/applications.md#应用程序剖析)
 
 一个**应用程序**可以分为两个主要组件，*合约*和*服务*。
 
-**合约**是gas计量的，应用程序在合约中执行操作、处理跨链消息、发起跨链调用和修改应用状态。关于合约在[SDK文档](https://linera-dev.respeer.ai/#/zh_CN/sdk)中包含更加详细的说明。
+**合约**是gas计量的，应用程序在合约中执行操作、处理跨链消息、发起跨链调用和修改应用状态。关于合约在[SDK文档](zh_CN/developers/sdk.md)中包含更加详细的说明。
 
 **服务**是只读的，服务的执行不消耗gas。服务主要用于查询应用状态，通过用户接口将查询结果返回到表示层(通常为前端)。
 
 
-## [操作和消息](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=operations-and-messages)
+## [操作和消息](zh_CN/developers/core_concepts/applications.md#操作和消息)
 
 > 本节我们将使用示例应用"fungible"来展示完整的应用程序部署流程，用户可以通过该应用互相转账。
 
@@ -73,7 +72,7 @@ pub enum Message {
 }
 ```
 
-### [认证](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=authentication)
+### [认证](zh_CN/developers/core_concepts/applications.md#)
 
 操作总是认证过的，给区块签名认证的角色天然就是本区块内包含的操作的认证者。消息也可以认证。执行操作时，应用程序可以创建消息并发送给其他微链，这些消息可以设置为认证过的。在这种情况下，接收方将收到与创建该消息的操作拥有相同认证信息的消息。同样，如果处理消息时创建了新消息，新消息也可以配置与旧消息相同的认证信息。
 
@@ -113,8 +112,7 @@ pub enum Message {
 
 `Claim`操作允许用户在其他微链上存入资金，只要用户能够在该微链创建区块，或者相信该微链的所有者会创建区块处理他们的消息。这样的操作也确保即使微链有多个所有者，或者用户无权创建新区块时，用户的资金依然只有用户自己能动用。
 
-## [注册跨链应用](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/applications?id=registering-an-application-across-chains)
-
+## [注册跨链应用](zh_CN/developers/core_concepts/applications.md#注册跨链应用)
 如果Alice使用她自己的微链上的应用与Bob的应用交互，例如，通过`fungible`应用向Bob发送一些资金，那么，当Bob的微链接收到Alice发出的消息，并开始处理该消息时，应用就会在Bob的微链上自动注册。应用注册完成后，Bob就可以在自己的微链上执行应用操作，例如，给某人发送一些资金。
 
 某些情况下，Bob想使用那些他的微链上没有的应用，该怎么办？例如，Alice运营了一个`social`应用，她会定期更新帖子，而Bob想订阅Alice的内容。

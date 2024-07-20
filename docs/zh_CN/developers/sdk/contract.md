@@ -39,7 +39,7 @@ pub trait Contract: WithContractAbi + ContractAbi + Sized {
 
 在示例应用中，我们将会使用`load`, `execute_operation`和`store`方法。
 
-## [合约生命周期](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=the-contract-lifecycle)
+## [合约生命周期](zh_CN/developers/sdk/contract.md#合约生命周期)
 
 实现合约的第一步是创建合约类型：
 
@@ -71,10 +71,9 @@ pub struct CounterContract {
     }
 ```
 
-最后一步可以做的事情不仅仅是保存状态，更多细节参见[合约最终化](../advanced_topics/contract_finalize.md)章节。
+最后一步可以做的事情不仅仅是保存状态，更多细节参见[合约最终化](zh_CN/developers/advanced_topics/contract_finalize.md)章节。
 
-## [初始化应用](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=initializing-our-application)
-
+## [初始化应用](zh_CN/developers/sdk/contract.md#初始化应用)
 首先，我们需要使用`Contract::instantiate`初始化应用。
 
 `Contract::instantiate` 只在应用创建时调用一次，而且仅在创建该应用的微链上调用。
@@ -89,7 +88,7 @@ pub struct CounterContract {
     }
 ```
 
-## [实现增量操作](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=implementing-the-increment-operation)
+## [实现增量操作](zh_CN/developers/sdk/contract.md#实现增量操作)
 
 现在，我们实现了一个计数器状态，可以通过传递任意数值初始化，我们需要实现一个方法来增加计数器的值。区块创建者修改应用状态的行为统称为'操作'。
 
@@ -102,8 +101,7 @@ pub struct CounterContract {
     }
 ```
 
-## [声明ABI](https://linera-dev.respeer.ai/#/zh_CN/sdk/contract?id=declaring-the-abi)
-
+## [声明ABI](zh_CN/developers/sdk/contract.md#实声明ABI)
 最后，我们通过如下的代码将上面实现的`Contract` trait与应用程序的ABI相关联：
 
 ```rust,ignore

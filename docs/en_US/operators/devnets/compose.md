@@ -11,7 +11,7 @@ application as a single unit using simple commands like docker-compose up and
 docker-compose down.
 
 For a more complete setup, consider using Kind as described
-[in the next section](kind.md).
+[in the next section](en_US/operators/devnets/kind.md).
 
 ## Installation
 

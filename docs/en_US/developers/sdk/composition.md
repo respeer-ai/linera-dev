@@ -95,9 +95,7 @@ in its application state on Bob's chain that Carol has pledged 10 Pugecoin
 tokens.
 
 For the complete code please take a look at the
-[`crowd-funding`](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
-/examples/crowd-funding/src/contract.rs)
+[`crowd-funding`](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a/examples/crowd-funding/src/contract.rs)
 and the
-[`fungible`](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
-/examples/fungible/src/contract.rs)
+[`fungible`](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a/examples/fungible/src/contract.rs)
 application contracts in the `examples` folder in `linera-protocol`.

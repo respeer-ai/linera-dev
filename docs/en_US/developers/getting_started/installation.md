@@ -2,7 +2,7 @@
 
 Let's start with the installation of the Linera development tools.
 
-## Overview
+## [Overview](en_US/developers/getting_started/installation.md#overview)
 
 The Linera toolchain consist of two crates:
 
@@ -16,7 +16,7 @@ The Linera toolchain consist of two crates:
   - `linera-server` -- the service run by each worker of a validator, hidden
     behind the proxy.
 
-## Requirements
+## [Requirements](en_US/developers/getting_started/installation.md#Requirements)
 
 The operating systems currently supported by the Linera toolchain can be
 summarized as follows:
@@ -57,7 +57,7 @@ targets = [ "wasm32-unknown-unknown" ]
 profile = "minimal"
 ```
 
-## Installing from crates.io
+## [Installing from crates.io](en_US/developers/getting_started/installation.md#Installing-from-crates-io)
 
 You may install the Linera binaries with
 
@@ -74,7 +74,7 @@ cargo add linera-sdk@0.11.3
 The version number `0.11.3` corresponds to the
 current Devnet of Linera and may change frequently.
 
-## Installing from GitHub
+## [Installing from GitHub](en_US/developers/getting_started/installation.md#Installing-from-GitHub)
 
 Download the source from [GitHub](https://github.com/linera-io/linera-protocol):
 
@@ -100,12 +100,12 @@ This manual was tested against the following commit of the
 2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
 ```
 
-## Bash helper (optional)
+## [Bash helper (optional)](en_US/developers/getting_started/installation.md#Bash-helper-optional)
 
 Consider adding the output of `linera net helper` to your `~/.bash_profile` to
-help with [automation](../core_concepts/wallets.md#automation-in-bash).
+help with [automation](en_US/developers/core_concepts/wallets.md#automation-in-bash).
 
-## Getting help
+## [Getting help](en_US/developers/getting_started/installation.md#Getting-help)
 
 If installation fails, reach out to the team (e.g. on
 [Discord](https://discord.gg/linera)) to help troubleshoot your issue or

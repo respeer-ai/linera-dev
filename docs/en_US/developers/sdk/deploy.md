@@ -7,7 +7,7 @@ the devnet.
 ## Local Net
 
 To configure the local network, follow the steps in the
-[Getting Started section](../getting_started/hello_linera.html#using-the-initial-test-wallet).
+[Getting Started section](en_US/developers/getting_started/hello_linera.md#Using-the-Initial-Test-Wallet).
 
 Afterwards, the `LINERA_WALLET` and the `LINERA_STORAGE` environment variables
 should be set and can be used in the `publish-and-create` command to deploy the
@@ -49,4 +49,4 @@ linera publish-and-create \
 ## Interacting with the Application
 
 To interact with the deployed application, a
-[node service](../core_concepts/node_service.html) must be used.
+[node service](en_US/developers/core_concepts/node_service.md) must be used.

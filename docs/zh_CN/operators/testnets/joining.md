@@ -14,7 +14,7 @@
 
 ### 安装Linera工具链
 
-参考[Github安装章节](../../developers/getting_started/installation.md#installing-from-github)安装Linera工具链。
+参考[Github安装章节](zh_CN/developers/getting_started/installation.md#从GitHub安装)安装Linera工具链。
 
 Docker Compose脚本位于Linera代码库内，因此需要通过Github安装Linera工具链。
 
@@ -26,7 +26,7 @@ Docker Compose脚本位于Linera代码库内，因此需要通过Github安装Lin
 
 通过Docker Compose运行的验证者节点并未预装执行TLS终止所需的负载均衡器(与Kubernetes部署不同)。因此，需要验证者运营商提供TLS终止并支持Linera通知系统正常运行所需的HTTP/2长连接。
 
-### 创建验证者配置
+### [创建验证者配置](zh_CN/operators/testnets/joining.md#创建验证者配置)
 
 验证者可以使用以下模板设置：
 
@@ -51,7 +51,7 @@ metrics_port = 21100
 
 ```
 
-### 创世配置
+### [创世配置](zh_CN/operators/testnets/joining.md#创世配置)
 
 创世配置描述了网络创建时的验证者委员会和链，验证者需要这些配置才能开始工作。
 
@@ -65,7 +65,7 @@ wget "https://storage.cloud.google.com/linera-io-dev-public/devnet-2024-05-07/ge
 
 ### 创建私钥
 
-现在[验证者配置](joining.md#creating-your-validator-configuration)已经创建好了，并且[创世配置](joining.md#genesis-configuration)可用，可以生成验证者私钥。
+现在[验证者配置](zh_CN/operators/testnets/joining.md#创建验证者配置)已经创建好了，并且[创世配置](zh_CN/operators/testnets/joining.md#创世配置)可用，可以生成验证者私钥。
 
 下列命令将生成私钥：
 

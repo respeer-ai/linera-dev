@@ -19,7 +19,7 @@ the Docker docs.
 ### Installing the Linera Toolchain
 
 To install the Linera Toolchain refer to the
-[installation section](../../developers/getting_started/installation.md#installing-from-github).
+[installation section](en_US/developers/getting_started/installation.md#Installing-from-GitHub).
 
 You want to install the toolchain from GitHub, as you'll be using the repository
 to run the Docker Compose validator service.
@@ -29,7 +29,7 @@ to run the Docker Compose validator service.
 For the next section, we'll be working out of the `docker` subdirectory in the
 `linera-protocol` repository.
 
-### Infrastructure Configuration
+### [Infrastructure Configuration](en_US/operators/testnets/joining.md#Infrastructure-Configuration)
 
 Validators run via Docker Compose do not come with a pre-packaged load balancer
 to perform TLS termination (unlike validators running on Kubernetes).
@@ -38,7 +38,7 @@ Thus, it is required of validator operators to provide TLS termination and
 support long-lived HTTP/2 connections required for the functioning of the Linera
 notification system.
 
-### Creating your Validator Configuration
+### [Creating your Validator Configuration](en_US/operators/testnets/joining.md#creating-your-validator-configuration)
 
 Validators are configured using a TOML file. You can use the following template
 to set up you own validator configuration:
@@ -64,7 +64,7 @@ metrics_port = 21100
 
 ```
 
-### Genesis Configuration
+### [Genesis Configuration](en_US/operators/testnets/joining.md#Genesis-Configuration)
 
 The genesis configuration describes the committee of validators and chains at
 the point of network creation. It is required for validators to function.
@@ -81,8 +81,8 @@ wget "https://storage.cloud.google.com/linera-io-dev-public/devnet-2024-05-07/ge
 ### Creating Your Keys
 
 Now that the
-[validator configuration](joining.md#creating-your-validator-configuration) has
-been created and the [genesis configuration](joining.md#genesis-configuration)
+[validator configuration](en_US/operators/testnets/joining.md#creating-your-validator-configuration) has
+been created and the [genesis configuration](en_US/operators/testnets/joining.md#Genesis-Configuration)
 is available, the validator private keys can be generated.
 
 To generate the private keys, the `linera-server` binary is used:

@@ -1,12 +1,11 @@
 # 1.2. Hello, Linera
 
-# [Hello, Linera](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=hello-linera)
 
 本节我们将介绍Linera Devnet交互方式和运行本地测试网的步骤，然后从0开始编译并部署第一个Linera应用。
 
 本小节结束后，你将能够在Linera Devnet和你自己的本地测试网上创建一条[微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains)，并运行一个可以使用GraphQL访问的应用。
 
-## [使用Devnet](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-devnet)
+## [使用Devnet](zh_CN/developers/getting_started/hello_linera.md#使用Devnet)
 
 Linera Devnet是部署给开发者使用，开发者需要知道Devnet是不稳定的，并且随时可能使用新的创世设置重启。
 
@@ -20,7 +19,7 @@ linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.li
 
 > 确定你使用的Linera工具链[与当前的Devnet兼容](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio)。
 
-## [启动本地测试网](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=starting-a-local-test-network)
+## [启动本地测试网](zh_CN/developers/getting_started/hello_linera.md#启动本地测试网)
 
 你也可以在本地环境启动本地测试网络。测试网络包含一些[验证器](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/validators)，每个验证器都包含一个入口代理(即负载均衡器)(译者注：原文为ingress，等同于微服务集群中的网关代理，用于将请求根据预设规则路由到对应的服务)和一些工作节点(即物理分片)。
 
@@ -34,7 +33,7 @@ linera net up
 
 同时，该命令会创建一些初始微链，并创建一个可以操作这些微链的钱包。
 
-### [使用测试网络初始钱包](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=using-the-initial-test-wallet)
+### [使用测试网络初始钱包](zh_CN/developers/getting_started/hello_linera.md#使用测试网络初始钱包)
 
 命令`linera net up`在终端中打印了Bash设置(如下面的例子)，这些设置可以帮助开发者设置他们的终端，以使用测试网络的初始钱包。
 
@@ -45,7 +44,7 @@ export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/
 
 该钱包仅仅在测试网络执行期间有效，每次重启测试网络，该钱包都将被重新配置。
 
-## [与网络交互](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=interacting-with-the-network)
+## [与网络交互](zh_CN/developers/getting_started/hello_linera.md#与网络交互)
 
 > 在后面的例子中，我们假设终端已经将钱包设置好直接访问Devnet，或者`LINERA_WALLET`和`LINERA_STORAGE`环境变量已经设置为本地测试网络的初始钱包。
 
@@ -60,9 +59,9 @@ linera query-balance
 
 如果一切正常，你将会看到一个数字，例如`10`。
 
-## 构建示例应用程序
+## [构建示例应用程序](zh_CN/developers/getting_started/hello_linera.md#构建示例应用程序)
 
-运行在Linera网络上的应用是[Wasm](https://webassembly.org/)字节码。每个验证其和客户端上都会运行一个内置的Wasm虚拟机(VM)，用来执行字节码。
+运行在Linera网络上的应用是[Wasm](https://webassembly.org/)字节码。每个验证器和客户端上都会运行一个内置的Wasm虚拟机(VM)，用来执行字节码。
 
 下面我们将构建`examples/`子目录中的`counter`应用：
 
@@ -70,7 +69,7 @@ linera query-balance
 cd examples/counter && cargo build --release --target wasm32-unknown-unknown
 ```
 
-## [发布应用](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=publishing-your-application)
+## [发布应用](zh_CN/developers/getting_started/hello_linera.md#发布应用)
 
 使用`linera`客户端中的`publish-and-create`命令， 你可以发布字节码，同时创建一个Linera应用，该命令需要以下参数：
 
@@ -86,9 +85,8 @@ linera publish-and-create \
 
 恭喜你！到此你已经成功发布了第一个Linera应用！
 
-## [查询应用](https://linera-dev.respeer.ai/#/zh_CN/getting_started/hello_linera?id=querying-your-application)
-
-现在我们可以查询上面部署的应用，获取当前的计数值。查询应用需要使用客户端的[*服务*模式](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)运行一个Linera节点服务，我们将通过该节点服务提供的一系列APIs与应用交互。
+## [查询应用](zh_CN/developers/getting_started/hello_linera.md#查询应用)
+现在我们可以查询上面部署的应用，获取当前的计数值。查询应用需要使用客户端的[*服务模式*](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)运行一个Linera节点服务，我们将通过该节点服务提供的一系列APIs与应用交互。
 
 ```bash
 linera service

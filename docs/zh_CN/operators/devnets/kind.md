@@ -2,7 +2,7 @@
 
 本章将介绍使用`kind`怎么运行一个包含多个验证者的本地开发网络。
 
-Kind(Kubernetes in Docker)是一个在Docker容器节点中运行本地Kubernetes集群的工具。Kind使用在Docker上创建的容器集群来模拟Kubernetes控制平面和工作节点，这样开发者就可以在本地主机方便地上创建、管理和测试多节点集群。
+Kind(Kubernetes in Docker)是一个在Docker容器节点中运行本地Kubernetes集群的工具。Kind使用在Docker上创建的容器集群来模拟Kubernetes控制平面和工作节点，这样开发者就可以在本地主机方便地创建、管理和测试多节点集群。
 
 ## 安装
 

@@ -2,14 +2,14 @@
 
 本节将介绍Linera协议的基础构建单元，微链。微链的正式阐述参见[白皮书](https://linera.io/whitepaper)。
 
-## [背景](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains?id=background)
+## [背景](zh_CN/developers/core_concepts/microchains.md#背景)
 
 **微链**是一系列区块的串联，这些区块描述了对于某共享状态的持续修改。在此我们不严格区分*链*和*微链*，而将这两者互换使用。除了我们熟知的经典区块链特性，Linera中的微链还具有下列重要特性：
 
 - Linera网络中可以存在任意数量的微链，这些微链共享一组验证器，拥有同样的安全级别。创建微链只需要在已有微链上执行一条交易即可完成。
 - 根据微链的不同配置，微链的新区块可能由验证器创建，或由终端用户(或者说他们的钱包)创建。特别地，根据微链中谁被授权创建区块，可以将微链分为*单所有者链*，*许可链*或*公开链*。
 
-## [跨链消息](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains?id=cross-chain-messaging)
+## [跨链消息](zh_CN/developers/core_concepts/microchains.md#跨链消息)
 
 传统区块链通常为单链，每条交易都可以访问完整执行状态。与传统区块链不同，Linera中的微链执行状态只会被自己的区块改变。
 
@@ -39,7 +39,7 @@
 
 Linera协议允许接收方丢弃消息，但是不允许接收方修改选定消息在通信队列内的顺序。如果某条消息最终不会被选中，当接收方创建新区块并执行时，将会忽略该消息。当前Linera客户端实现将会从收件箱选取尽量多的消息，除非消息执行失败，否则不会丢弃。
 
-## [链的所有权语义](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains?id=chain-ownership-semantics)
+## [链的所有权语义](zh_CN/developers/core_concepts/microchains.md#链的所有权语义)
 
 活跃的微链可以被一个或多个所有者拥有，如果微链不存在所有者，则微链被永久禁用。
 
@@ -53,4 +53,4 @@ Linera协议允许接收方丢弃消息，但是不允许接收方修改选定�
 
 *多领导者*Round是可配置的：鉴于链上活动水平波动状况，如果多领导者Round因为较大争议(译者注：没有任何一个区块能够搜集到2/3以上的投票)，此时该Round将动态切换为单领导者模式。对于多个领导者频繁同时活动(译者注：创建区块)的微链，可以将多领导者Rounds设置为0(译者注：以较快达成一致)。
 
-关于创建和停止微链的更多细节和示例，可以参见[微链管理](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets?id=opening-a-chain)的钱包章节。
+关于创建和停止微链的更多细节和示例，可以参见[微链管理](zh_CN/developers/core_concepts/wallets.md#默认微链)的钱包章节。

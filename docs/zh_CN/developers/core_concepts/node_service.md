@@ -14,7 +14,7 @@ linera service
 
 上面的命令将在8080的默认端口运行一个节点服务，服务端口可以通过传递`--port`标志修改。
 
-## [关于GraphQL](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=a-note-on-graphql)
+## [关于GraphQL](zh_CN/developers/core_concepts/node_service.md#关于GraphQL)
 
 Linera使用GraphQL作为与系统不同部分交互的查询语言。GraphQL语言让客户端可以精准地从服务端获取需要的东西。
 
@@ -22,7 +22,7 @@ GraphQL广泛应用于应用开发领域，例如当我们需要从前端请求�
 
 更多GraphQL资料参见[官方文档](https://graphql.org/learn/)。
 
-## [GraphiQL IDE](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphiql-ide)
+## GraphiQL IDE
 
 为了方便开发者，节点服务集成了一个GraphQL IDE(GraphiQL)。在运行节点服务后，开发者通过浏览器访问`http://localhost:8080`即可使用GraphiQL。
 
@@ -30,11 +30,11 @@ GraphiQL IDE左半部窗口是schema浏览器，其中可以输入GraphQL查询�
 
 ![graphiql.png](graphiql.png)
 
-## [GraphQL系统API](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphql-system-api)
+## [GraphQL系统API](zh_CN/developers/core_concepts/node_service.md#GraphQL系统API)
 
 节点服务也暴露一系列系统操作的GraphQL API，点击`MutationRoot`可以查看完整操作列表。
 
-## [GraphQL应用API](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphql-application-api)
+## [GraphQL应用API](zh_CN/developers/core_concepts/node_service.md#GraphQL应用API)
 
 Linera运行在节点服务模式时，向客户端提供应用API，开发者可以访问`http://localhost:8080/chains/<chain-id>/applications/<application-id>`，执行GraphQL查询应用在钱包管理的微链上的状态。
 

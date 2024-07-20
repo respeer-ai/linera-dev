@@ -21,8 +21,7 @@ pub fn call_application<A: ContractAbi + Send>(
 
 `call`参数是被调用者定义的应用调用参数。
 
-## [示例: 筹款](https://linera-dev.respeer.ai/#/zh_CN/sdk/composition?id=example-crowd-funding)
-
+## 示例: 筹款
 `crowd-funding`应用允许应用创建者启动一个筹款活动，筹款目标可以是在`fungible`应用中指定的任意Token金额。其他人可以向活动质押需要的Token，如果到期未能达到目标，质押将退回。
 
 假定Alice使用`fungible`示例创建了一个Pugecoin应用(以一只令人印象深刻的哈巴狗作为吉祥物)，然后Bob可以创建一个`crowd-funding`应用，并使用Pugecoin的应用ID作为`CrowdFundingAbi::Parameters`，并在`CrowdFundingAbi::InstantiationArgument`中指定本次活动时长为一周，筹款目标为1000 Pugecoins。
@@ -59,4 +58,4 @@ self.runtime
 
 Bob将在他的微链创建新区块处理两条收到的消息，首先处理`Fungible::execute_message`，然后处理`CrowdFunding::execute_message`。`CrowdFunding::execute_message`将会触发一次跨应用调用，从Carol的账户中转10 Tokens到筹款应用的活动账户(两个账户都在Bob的微链上)。由于Carol在她的微链上有10 Tokens，并且她通过签名认证区块的方式间接授权了向活动账户转入10 Tokens质押，因此上述过程能够成功。Bob的微链上的筹款应用现在可以在其应用状态中记录Carol质押了10 Pugecoins。
 
-完整代码请查看 `linera-protocol` 仓库中 `examples` 文件夹下的 [`crowd-funding`](https://github.com/linera-io/linera-protocol/examples/crowd-funding/src/contract.rs) 和 [`fungible`](https://github.com/linera-io/linera-protocol/examples/fungible/src/contract.rs) 。
+完整代码请查看 `linera-protocol` 仓库中 `examples` 文件夹下的 [`crowd-funding`](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a/examples/crowd-funding/src/contract.rs) 和 [`fungible`](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a/examples/fungible/src/contract.rs) 。

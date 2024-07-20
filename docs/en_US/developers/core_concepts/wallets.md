@@ -5,7 +5,7 @@ private keys. However, instead of signing transactions, Linera wallets are meant
 to sign blocks and propose them to extend the chains owned by their users.
 
 In practice, wallets include a node which tracks a subset of Linera chains. We
-will see in the [next section](node_service.md) how a Linera wallet can run a
+will see in the [next section](en_US/developers/core_concepts/node_service) how a Linera wallet can run a
 GraphQL service to expose the state of its chains to web frontends.
 
 > The command-line tool `linera` is the main way for developers to interact with
@@ -13,7 +13,7 @@ GraphQL service to expose the state of its chains to web frontends.
 
 Note that this command-line tool is intended mainly for development purposes.
 Our goal is that end users eventually manage their wallets in a
-[browser extension](overview.html#web3-sdk).
+[browser extension](en_US/developers/core_concepts/overview.md#Web3-SDK).
 
 ## Selecting a Wallet
 
@@ -82,7 +82,7 @@ To change the default chain for your wallet, user the `set-default` command:
 linera wallet set-default <chain-id>
 ```
 
-### Opening a Chain
+### [Opening a Chain](en_US/developers/core_concepts/wallets.md#opening-a-chain)
 
 The Linera protocol defines semantics for how new chains are created, we call
 this "opening a chain". A chain cannot be opened in a vacuum, it needs to be
