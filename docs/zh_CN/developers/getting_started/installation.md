@@ -6,7 +6,7 @@
 
 Linera工具链由以下两个crate构成（译者注：crate即为rust发布包）：
 
-- `linera-sdk`：Linera Rust应用开发的基础库，其中包含Linera基础类型、函数定义等。
+- `linera-sdk`：开发Linera应用的Rust基础库，其中包含Linera基础类型、函数定义等。
 
 - `linera-service`：包含下述可执行文件：
   - `linera` -- Linera的基础客户端工具，用于操作钱包，
