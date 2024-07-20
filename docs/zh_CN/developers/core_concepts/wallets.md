@@ -2,9 +2,9 @@
 
 与传统区块链的钱包相同，Linera钱包也负责管理用户私钥和签名交易，但除此之外，Linera钱包也会创建区块，并将区块提交到验证器来延伸钱包用户管理的微链。
 
-在实现上，Linera钱包将会包含一个节点服务，该节点服务管理Linera微链的一个子集(译者注：只管理当前钱包用户拥有的微链)。[下一节](zh_CN/developers/core_concepts/node_service)中我们将会看到通过Linera钱包提供的GraphQL服务将钱包管理的微链状态提供给Web前端。
+在实现上，Linera钱包将会包含一个节点服务，该节点服务管理Linera微链的一个子集(译者注：只管理当前钱包用户拥有的微链)。[下一节](zh_CN/developers/core_concepts/node_service)中我们将会看到通过Linera钱包提供的GraphQL服务将钱包管理的微链状态提暴露给Web前端。
 
-> 开发者主要通过命令行工具`linera`与Linera网络交互，并管理本地用户钱包。
+> 开发者主要通过命令行工具`linera`与Linera网络交互并管理本地用户钱包。
 
 命令行工具主要针对开发者，对于最终用户，我们将会提供[浏览器插件](zh_CN/developers/core_concepts/overview.md#Web3-SDK)来管理他们的钱包。
 
@@ -20,7 +20,7 @@
 
 ## [管理微链](zh_CN/developers/core_concepts/wallets.md#管理微链)
 
-### 获取微链清单
+### 获取微链列表
 
 使用`show`命令可以获取钱包中的微链清单：
 
@@ -43,9 +43,10 @@ linera wallet show
 ╰──────────────────────────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-上面的清单中每一行代表钱包中的一条微链，左边是微链的标识符，右边是微链最新区块相关的元数据。
+上面的列表中每一行代表钱包中的一条微链，左边是微链的标识符，右边是微链最新区块相关的元数据。
 
 ### [默认微链](zh_CN/developers/core_concepts/wallets.md#默认微链)
+
 每个钱包都有一条默认微链，如果执行命令时未传递`--chain`参数，命令将使用默认微链。
 
 第一条添加到钱包中的微链将被设置成默认微链，可以通过如下命令查看钱包的默认微链：
@@ -130,4 +131,4 @@ linera open-multi-owner-chain \
 
 在终端中执行`source /dev/stdin <<<"$(linera net helper 2>/dev/null)"`，即可在当前终端定义`linera_spawn_and_read_wallet_variables`函数。此外，开发者也可以通过将`linera net helper`添加到`~/.bash_profile`文件中，为将来登录的用户自动设置终端测试环境。
 
-当按照上述步骤定义好帮助函数，即可执行`linera_spawn_and_read_wallet_variables linera net up`来创建测试环境。
+当按照上述步骤定义好帮助函数，即可执行`linera_spawn_and_read_wallet_variables linera net up`来创建测试网络。
