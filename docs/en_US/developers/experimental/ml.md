@@ -48,7 +48,7 @@ manually seed RNG used by `candle`. We do this by writing a custom `getrandom`.
 
 Create a file under `src/random.rs` and add the following:
 
-```rust,ignore
+```rust
 use std::sync::{Mutex, OnceLock};
 
 use rand::{rngs::StdRng, Rng, SeedableRng};
@@ -79,7 +79,7 @@ Models cannot currently be saved on-chain; for more information see the
 To perform model inference, the model must be loaded into the service. To do
 this we'll use the `fetch_url` API when a query is made against the service:
 
-```rust,ignore
+```rust
 impl Service for MyService {
     async fn handle_query(&self, request: Request) -> Response {
         // do some stuff here
@@ -100,7 +100,7 @@ Depending on the model format that you're using, `candle` exposes convenience
 functions to convert the bytes into a typed `struct` which can then be used to
 perform inference. Below is an example for a non-quantized Llama 2 model:
 
-```rust,ignore
+```rust
     fn load_llama_model(cursor: &mut Cursor<Vec<u8>>) -> Result<(Llama, Cache), candle_core::Error> {
         let config = llama2_c::Config::from_reader(cursor)?;
         let weights =

@@ -13,7 +13,7 @@ that can be made against your application.
 The `Service` trait is how you define the interface into your application. The
 `Service` trait is defined as follows:
 
-```rust,ignore
+```rust
 pub trait Service: WithServiceAbi + ServiceAbi + Sized {
     /// Immutable parameters specific to this application.
     type Parameters: Serialize + DeserializeOwned + Send + Sync + Clone + Debug + 'static;
@@ -34,7 +34,7 @@ Let's implement `Service` for our counter application.
 
 First, we create a new type for the service, similarly to the contract:
 
-```rust,ignore
+```rust
 pub struct CounterService {
     state: Counter,
 }
@@ -51,7 +51,7 @@ export the necessary resource types and functions so that the service can be
 executed. Fortunately, there is a macro to perform this code generation, so just
 add the following to `service.rs`:
 
-```rust,ignore
+```rust
 linera_sdk::service!(CounterService);
 ```
 
@@ -60,7 +60,7 @@ first step is to define the `Service`'s associated type, which is the global
 parameters specified when the application is instantiated. In our case, the
 global paramters aren't used, so we can just specify the unit type:
 
-```rust,ignore
+```rust
 #[async_trait]
 impl Service for CounterService {
     type Parameters = ();
@@ -71,7 +71,7 @@ Also like in contracts, we must implement a `load` constructor when implementing
 the `Service` trait. The constructor receives the runtime handle and should use
 it to load the application state:
 
-```rust,ignore
+```rust
     async fn load(runtime: ServiceRuntime<Self>) -> Self {
         let state = Counter::load(ViewStorageContext::from(runtime.key_value_store()))
             .await
@@ -89,7 +89,7 @@ will accept GraphQL queries and handle them using the
 forward the queries to custom GraphQL handlers we will implement in the next
 section, we use the following code:
 
-```rust,ignore
+```rust
     async fn handle_query(&mut self, request: Request) -> Response {
         let schema = Schema::build(
             // implemented in the next section
@@ -107,7 +107,7 @@ section, we use the following code:
 Finally, as before, the following code is needed to incorporate the ABI
 definitions into your `Service` implementation:
 
-```rust,ignore
+```rust
 impl WithServiceAbi for Counter {
     type Abi = counter::CounterAbi;
 }
@@ -122,7 +122,7 @@ serialized `Operation` values that can be placed in blocks.
 In the `QueryRoot`, we only create a single `value` query that returns the
 counter's value:
 
-```rust,ignore
+```rust
 struct QueryRoot {
     value: u64,
 }
@@ -138,7 +138,7 @@ impl QueryRoot {
 In the `MutationRoot`, we only create one `increment` method that returns a
 serialized operation to increment the counter by the provided `value`:
 
-```rust,ignore
+```rust
 struct MutationRoot;
 
 #[Object]

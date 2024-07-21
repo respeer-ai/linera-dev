@@ -27,7 +27,7 @@ pub trait Abi: ContractAbi + ServiceAbi {}
 
 `ContractAbi` trait定义了应用程序的合约中使用的数据类型，每种类型都表示合约的一部分特定行为：
 
-```rust,ignore
+```rust
 /// A trait that includes all the types exported by a Linera application contract.
 pub trait ContractAbi {
     /// The type of operation executed by the application.
@@ -59,7 +59,7 @@ impl ContractAbi for CounterAbi {
 ## [服务ABI](zh_CN/developers/sdk/abi.md#服务ABI)
 概念上，`ServiceAbi`与`ContractAbi`雷同，所不同者，`ServiceAbi`提供的是应用程序的服务部分数据类型和接口。
 
-```rust,ignore
+```rust
 /// A trait that includes all the types exported by a Linera application service.
 pub trait ServiceAbi {
     /// The type of a query receivable by the application's service.

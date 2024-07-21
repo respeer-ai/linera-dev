@@ -29,7 +29,7 @@ runtimes, and can be configured to return specific values for different tests.
 A simple unit test is shown below, which tests if the application contract's
 `do_something` method changes the application state.
 
-```rust,ignore
+```rust
 #[cfg(test)]
 mod tests {
     use crate::{ApplicationContract, ApplicationState};
@@ -72,7 +72,7 @@ the application.
 A simple test that sends a message between application instances on different
 chains is shown below.
 
-```rust,ignore
+```rust
 #[tokio::test]
 async fn test_cross_chain_message() {
     let parameters = vec![];

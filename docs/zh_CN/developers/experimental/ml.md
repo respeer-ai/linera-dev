@@ -33,7 +33,7 @@ tokenizers = { git = "https://github.com/christos-h/tokenizers", default-feature
 
 创建一个文件 `src/random.rs` 并添加以下内容：
 
-```rust,ignore
+```rust
 use std::sync::{Mutex, OnceLock};
 
 use rand::{rngs::StdRng, Rng, SeedableRng};
@@ -60,7 +60,7 @@ getrandom::register_custom_getrandom!(custom_getrandom);
 
 执行推理前，需要通过`fetch_url`加载模型：
 
-```rust,ignore
+```rust
 impl Service for MyService {
     async fn handle_query(&self, request: Request) -> Response {
         // do some stuff here
@@ -76,7 +76,7 @@ impl Service for MyService {
 
 我们可以通过`candle`提供的函数方便地将字节转换为类型化的`struct`，用于执行推理。以下是非量化 Llama 2 模型的示例：
 
-```rust,ignore
+```rust
     fn load_llama_model(cursor: &mut Cursor<Vec<u8>>) -> Result<(Llama, Cache), candle_core::Error> {
         let config = llama2_c::Config::from_reader(cursor)?;
         let weights =

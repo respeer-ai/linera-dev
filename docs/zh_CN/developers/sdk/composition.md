@@ -6,7 +6,7 @@
 
 跨应用调用发生在同一条微链的不同应用实例之间，通过调用 [`ContractRuntime::call_application`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ContractRuntime.html#call_application) 方法实现：
 
-```rust,ignore
+```rust
 pub fn call_application<A: ContractAbi + Send>(
     &mut self,
     authenticated: bool,
@@ -40,7 +40,7 @@ mutation { pledge(owner: "User:841…6c0", amount: "10") }
 
 首先，`CrowdFunding::execute_operation`调用Carol的微链上的`fungible`应用，从Carol的账户中转移10 Tokens到Bob的微链(上的Carol的账户)：
 
-```rust,ignore
+```rust
 // ...
 let call = fungible::Operation::Transfer {
     owner,

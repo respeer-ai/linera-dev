@@ -6,7 +6,7 @@ Linera应用的第二个组件是服务程序，服务程序编译的字节码�
 
 `Service` trait中定义了应用交互接口：
 
-```rust,ignore
+```rust
 pub trait Service: WithServiceAbi + ServiceAbi + Sized {
     /// Immutable parameters specific to this application.
     type Parameters: Serialize + DeserializeOwned + Send + Sync + Clone + Debug + 'static;
@@ -25,7 +25,7 @@ pub trait Service: WithServiceAbi + ServiceAbi + Sized {
 
 与合约类似，我们首先定义服务类型：
 
-```rust,ignore
+```rust
 pub struct CounterService {
     state: Counter,
 }
@@ -35,13 +35,13 @@ pub struct CounterService {
 
 我们需要生成实现服务的模板文件[WIT接口](https://component-model.bytecodealliance.org/design/wit.html)，用来导出主机(执行字节码的进程)访问服务的必要资源类型和函数。Linera SDK中有预先定义的宏来执行需要的代码生成过程，因此我们只需要在`service.rs`文件中添加如下代码即可：
 
-```rust,ignore
+```rust
 linera_sdk::service!(CounterService);
 ```
 
 接下来，我们需要为 `CounterService` 类型实现 `Service` trait。`Service` trait中包含初始化应用需要的全局参数，如果应用程序有自己特定的初始化参数定义，应该在trait的实现中将该参数类型重新声明为应用程序自己的初始化参数类型。本例中我们不需要传递初始化参数，因此将该参数声明为单元类型：
 
-```rust,ignore
+```rust
 #[async_trait]
 impl Service for CounterService {
     type Parameters = ();
@@ -50,7 +50,7 @@ impl Service for CounterService {
 
 与合约类似，当实现 `Service` trait 时，我们必须实现一个 `load` 构造函数，该函数携带`runtime`参数，我们可以用该参数来加载应用程序状态：
 
-```rust,ignore
+```rust
     async fn load(runtime: ServiceRuntime<Self>) -> Self {
         let state = Counter::load(ViewStorageContext::from(runtime.key_value_store()))
             .await
@@ -63,7 +63,7 @@ impl Service for CounterService {
 
 服务功能实现在`handler_query`方法中。客户端向服务发送的GraphQL请求被[`async-graphql` crate](https://github.com/async-graphql/async-graphql)处理，然后被转发到特定的处理程序，我们将在下面的章节讲解该部分的路由细节。下面的代码是实例程序的`handler_query`实现：
 
-```rust,ignore
+```rust
     async fn handle_query(&mut self, request: Request) -> Response {
         let schema = Schema::build(
             // implemented in the next section
@@ -80,7 +80,7 @@ impl Service for CounterService {
 
 最后，与合约代码一样，我们需要将`Service`实现与ABI定义相关联：
 
-```rust,ignore
+```rust
 impl WithServiceAbi for Counter {
     type Abi = counter::CounterAbi;
 }
@@ -92,7 +92,7 @@ impl WithServiceAbi for Counter {
 
 `QueryRoot`实现`value`查询方法，该方法返回计数器当前值：
 
-```rust,ignore
+```rust
 struct QueryRoot {
     value: u64,
 }
@@ -107,7 +107,7 @@ impl QueryRoot {
 
 `MutationRoot`中实现`increment`方法，序列化给定的值，合约实现将会使用该序列化结果修改当前计数值：
 
-```rust,ignore
+```rust
 struct MutationRoot;
 
 #[Object]

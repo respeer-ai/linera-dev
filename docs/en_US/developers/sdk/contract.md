@@ -6,7 +6,7 @@ actually change the state of the application.
 To create a contract, we need to create a new type and implement the `Contract`
 trait for it, which is as follows:
 
-```rust,ignore
+```rust
 pub trait Contract: WithContractAbi + ContractAbi + Sized {
     /// The type of message executed by the application.
     type Message: Serialize + DeserializeOwned + Debug;
@@ -48,7 +48,7 @@ methods.
 
 To implement the application contract, we first create a type for the contract:
 
-```rust,ignore
+```rust
 pub struct CounterContract {
     state: Counter,
     runtime: ContractRuntime<Self>,
@@ -68,7 +68,7 @@ contract can use, and should use it to load the application state. For our
 implementation, we will load the state and create the `CounterContract`
 instance:
 
-```rust,ignore
+```rust
     async fn load(runtime: ContractRuntime<Self>) -> Self {
         let state = Counter::load(ViewStorageContext::from(runtime.key_value_store()))
             .await
@@ -83,7 +83,7 @@ persist its state to storage. That final step is a call to the `Contract::store`
 method, which can be thought of as similar to executing a destructor. In our
 implementation we will persist the state back to storage:
 
-```rust,ignore
+```rust
     async fn store(mut self) {
         self.state.save().await.expect("Failed to save state");
     }
@@ -109,7 +109,7 @@ For our example application, we'll want to initialize the state of the
 application to an arbitrary number that can be specified on application creation
 using its instatiation parameters:
 
-```rust,ignore
+```rust
     async fn instantiate(&mut self, value: u64) {
         self.state.value.set(value);
     }
@@ -125,7 +125,7 @@ To handle an operation, we need to implement the `Contract::execute_operation`
 method. In the counter's case, the operation it will be receiving is a `u64`
 which is used to increment the counter by that value:
 
-```rust,ignore
+```rust
     async fn execute_operation(&mut self, operation: u64) {
         let current = self.value.get();
         self.value.set(current + operation);
@@ -137,7 +137,7 @@ which is used to increment the counter by that value:
 Finally, to link our `Contract` trait implementation with the ABI of the
 application, the following code is added:
 
-```rust,ignore
+```rust
 impl WithContractAbi for CounterContract {
     type Abi = counter::CounterAbi;
 }

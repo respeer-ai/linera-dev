@@ -43,7 +43,7 @@ linera publish-and-create <contract-path> <service-path> <init-args>
 
 以"fungible token"为例，给另一个用户发送资金的操作定义如下：
 
-```rust,ignore
+```rust
 # extern crate serde;
 # use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
@@ -62,7 +62,7 @@ pub enum Operation {
 
 在"fungible token"应用中，给账户记账的消息定义如下：
 
-```rust,ignore
+```rust
 # extern crate serde;
 # use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]

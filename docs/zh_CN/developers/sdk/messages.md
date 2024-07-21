@@ -4,7 +4,7 @@
 
 我们可以在应用程序的合约实现中指定任何可以序列化的类型作为`Message`类型。正如[编写合约](zh_CN/developers/sdk/contract.md)章节中描述，我们在合约类型中声明了`runtime`字段。构造合约实例时，`Contract::load`函数携带的[`ContractRuntime`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ContractRuntime.html)参数被存储在合约实例的`runtime`字段。合约事务执行过程中，我们可以调用[`ContractRuntime::prepare_message`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ContractRuntime.html#prepare_message)准备消息，然后使用[`send_to`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.MessageBuilder.html#send_to)将消息发送到目标链。
 
-```rust,ignore
+```rust
     self.runtime
         .prepare_message(message_contents)
         .send_to(destination_chain_id);
@@ -16,7 +16,7 @@
 
 微链发送的消息中可以启用身份验证转发或消息追踪。身份验证转发意味着接收者执行该消息时，该消息的签名信息与最初发送该消息的用户签名一致。如果启用消息追踪，那些被接收者拒绝的消息将被发回发送者。下面的例子同时启用了身份认证转发和消息追踪：
 
-```rust,ignore
+```rust
     self.runtime
         .prepare_message(message_contents)
         .with_tracking()
@@ -28,7 +28,7 @@
 
 在[`fungible`示例应用](https://github.com/linera-io/linera-protocol/tree/main/examples/fungible)中，从一条微链向另一条微链转账就是一条消息。如果发送者在他的微链上包含一个`Transfer`操作，当操作被执行时，发送者的账户余额将减少，同时发送一个`Credit`消息到接收者的微链：
 
-```rust,ignore
+```rust
 async fn execute_operation(&mut self, operation: Self::Operation) -> Self::Response {
     match operation {
         // ...
@@ -72,7 +72,7 @@ async fn finish_transfer_to_account(
 
 接收者微链这一侧，`execute_message`将会执行，增加接收者的余额。
 
-```rust,ignore
+```rust
 async fn execute_message(&mut self, message: Message) {
     match message {
         Message::Credit {

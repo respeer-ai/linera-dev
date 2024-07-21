@@ -14,7 +14,7 @@ are instead mapped onto key-value stores like [RocksDB](https://rocksdb.org/).
 
 In vanilla Rust, we might represent our Counter as so:
 
-```rust,ignore
+```rust
 // do not use this
 struct Counter {
   value: u64
@@ -24,7 +24,7 @@ struct Counter {
 However, to persist your data, you'll need to replace the existing `Application`
 state struct in `src/state.rs` with the following view:
 
-```rust,ignore
+```rust
 /// The application state.
 #[derive(RootView, async_graphql::SimpleObject)]
 #[view(context = "ViewStorageContext")]

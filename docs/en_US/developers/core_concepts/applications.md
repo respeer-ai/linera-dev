@@ -73,7 +73,7 @@ a response value back to the caller.
 Taking the "fungible token" application as an example, an operation for a user
 to transfer funds to another user would look like this:
 
-```rust,ignore
+```rust
 # extern crate serde;
 # use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
@@ -98,7 +98,7 @@ chain (or by a previous block of the same chain).
 In our "fungible token" application, a message to credit an account would look
 like this:
 
-```rust,ignore
+```rust
 # extern crate serde;
 # use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]

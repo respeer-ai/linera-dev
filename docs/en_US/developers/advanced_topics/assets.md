@@ -23,7 +23,7 @@ The
 [`matching-engine` example application](https://github.com/linera-io/linera-protocol/tree/main/examples/matching-engine)
 does this:
 
-```rust,ignore
+```rust
     async fn execute_operation(&mut self, operation: Operation) -> Self::Response {
         match operation {
             // ...
