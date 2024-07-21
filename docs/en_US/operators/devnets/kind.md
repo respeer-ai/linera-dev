@@ -45,7 +45,7 @@ For MacOS support see the installation section on
 
 This manual was tested with the following Rust toolchain:
 
-```text
+```rust
 [toolchain]
 channel = "1.77.2"
 components = [ "clippy", "rustfmt", "rust-src" ]

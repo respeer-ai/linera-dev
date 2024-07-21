@@ -127,7 +127,7 @@ Navigate to `http://localhost:8080` in your browser to access the GraphiQL, the
 [later section](../core_concepts/node_service.md#graphiql-ide); for now, list
 the applications deployed on your default chain e476… by running:
 
-```gql
+```graphql
 query {
   applications(
     chainId: "e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65"
@@ -147,7 +147,7 @@ your application copy and paste the link into a new browser tab.
 
 Finally, to query the counter value, run:
 
-```gql
+```graphql
 query {
   value
 }

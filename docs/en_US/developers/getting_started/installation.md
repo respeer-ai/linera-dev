@@ -49,7 +49,7 @@ protocol itself, see the installation section on
 
 This manual was tested with the following Rust toolchain:
 
-```text
+```rust
 [toolchain]
 channel = "1.77.2"
 components = [ "clippy", "rustfmt", "rust-src" ]
@@ -61,13 +61,13 @@ profile = "minimal"
 
 You may install the Linera binaries with
 
-```terminal
+```bash
 cargo install --locked linera-service@0.11.3
 ```
 
 and use `linera-sdk` as a library for Linera Wasm applications:
 
-```terminal
+```bash
 cargo add linera-sdk@0.11.3
 ```
 

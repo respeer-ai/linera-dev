@@ -36,7 +36,7 @@ MacOS支持，以及测试Linera协议的一些附加需求可以参见[GitHub�
 
 本手册测试使用的Rust工具链配置如下：
 
-```text
+```rust
 [toolchain]
 channel = "1.77.2"
 components = [ "clippy", "rustfmt", "rust-src" ]

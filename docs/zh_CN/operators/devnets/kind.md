@@ -35,7 +35,7 @@ MacOS系统参见[GitHub上的安装部分](https://github.com/linera-io/linera-
 
 本手册基于下列工具链测试：
 
-```text
+```rust
 [toolchain]
 channel = "1.77.2"
 components = [ "clippy", "rustfmt", "rust-src" ]
