@@ -16,14 +16,14 @@ For a reference guide, check out the
 The library part of your application (generally in `src/lib.rs`) must define a
 public empty struct that implements the `Abi` trait.
 
-```rust,ignore
+```terminal
 struct CounterAbi;
 ```
 
 The `Abi` trait combines the `ContractAbi` and `ServiceAbi` traits to include
 the types that your application exports.
 
-```rust,ignore
+```terminal
 {{#include ../../../linera-protocol/linera-base/src/abi.rs:abi}}
 ```
 
@@ -34,7 +34,7 @@ Next, we're going to implement each of the two traits.
 The `ContractAbi` trait defines the data types that your application uses in a
 contract. Each type represents a specific part of the contract's behavior:
 
-```rust,ignore
+```terminal
 {{#include ../../../linera-protocol/linera-base/src/abi.rs:contract_abi}}
 ```
 
@@ -43,7 +43,7 @@ All these types must implement the `Serialize`, `DeserializeOwned`, `Send`,
 
 In our example, we would like to change our `Operation` to `u64`, like so:
 
-```rust
+```terminal
 # extern crate linera_base;
 # use linera_base::abi::ContractAbi;
 # struct CounterAbi;
@@ -61,14 +61,14 @@ service component of your application.
 The `ServiceAbi` trait defines the types used by the service part of your
 application:
 
-```rust,ignore
+```terminal
 {{#include ../../../linera-protocol/linera-base/src/abi.rs:service_abi}}
 ```
 
 For our Counter example, we'll be using GraphQL to query our application so our
 `ServiceAbi` should reflect that:
 
-```rust
+```terminal
 # extern crate linera_base;
 # extern crate async_graphql;
 # use linera_base::abi::ServiceAbi;

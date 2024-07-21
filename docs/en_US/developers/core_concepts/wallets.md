@@ -38,7 +38,7 @@ short).
 
 To list the chains present in your wallet, you may use the command `show`:
 
-```bash
+```terminal
 linera wallet show
 ╭──────────────────────────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────╮
 │ Chain ID                                                         ┆ Latest Block                                                                         │
@@ -70,7 +70,7 @@ another `--chain` on the command line.
 The default chain is set initially, when the first chain is added to the wallet.
 You can check the default chain for your wallet by running:
 
-```bash
+```terminal
 linera wallet show
 ```
 
@@ -78,7 +78,7 @@ The Chain ID which is in green text instead of white text is your default chain.
 
 To change the default chain for your wallet, user the `set-default` command:
 
-```bash
+```terminal
 linera wallet set-default <chain-id>
 ```
 
@@ -92,7 +92,7 @@ created by an existing chain on the network.
 
 To open a chain for your own wallet, you can use the `open-chain` command:
 
-```bash
+```terminal
 linera open-chain
 ```
 
@@ -104,21 +104,21 @@ the wallet. Use the `wallet show` command to see your existing chains.
 Opening a chain for another `wallet` requires an extra two steps. Let's
 initialize a second wallet:
 
-```bash
+```terminal
 linera --wallet wallet2.json --storage rocksdb:linera2.db wallet init --genesis target/debug/genesis.json
 ```
 
 First `wallet2` must create an unassigned keypair. The public part of that
 keypair is then sent to the `wallet` who is the chain creator.
 
-```bash
+```terminal
 linera --wallet wallet2.json keygen
 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 # this is the public key for the unassigned keypair
 ```
 
 Next, using the public key, `wallet` can open a chain for `wallet2`.
 
-```bash
+```terminal
 linera open-chain --to-public-key 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888
 e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000000000000
 fc9384defb0bcd8f6e206ffda32599e24ba715f45ec88d4ac81ec47eb84fa111
@@ -130,7 +130,7 @@ the new chain. The second line is the new chain's ID.
 Finally, to add the chain to `wallet2` for the given unassigned key we use the
 `assign` command:
 
-```bash
+```terminal
  linera --wallet wallet2.json assign --key 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 --message-id e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000000000000
 ```
 
@@ -141,7 +141,7 @@ which gives you fine-grained control over the set and kinds of owners and rounds
 for the new chain, and the timeout settings for the rounds. E.g. this creates a
 chain with two owners and two multi-leader rounds.
 
-```bash
+```terminal
 linera open-multi-owner-chain \
     --chain-id e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000000000000 \
     --owner-public-keys 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 \

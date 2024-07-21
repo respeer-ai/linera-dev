@@ -11,7 +11,7 @@ terminal. However, the client also acts as a node which:
 
 To interact with the node service, run `linera` in `service` mode:
 
-```bash
+```terminal
 linera service
 ```
 

@@ -17,7 +17,7 @@ To interact with the Devnet, some tokens are needed. A Faucet service is
 available to create new microchains and obtain some test tokens. To do so, this
 must be configured when initializing the wallet:
 
-```bash
+```terminal
 linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.linera.net
 ```
 
@@ -36,7 +36,7 @@ of workers (aka. "physical shards").
 
 To start a local network, run the following command:
 
-```bash
+```terminal
 linera net up
 ```
 
@@ -52,7 +52,7 @@ operate them.
 configure your terminal to use the initial wallet of the new test network, for
 instance:
 
-```bash
+```terminal
 export LINERA_WALLET="/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/.tmpvJ6lJI/wallet.json"
 export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/.tmpvJ6lJI/linera.db"
 ```
@@ -73,7 +73,7 @@ To check that the network is working, you can synchronize your
 [default chain](../core_concepts/wallets.md) with the rest of the network and
 display the chain balance as follows:
 
-```bash
+```terminal
 linera sync
 linera query-balance
 ```
@@ -88,7 +88,7 @@ execute bytecode.
 
 Let's build the `counter` application from the `examples/` subdirectory:
 
-```bash
+```terminal
 cd examples/counter && cargo build --release --target wasm32-unknown-unknown
 ```
 
@@ -101,7 +101,7 @@ network using the `linera` client's `publish-and-create` command and provide:
 2. The location of the service bytecode
 3. The JSON encoded initialization arguments
 
-```bash
+```terminal
 linera publish-and-create \
   ../target/wasm32-unknown-unknown/release/counter_{contract,service}.wasm \
   --json-argument "42"
@@ -116,7 +116,7 @@ we need to use the client running in
 [_service_ mode](../core_concepts/node_service.md). This will expose a bunch of
 APIs locally which we can use to interact with applications on the network.
 
-```bash
+```terminal
 linera service
 ```
 
@@ -127,7 +127,7 @@ Navigate to `http://localhost:8080` in your browser to access the GraphiQL, the
 [later section](../core_concepts/node_service.md#graphiql-ide); for now, list
 the applications deployed on your default chain e476… by running:
 
-```gql
+```terminal
 query {
   applications(
     chainId: "e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65"
@@ -147,7 +147,7 @@ your application copy and paste the link into a new browser tab.
 
 Finally, to query the counter value, run:
 
-```gql
+```terminal
 query {
   value
 }

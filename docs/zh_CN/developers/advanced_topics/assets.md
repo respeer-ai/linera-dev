@@ -14,7 +14,7 @@ Linera基于临时微链实现了一种解决方案：如果参与各方是有�
 
 [`matching-engine` 示例程序](https://github.com/linera-io/linera-protocol/tree/main/examples/matching-engine)实现了上述流程：
 
-```rust,ignore
+```terminal
     async fn execute_operation(&mut self, operation: Operation) -> Self::Response {
         match operation {
             // ...

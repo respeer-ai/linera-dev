@@ -30,7 +30,7 @@ Docker Compose脚本位于Linera代码库内，因此需要通过Github安装Lin
 
 验证者可以使用以下模板设置：
 
-```toml
+```terminal
 server_config_path = "server.json"
 host = "<your-host>" # e.g. my-subdomain.my-domain.net
 port = 443
@@ -59,7 +59,7 @@ metrics_port = 21100
 
 下面是一个测试网创世配置的例子：
 
-```bash
+```terminal
 wget "https://storage.cloud.google.com/linera-io-dev-public/devnet-2024-05-07/genesis.json"
 ```
 
@@ -69,13 +69,13 @@ wget "https://storage.cloud.google.com/linera-io-dev-public/devnet-2024-05-07/ge
 
 下列命令将生成私钥：
 
-```bash
+```terminal
 linera-server generate --validators /path/to/validator/configuration.toml
 ```
 
 验证者运行所需的信息在`server.json`文件中，该文件由上面的命令生成，包含密码学密钥对，其公钥将打印在屏幕上：
 
-```bash
+```terminal
 $ linera-server generate --validators /path/to/validator/configuration.toml
 2024-07-01T16:51:32.881255Z  INFO linera_version::version_info: Linera protocol: v0.12.0
 2024-07-01T16:51:32.881273Z  INFO linera_version::version_info: RPC API hash: p//G+L8e12ZRwUdWoGHWYvWA/03kO0n6gtgKS4D4Q0o
@@ -94,7 +94,7 @@ $ linera-server generate --validators /path/to/validator/configuration.toml
 
 在`linera-protocol`存储库的根目录运行以下命令构建镜像：
 
-```bash
+```terminal
 $ docker build -f docker/Dockerfile . -t linera
 ```
 
@@ -104,7 +104,7 @@ $ docker build -f docker/Dockerfile . -t linera
 
 现在，通过在`docker`目录内运行以下命令来启动验证者，该验证者将使用`docker/genesis.json`中的创世配置，和`docker/server.json`中的服务器配置：
 
-```bash
+```terminal
 cd docker && docker compose up -d
 ```
 

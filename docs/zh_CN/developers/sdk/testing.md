@@ -14,7 +14,7 @@ Linera应用程序可以执行单元测试和集成测试保障应用发布质�
 
 下面的例子展示了一个简单的单元测试，用来测试应用中的`do_something`方法是否更改应用状态。
 
-```rust,ignore
+```terminal
 #[cfg(test)]
 mod tests {
     use crate::{ApplicationContract, ApplicationState};
@@ -53,7 +53,7 @@ mod tests {
 
 下面的示例展示了在不同微链的应用实例之间发送消息的测试：
 
-```rust,ignore
+```terminal
 #[tokio::test]
 async fn test_cross_chain_message() {
     let parameters = vec![];

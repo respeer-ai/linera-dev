@@ -11,7 +11,7 @@ Linera Devnet是部署给开发者使用，开发者需要知道Devnet是不稳�
 
 为了能够与Devnet交互，我们需要一些Token。通过如下命令初始化并设置钱包后，我们可以从水龙头服务领取一些测试Token：
 
-```bash
+```terminal
 linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.linera.net
 ```
 
@@ -25,7 +25,7 @@ linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.li
 
 通过执行以下命令启动本地测试网：
 
-```bash
+```terminal
 linera net up
 ```
 
@@ -37,7 +37,7 @@ linera net up
 
 命令`linera net up`在终端中打印了Bash设置(如下面的例子)，这些设置可以帮助开发者设置他们的终端，以使用测试网络的初始钱包。
 
-```bash
+```terminal
 export LINERA_WALLET="/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/.tmpvJ6lJI/wallet.json"
 export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/.tmpvJ6lJI/linera.db"
 ```
@@ -52,7 +52,7 @@ export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/
 
 你可以通过如下命令同步[默认微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets)并显示微链余额来确认网络是否正常工作：
 
-```bash
+```terminal
 linera sync
 linera query-balance
 ```
@@ -65,7 +65,7 @@ linera query-balance
 
 下面我们将构建`examples/`子目录中的`counter`应用：
 
-```bash
+```terminal
 cd examples/counter && cargo build --release --target wasm32-unknown-unknown
 ```
 
@@ -77,7 +77,7 @@ cd examples/counter && cargo build --release --target wasm32-unknown-unknown
 2. 服务字节码的路径
 3. 初始化参数的JSON文本
 
-```bash
+```terminal
 linera publish-and-create \
   ../target/wasm32-unknown-unknown/release/counter_{contract,service}.wasm \
   --json-argument "42"
@@ -88,13 +88,13 @@ linera publish-and-create \
 ## [查询应用](zh_CN/developers/getting_started/hello_linera.md#查询应用)
 现在我们可以查询上面部署的应用，获取当前的计数值。查询应用需要使用客户端的[*服务模式*](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)运行一个Linera节点服务，我们将通过该节点服务提供的一系列APIs与应用交互。
 
-```bash
+```terminal
 linera service
 ```
 
 打开你的浏览器，在地址栏输入`http://localhost:8080`访问上面运行的节点服务器内置的GraphiQL用户界面([GraphQL](https://graphql.org/) IDE)。[后面的章节](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphiql-ide)我们会提供更多GraphiQL的使用细节，现在，我们通过下面的命令获得默认微链(e476…)上的应用列表：
 
-```gql
+```terminal
 query {
   applications(
     chainId: "e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65"
@@ -112,7 +112,7 @@ query {
 
 最后，执行下面的查询获得计数值：
 
-```gql
+```terminal
 query {
   value
 }

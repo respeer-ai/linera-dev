@@ -6,7 +6,7 @@
 
 例如，执行`Operation::StartSession`可能要求相同的调用者在事务结束前执行`Operation::EndSession`。
 
-```rust,ignore
+```terminal
 pub struct MyContract {
     state: MyState;
     runtime: ContractRuntime<Self>;

@@ -36,7 +36,7 @@ MacOS支持，以及测试Linera协议的一些附加需求可以参见[GitHub�
 
 本手册测试使用的Rust工具链配置如下：
 
-```text
+```terminal
 [toolchain]
 channel = "1.77.2"
 components = [ "clippy", "rustfmt", "rust-src" ]
@@ -48,14 +48,14 @@ profile = "minimal"
 
 你可以通过如下命令安装Linera工具链
 
-```bash
+```terminal
 cargo install linera-sdk@0.11.3
 cargo install linera-service@0.11.3
 ```
 
 然后使用`linera-sdk`作为Linera Wasm应用的依赖库：
 
-```bash
+```terminal
 cargo add linera-sdk@0.11.3
 ```
 
@@ -64,7 +64,7 @@ cargo add linera-sdk@0.11.3
 ## [从GitHub安装](zh_CN/developers/getting_started/installation.md#从GitHub安装)
 从[GitHub](https://github.com/linera-io/linera-protocol)下载源码：
 
-```bash
+```terminal
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
 git checkout -t origin/devnet_2024_05_07  # 当前发布分支
@@ -72,7 +72,7 @@ git checkout -t origin/devnet_2024_05_07  # 当前发布分支
 
 如果希望从源码安装Linera工具链，执行如下命令：
 
-```bash
+```terminal
 cargo install --locked --path linera-service
 ```
 
@@ -80,7 +80,7 @@ cargo install --locked --path linera-service
 
 本文档的编写使用[仓库](https://github.com/linera-io/linera-protocol)的如下提交记录进行测试：
 
-```text
+```terminal
 2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
 ```
 

@@ -17,7 +17,7 @@ application while also specifying:
 2. The location of the service bytecode
 3. The JSON encoded initialization arguments
 
-```bash
+```terminal
 linera publish-and-create \
   target/wasm32-unknown-unknown/release/my-counter_{contract,service}.wasm \
   --json-argument "42"
@@ -28,7 +28,7 @@ linera publish-and-create \
 To configure the wallet for the devnet while creating a new microchain, the
 following command can be used:
 
-```bash
+```terminal
 linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.linera.net
 ```
 
@@ -40,7 +40,7 @@ specifying:
 2. The location of the service bytecode
 3. The JSON encoded initialization arguments
 
-```bash
+```terminal
 linera publish-and-create \
   target/wasm32-unknown-unknown/release/my-counter_{contract,service}.wasm \
   --json-argument "42"

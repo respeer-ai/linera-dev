@@ -24,7 +24,7 @@
 
 使用`show`命令可以获取钱包中的微链清单：
 
-```bash
+```terminal
 linera wallet show
 ╭──────────────────────────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────╮
 │ Chain ID                                                         ┆ Latest Block                                                                         │
@@ -50,13 +50,13 @@ linera wallet show
 
 第一条添加到钱包中的微链将被设置成默认微链，可以通过如下命令查看钱包的默认微链：
 
-```bash
+```terminal
 linera wallet show
 ```
 
 其中微链ID为绿色的行为钱包默认微链。可以通过如下命令改变默认微链：
 
-```bash
+```terminal
 linera wallet set-default <chain-id>
 ```
 
@@ -68,7 +68,7 @@ Linera协议实现了创建新微链的语义，称为"opening a chain"。微链
 
 执行`open-chain`命令可以在你的钱包中创建新微链：
 
-```bash
+```terminal
 linera open-chain
 ```
 
@@ -77,20 +77,20 @@ linera open-chain
 #### 在另一个钱包创建微链
 在另一个`钱包`创建新的微链需要两个额外的步骤。首先，需要初始化第二个钱包：
 
-```bash
+```terminal
 linera --wallet wallet2.json --storage rocksdb:linera2.db wallet init --genesis target/debug/genesis.json
 ```
 
 `钱包2`需要使用未分配的密钥对创建，该密钥对的公钥将被发送给`钱包1`的创建者。
 
-```bash
+```terminal
 linera --wallet wallet2.json keygen
 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 # 上面提到未分配密钥对的公钥
 ```
 
 接下来，`钱包1`使用该公钥即可为`钱包2`创建一条微链。
 
-```bash
+```terminal
 linera open-chain --to-public-key 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888
 e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000000000000
 fc9384defb0bcd8f6e206ffda32599e24ba715f45ec88d4ac81ec47eb84fa111
@@ -100,7 +100,7 @@ fc9384defb0bcd8f6e206ffda32599e24ba715f45ec88d4ac81ec47eb84fa111
 
 然后，我们使用`assign`命令将新创建的微链添加到`钱包2`，并将其所有者设置为上面提到的公钥：
 
-```bash
+```terminal
  linera --wallet wallet2.json assign --key 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 --message-id e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000000000000
 ```
 
@@ -108,7 +108,7 @@ fc9384defb0bcd8f6e206ffda32599e24ba715f45ec88d4ac81ec47eb84fa111
 
 `open-chain` 命令是 `open-multi-owner-chain` 的简化版本，后者允许创建者对链所有者、Round和超时进行更加精细的设定。下面的示例命令将创建一条具有两个所有者及两个多领导者Rounds的微链：
 
-```bash
+```terminal
 linera open-multi-owner-chain \
     --chain-id e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65010000000000000000000000 \
     --owner-public-keys 6443634d872afbbfcc3059ac87992c4029fa88e8feb0fff0723ac6c914088888 \

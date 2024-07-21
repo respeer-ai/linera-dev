@@ -39,7 +39,7 @@ to run the Docker Compose validator service.
 To run a local devnet with Docker Compose, navigate to the root of the
 `linera-protocol` repository and run:
 
-```bash
+```terminal
 cd docker && ./compose.sh
 ```
 
@@ -50,7 +50,7 @@ the service is ready, a temporary wallet and database is available under the
 Referencing these variables with the `linera` binary will enable you to interact
 with the devnet:
 
-```bash
+```terminal
 $ linera --wallet wallet.json --storage rocksdb:linera.db sync
 2024-06-07T14:19:32.751359Z  INFO linera: Synchronizing chain information
 2024-06-07T14:19:32.771842Z  INFO linera::client_context: Saved user chain states

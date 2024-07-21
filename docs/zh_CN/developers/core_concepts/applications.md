@@ -18,7 +18,7 @@ Linera应用是可重用的，因此，应用的字节码和网络上正在运�
 
 应用程序的部署生命周期与用户是分离的，开发者可以通过执行下面的命令发布一个应用：
 
-```bash
+```terminal
 linera publish-and-create <contract-path> <service-path> <init-args>
 ```
 
@@ -43,7 +43,7 @@ linera publish-and-create <contract-path> <service-path> <init-args>
 
 以"fungible token"为例，给另一个用户发送资金的操作定义如下：
 
-```rust,ignore
+```terminal
 # extern crate serde;
 # use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
@@ -62,7 +62,7 @@ pub enum Operation {
 
 在"fungible token"应用中，给账户记账的消息定义如下：
 
-```rust,ignore
+```terminal
 # extern crate serde;
 # use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
@@ -119,7 +119,7 @@ pub enum Message {
 
 此时，Bob将不能执行`social`应用的操作，因为该应用没有在他的微链注册。Bob首先需要向Alice请求该应用：
 
-```bash
+```terminal
 linera request-application <application-id> --target-chain-id <alices-chain-id>
 ```
 

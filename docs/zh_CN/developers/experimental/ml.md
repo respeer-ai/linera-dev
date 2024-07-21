@@ -14,7 +14,7 @@ Linera应用的合约/服务分离设计允许在边缘节点安全高效地运�
 
 为了支持机器学习能力，我们需要将下列依赖项添加到Linera应用的`Cargo.toml`文件中：
 
-```toml
+```terminal
 candle-core = "0.4.1"
 getrandom = { version = "0.2.12", default-features = false, features = ["custom"] }
 rand = "0.8.5"
@@ -22,7 +22,7 @@ rand = "0.8.5"
 
 如果需要运行大型语言模型，还需要添加下列crate：
 
-```toml
+```terminal
 candle-transformers = "0.4.1"
 tokenizers = { git = "https://github.com/christos-h/tokenizers", default-features = false, features = ["unstable_wasm"] }
 ```
@@ -33,7 +33,7 @@ tokenizers = { git = "https://github.com/christos-h/tokenizers", default-feature
 
 创建一个文件 `src/random.rs` 并添加以下内容：
 
-```rust,ignore
+```terminal
 use std::sync::{Mutex, OnceLock};
 
 use rand::{rngs::StdRng, Rng, SeedableRng};
@@ -60,7 +60,7 @@ getrandom::register_custom_getrandom!(custom_getrandom);
 
 执行推理前，需要通过`fetch_url`加载模型：
 
-```rust,ignore
+```terminal
 impl Service for MyService {
     async fn handle_query(&self, request: Request) -> Response {
         // do some stuff here
@@ -76,7 +76,7 @@ impl Service for MyService {
 
 我们可以通过`candle`提供的函数方便地将字节转换为类型化的`struct`，用于执行推理。以下是非量化 Llama 2 模型的示例：
 
-```rust,ignore
+```terminal
     fn load_llama_model(cursor: &mut Cursor<Vec<u8>>) -> Result<(Llama, Cache), candle_core::Error> {
         let config = llama2_c::Config::from_reader(cursor)?;
         let weights =

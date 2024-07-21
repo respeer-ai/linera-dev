@@ -19,7 +19,7 @@ to start preparing a message, and then
 [`send_to`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.MessageBuilder.html#send_to)
 to send it to a destination chain.
 
-```rust,ignore
+```terminal
     self.runtime
         .prepare_message(message_contents)
         .send_to(destination_chain_id);
@@ -43,7 +43,7 @@ executed by the receiver with the same authenticated signer as the sender of the
 message, while tracking means that the message is sent back to the sender if the
 receiver rejects it. The example below enables both flags:
 
-```rust,ignore
+```terminal
     self.runtime
         .prepare_message(message_contents)
         .with_tracking()
@@ -61,7 +61,7 @@ can be the transfer of tokens from one chain to another. If the sender includes
 a `Transfer` operation on their chain, it decreases their account balance and
 sends a `Credit` message to the recipient's chain:
 
-```rust,ignore
+```terminal
 async fn execute_operation(&mut self, operation: Self::Operation) -> Self::Response {
     match operation {
         // ...
@@ -106,7 +106,7 @@ async fn finish_transfer_to_account(
 On the recipient's chain, `execute_message` is called, which increases their
 account balance.
 
-```rust,ignore
+```terminal
 async fn execute_message(&mut self, message: Message) {
     match message {
         Message::Credit {

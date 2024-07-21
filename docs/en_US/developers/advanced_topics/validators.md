@@ -94,7 +94,7 @@ In [a previous section](../getting_started/hello_linera.md), we used the
 `linera net up` command to start a local network. This should be sufficient for
 most use cases when you're running a local network.
 
-```bash
+```terminal
 linera net up
 ```
 
@@ -107,7 +107,7 @@ To do this, you need the `linera-protocol` repository and the
 `run_local.sh` uses the `validator_n.toml` file from the `configuration/`
 directory to configure validator number `n`.
 
-```bash
+```terminal
 linera-server generate --validators configuration/validator_{1,2,3,4}.toml --committee committee.json
 ```
 
@@ -115,7 +115,7 @@ generates keys and writes them, together with the options from the TOML files,
 to `server_1.json`, ..., `server_4.json`. It also stores the set of the new
 validators' public keys in `committee.json`.
 
-```bash
+```terminal
 linera --wallet wallet.json --storage rocksdb:linera.db create-genesis-config 10 --genesis genesis.json --initial-funding 10 --committee committee.json
 ```
 
@@ -127,13 +127,13 @@ client who owns all those chains and initializes the corresponding local node
 To start the newly configured network, each validator `n` must start their
 proxy:
 
-```bash
+```terminal
 linera-proxy server_n.json &
 ```
 
 And all shards; for shard `i`:
 
-```bash
+```terminal
 linera-server run --storage rocksdb:server_n_i.db --server server_n.json --shard i --genesis genesis.json &
 ```
 
@@ -151,7 +151,7 @@ validators is fixed. If you own the admin chain, you can use the `set-validator`
 and `remove-validator` commands to start a new epoch with a modified set of
 validators:
 
-```bash
+```terminal
 linera --wallet wallet.json set-validator --name 5b611b86cc1f54f73a4abfb4a2167c7327cc85a74cb2a5502431f67b554850b4 --address 127.0.0.1:9100 --votes 3
 linera --wallet wallet.json remove-validator --name f65a585f05852f0610e2460a99c23faa3969f3cfce8a519f843a793dbfb4cb84
 ```

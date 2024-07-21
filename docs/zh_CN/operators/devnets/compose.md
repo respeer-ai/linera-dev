@@ -26,7 +26,7 @@ Docker Compose是一个用于编排和管理多容器Docker应用的工具。开
 
 使用Docker Compose运行本地开发网络需要先clone linera-protocol源码库，然后进入源码clone目录，执行以下命令：
 
-```bash
+```terminal
 ## 应该确保主机安装了protoc，rust等工具链
 cargo install --path linera-service
 ## 参考[Docker Compose error](https://github.com/docker/compose/issues/8630#issuecomment-1073166114)解决docker compose报错
@@ -37,7 +37,7 @@ cd docker && ./compose.sh
 
 开发者可以通过`linera`命令行和开发网络交互：
 
-```bash
+```terminal
 $ linera --wallet wallet.json --storage rocksdb:linera.db sync
 2024-06-07T14:19:32.751359Z  INFO linera: Synchronizing chain information
 2024-06-07T14:19:32.771842Z  INFO linera::client_context: Saved user chain states

@@ -10,7 +10,7 @@ Such calls happen on the same chain and are made with the
 [`ContractRuntime::call_application`](https://docs.rs/linera-sdk/latest/linera_sdk/struct.ContractRuntime.html#call_application)
 method:
 
-```rust,ignore
+```terminal
 pub fn call_application<A: ContractAbi + Send>(
     &mut self,
     authenticated: bool,
@@ -63,7 +63,7 @@ call and two cross-chain messages:
 First `CrowdFunding::execute_operation` calls the `fungible` application on
 Carol's chain to transfer 10 tokens to Carol's account on Bob's chain:
 
-```rust,ignore
+```terminal
 // ...
 let call = fungible::Operation::Transfer {
     owner,

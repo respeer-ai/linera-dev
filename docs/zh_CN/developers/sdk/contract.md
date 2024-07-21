@@ -4,7 +4,7 @@
 
 我们需要实现如下的`Contract` trait来实现一个合约：
 
-```rust,ignore
+```terminal
 pub trait Contract: WithContractAbi + ContractAbi + Sized {
     /// The type of message executed by the application.
     type Message: Serialize + DeserializeOwned + Debug;
@@ -43,7 +43,7 @@ pub trait Contract: WithContractAbi + ContractAbi + Sized {
 
 实现合约的第一步是创建合约类型：
 
-```rust,ignore
+```terminal
 pub struct CounterContract {
     state: Counter,
     runtime: ContractRuntime<Self>,
@@ -54,7 +54,7 @@ pub struct CounterContract {
 
 事务开始执行时，`Contract::load`将创建合约实例。`Contract::load`携带`runtime`句柄，作为参数，该句柄用于加载应用状态。我们使用如下的实现加载应用状态并创建`CounterContract`实例：
 
-```rust,ignore
+```terminal
     async fn load(runtime: ContractRuntime<Self>) -> Self {
         let state = Counter::load(ViewStorageContext::from(runtime.key_value_store()))
             .await
@@ -65,7 +65,7 @@ pub struct CounterContract {
 
 事务执行成功后，合约需要对事务执行结果最终检查确定，然后将执行状态持久化存储。这一步骤将通过`Contract::store`实现，大体上我们可以认为这是执行事务的析构函数。下面的实现将事务执行的最终状态持久化存储：
 
-```rust,ignore
+```terminal
     async fn store(mut self) {
         self.state.save().await.expect("Failed to save state");
     }
@@ -82,7 +82,7 @@ pub struct CounterContract {
 
 在我们的示例中，我们希望应用可以通过初始化参数指定任何数值作为计数器的初值：
 
-```rust,ignore
+```terminal
     async fn instantiate(&mut self, value: u64) {
         self.state.value.set(value);
     }
@@ -94,7 +94,7 @@ pub struct CounterContract {
 
 我们需要使用方法`Contract::execute_operation`来创建一个新的操作。在计数器示例中，该方法将会收到一个`u64`类型的数值，用来作为计数值的增量。
 
-```rust,ignore
+```terminal
     async fn execute_operation(&mut self, operation: u64) {
         let current = self.value.get();
         self.value.set(current + operation);
@@ -104,7 +104,7 @@ pub struct CounterContract {
 ## [声明ABI](zh_CN/developers/sdk/contract.md#实声明ABI)
 最后，我们通过如下的代码将上面实现的`Contract` trait与应用程序的ABI相关联：
 
-```rust,ignore
+```terminal
 impl WithContractAbi for CounterContract {
     type Abi = counter::CounterAbi;
 }

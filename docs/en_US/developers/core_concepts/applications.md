@@ -34,7 +34,7 @@ flexible:
 Importantly, the application deployment lifecycle is abstracted from the user,
 and an application can be published with a single command:
 
-```bash
+```terminal
 linera publish-and-create <contract-path> <service-path> <init-args>
 ```
 
@@ -73,7 +73,7 @@ a response value back to the caller.
 Taking the "fungible token" application as an example, an operation for a user
 to transfer funds to another user would look like this:
 
-```rust,ignore
+```terminal
 # extern crate serde;
 # use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
@@ -98,7 +98,7 @@ chain (or by a previous block of the same chain).
 In our "fungible token" application, a message to credit an account would look
 like this:
 
-```rust,ignore
+```terminal
 # extern crate serde;
 # use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
@@ -199,7 +199,7 @@ In that case, trying to execute an application-specific operation would fail,
 because the application is not registered on his chain. He needs to request it
 from Alice first:
 
-```bash
+```terminal
 linera request-application <application-id> --target-chain-id <alices-chain-id>
 ```
 

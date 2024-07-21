@@ -8,7 +8,7 @@ Views有点儿像[ORM](https://en.wikipedia.org/wiki/Object–relational_mapping
 
 原生的Rust中，我们用如下结构描述计数器：
 
-```rust
+```terminal
 // do not use this
 struct Counter {
   value: u64
@@ -17,7 +17,7 @@ struct Counter {
 
 然而，为了持久化存储数据，我们需要将`src/state.rs`中的所有`应用`状态用下面的View替换：
 
-```rust
+```terminal
 /// The application state.
 #[derive(RootView, async_graphql::SimpleObject)]
 #[view(context = "ViewStorageContext")]

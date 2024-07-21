@@ -18,7 +18,7 @@ As an example, a contract that executes a cross-application call with
 `Operation::StartSession` may require the same caller to perform another
 cross-application call with `Operation::EndSession` before the transaction ends.
 
-```rust,ignore
+```terminal
 pub struct MyContract {
     state: MyState;
     runtime: ContractRuntime<Self>;

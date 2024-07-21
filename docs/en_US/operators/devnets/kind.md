@@ -45,7 +45,7 @@ For MacOS support see the installation section on
 
 This manual was tested with the following Rust toolchain:
 
-```text
+```terminal
 [toolchain]
 channel = "1.77.2"
 components = [ "clippy", "rustfmt", "rust-src" ]
@@ -69,7 +69,7 @@ To run `kind` locally, you also need the following dependencies:
 To install the `Linera` toolchain, download the Linera source from
 [GitHub](https://github.com/linera-io/linera-protocol)):
 
-```bash
+```terminal
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
 git checkout -t origin/devnet_2024_05_07  # Current release branch
@@ -77,7 +77,7 @@ git checkout -t origin/devnet_2024_05_07  # Current release branch
 
 and to install the Linera toolchain:
 
-```bash
+```terminal
 cargo install --locked --path linera-service --features kubernetes
 ```
 
@@ -86,7 +86,7 @@ cargo install --locked --path linera-service --features kubernetes
 To run a local devnet with `kind`, navigate to the root of the `linera-protocol`
 repository and run:
 
-```bash
+```terminal
 linera net up --kubernetes
 ```
 
@@ -94,7 +94,7 @@ This will take some time as Docker images are built from the Linera source. When
 the cluster is ready, some text is written to the process output containing the
 exports required to configure your wallet for the devnet - something like:
 
-```bash
+```terminal
 export LINERA_WALLET="/tmp/.tmpIOelqk/wallet_0.json"
 export LINERA_STORAGE="rocksdb:/tmp/.tmpIOelqk/client_0.db"
 ```
@@ -102,7 +102,7 @@ export LINERA_STORAGE="rocksdb:/tmp/.tmpIOelqk/client_0.db"
 Exporting these variables in a new terminal will enable you to interact with the
 devnet:
 
-```bash
+```terminal
 $ linera sync-balance
 2024-05-21T22:30:12.061199Z  INFO linera: Synchronizing chain information and querying the local balance
 2024-05-21T22:30:12.061218Z  WARN linera: This command is deprecated. Use `linera sync && linera query-balance` instead.

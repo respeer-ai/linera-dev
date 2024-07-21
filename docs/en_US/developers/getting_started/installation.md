@@ -49,7 +49,7 @@ protocol itself, see the installation section on
 
 This manual was tested with the following Rust toolchain:
 
-```text
+```terminal
 [toolchain]
 channel = "1.77.2"
 components = [ "clippy", "rustfmt", "rust-src" ]
@@ -61,13 +61,13 @@ profile = "minimal"
 
 You may install the Linera binaries with
 
-```bash
+```terminal
 cargo install --locked linera-service@0.11.3
 ```
 
 and use `linera-sdk` as a library for Linera Wasm applications:
 
-```bash
+```terminal
 cargo add linera-sdk@0.11.3
 ```
 
@@ -78,7 +78,7 @@ current Devnet of Linera and may change frequently.
 
 Download the source from [GitHub](https://github.com/linera-io/linera-protocol):
 
-```bash
+```terminal
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
 git checkout -t origin/devnet_2024_05_07  # Current release branch
@@ -86,7 +86,7 @@ git checkout -t origin/devnet_2024_05_07  # Current release branch
 
 To install the Linera toolchain locally from source, you may run:
 
-```bash
+```terminal
 cargo install --locked --path linera-service
 ```
 
@@ -96,7 +96,7 @@ compiled in debug mode, e.g. using `export PATH="$PWD/target/debug:$PATH"`.
 This manual was tested against the following commit of the
 [repository](https://github.com/linera-io/linera-protocol):
 
-```text
+```terminal
 2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
 ```
 

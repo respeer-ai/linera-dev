@@ -2,7 +2,7 @@
 
 使用`linera project new`命令创建Linera项目，该命令应该在`linera-protocol`目录外执行，执行`linera project new`将会帮助开发者建立应用脚手架和必要文件：
 
-```bash
+```terminal
 linera project new my-counter
 ```
 

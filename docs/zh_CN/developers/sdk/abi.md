@@ -10,13 +10,13 @@ ABI的参考文档可以查看[crate文档](https://docs.rs/linera-base/latest/l
 
 应用中提供给外部调用的接口(通常定义在`src/lib.rs`文件中)必须定义一个实现了`Abi` trait的公开空结构。
 
-```rust
+```terminal
 struct CounterAbi;
 ```
 
 `Abi` trait聚合了`ContractAbi`和`ServiceAbi` traits，其中包含应用导出的所有数据类型和接口。
 
-```rust
+```terminal
 /// 包含Linera应用导出的所有数据类型和接口的trait(包含合约和服务)
 pub trait Abi: ContractAbi + ServiceAbi {}
 ```
@@ -27,7 +27,7 @@ pub trait Abi: ContractAbi + ServiceAbi {}
 
 `ContractAbi` trait定义了应用程序的合约中使用的数据类型，每种类型都表示合约的一部分特定行为：
 
-```rust,ignore
+```terminal
 /// A trait that includes all the types exported by a Linera application contract.
 pub trait ContractAbi {
     /// The type of operation executed by the application.
@@ -46,7 +46,7 @@ pub trait ContractAbi {
 
 在我们的例子中，我们将`Operation`成员修改为`u64`类型，如下：
 
-```rust
+```terminal
 extern crate linera_base;
 use linera_base::abi::ContractAbi;
 struct CounterAbi;
@@ -59,7 +59,7 @@ impl ContractAbi for CounterAbi {
 ## [服务ABI](zh_CN/developers/sdk/abi.md#服务ABI)
 概念上，`ServiceAbi`与`ContractAbi`雷同，所不同者，`ServiceAbi`提供的是应用程序的服务部分数据类型和接口。
 
-```rust,ignore
+```terminal
 /// A trait that includes all the types exported by a Linera application service.
 pub trait ServiceAbi {
     /// The type of a query receivable by the application's service.
@@ -72,7 +72,7 @@ pub trait ServiceAbi {
 
 在计数器示例中，我们将会使用GraphQL请求应用程序，因此`ServiceAbi`需要定义如下：
 
-```rust
+```terminal
 extern crate linera_base;
 extern crate async_graphql;
 use linera_base::abi::ServiceAbi;

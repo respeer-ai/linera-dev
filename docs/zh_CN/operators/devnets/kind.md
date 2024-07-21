@@ -35,7 +35,7 @@ MacOS系统参见[GitHub上的安装部分](https://github.com/linera-io/linera-
 
 本手册基于下列工具链测试：
 
-```text
+```terminal
 [toolchain]
 channel = "1.77.2"
 components = [ "clippy", "rustfmt", "rust-src" ]
@@ -58,7 +58,7 @@ profile = "minimal"
 
 安装Linera工具链需要先下载源码：
 
-```bash
+```terminal
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
 git checkout -t origin/devnet_2024_05_07  # Current release branch
@@ -66,7 +66,7 @@ git checkout -t origin/devnet_2024_05_07  # Current release branch
 
 然后编译安装：
 
-```bash
+```terminal
 cargo install --locked --path linera-service --features kubernetes
 ```
 
@@ -74,20 +74,20 @@ cargo install --locked --path linera-service --features kubernetes
 
 使用`kind`运行本地开发网络需要进入`linera-protocol`仓库根目录，并执行：
 
-```bash
+```terminal
 linera net up --kubernetes
 ```
 
 从源码构建镜像需要一些时间。部署完毕后，终端将会输出包含开发网络钱包设置的环境变量：
 
-```bash
+```terminal
 export LINERA_WALLET="/tmp/.tmpIOelqk/wallet_0.json"
 export LINERA_STORAGE="rocksdb:/tmp/.tmpIOelqk/client_0.db"
 ```
 
 这些变量用于在新的终端中与上面部署的开发网络交互：
 
-```bash
+```terminal
 $ linera sync-balance
 2024-05-21T22:30:12.061199Z  INFO linera: Synchronizing chain information and querying the local balance
 2024-05-21T22:30:12.061218Z  WARN linera: This command is deprecated. Use `linera sync && linera query-balance` instead.

@@ -12,7 +12,7 @@
 2. 服务字节码路径
 3. 初始化参数的JSON文本
 
-```bash
+```terminal
 linera publish-and-create \
   target/wasm32-unknown-unknown/release/my-counter_{contract,service}.wasm \
   --json-argument "42"
@@ -21,7 +21,7 @@ linera publish-and-create \
 ## [开发网](zh_CN/developers/sdk/deploy.md#开发网)
 如果想在开发网上创建微链，可以使用如下的命令配置钱包：
 
-```bash
+```terminal
 linera wallet init --with-new-chain --faucet https://faucet.devnet.linera.net
 ```
 
@@ -31,7 +31,7 @@ linera wallet init --with-new-chain --faucet https://faucet.devnet.linera.net
 2. 服务字节码路径
 3. 初始化参数的JSON文本
 
-```bash
+```terminal
 linera publish-and-create \
   target/wasm32-unknown-unknown/release/my-counter_{contract,service}.wasm \
   --json-argument "42"

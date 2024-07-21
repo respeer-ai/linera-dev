@@ -43,7 +43,7 @@ notification system.
 Validators are configured using a TOML file. You can use the following template
 to set up you own validator configuration:
 
-```toml
+```terminal
 server_config_path = "server.json"
 host = "<your-host>" # e.g. my-subdomain.my-domain.net
 port = 443
@@ -74,7 +74,7 @@ bucket managed by the Linera Protocol core team.
 
 An example can be found here:
 
-```bash
+```terminal
 wget "https://storage.cloud.google.com/linera-io-dev-public/devnet-2024-05-07/genesis.json"
 ```
 
@@ -87,7 +87,7 @@ is available, the validator private keys can be generated.
 
 To generate the private keys, the `linera-server` binary is used:
 
-```bash
+```terminal
 linera-server generate --validators /path/to/validator/configuration.toml
 ```
 
@@ -97,7 +97,7 @@ a validator to operate, including a cryptographic keypair.
 The public key will be printed after the command has finished executing, for
 example:
 
-```bash
+```terminal
 $ linera-server generate --validators /path/to/validator/configuration.toml
 2024-07-01T16:51:32.881255Z  INFO linera_version::version_info: Linera protocol: v0.12.0
 2024-07-01T16:51:32.881273Z  INFO linera_version::version_info: RPC API hash: p//G+L8e12ZRwUdWoGHWYvWA/03kO0n6gtgKS4D4Q0o
@@ -120,7 +120,7 @@ next epoch.
 To build the Linera Docker image, run the following command from the root of the
 `linera-protocol` repository:
 
-```bash
+```terminal
 $ docker build -f docker/Dockerfile . -t linera
 ```
 
@@ -132,7 +132,7 @@ Now that the genesis configuration is available at `docker/genesis.json` and the
 server configuration is available at `docker/server.json`, the validator can be
 started by running from inside the `docker` directory:
 
-```bash
+```terminal
 cd docker && docker compose up -d
 ```
 

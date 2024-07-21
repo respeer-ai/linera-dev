@@ -8,7 +8,7 @@
 
 将`linera`运行在`service`模式，即可与节点服务交互：
 
-```bash
+```terminal
 linera service
 ```
 
