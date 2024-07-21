@@ -78,6 +78,12 @@ cargo install --locked --path linera-service --features kubernetes
 linera net up --kubernetes
 ```
 
+> 译者注：如果使用较新的helmfile（例如v1的rc版本），或许我们会遇到不能解析文件的错误，可以参考[这里](https://github.com/helmfile/helmfile/discussions/1497)将helmfile.yaml重命名为helmfile.yaml.gotmpl解决。
+
+```bash
+mv kubernetes/linera-validator/helmfile.gotmpl kubernetes/linera-validator/helmfile.yaml.gotmpl
+```
+
 从源码构建镜像需要一些时间。部署完毕后，终端将会输出包含开发网络钱包设置的环境变量：
 
 ```terminal

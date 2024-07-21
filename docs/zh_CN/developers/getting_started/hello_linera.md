@@ -7,15 +7,15 @@
 
 ## [使用Devnet](zh_CN/developers/getting_started/hello_linera.md#使用Devnet)
 
-Linera Devnet是部署给开发者使用，开发者需要知道Devnet是不稳定的，并且随时可能使用新的创世设置重启。
+Linera Devnet是部署给开发者使用，开发者需要知道Devnet是不稳定的，随时可能使用新的创世设置重启。
 
-为了能够与Devnet交互，我们需要一些Token。通过如下命令初始化并设置钱包后，我们可以从水龙头服务领取一些测试Token：
+为了能够与Devnet交互，我们需要一些Token。执行以下命令初始化并设置钱包后，我们可以从水龙头服务领取一些测试Token：
 
 ```terminal
 linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.linera.net
 ```
 
-上面的命令将在Devnet上创建一条微链，该微链持有一定数量的测试token，并且自动被加入到新创建的钱包。
+上述命令将在Devnet上创建一条微链，该微链持有一定数量的测试Token，并且自动被加入到新创建的钱包。
 
 > 确定你使用的Linera工具链[与当前的Devnet兼容](zh_CN/developers/getting_started/installation.md#从cratesio安装)。
 
@@ -23,7 +23,7 @@ linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.li
 
 你也可以在本地环境启动本地测试网络。测试网络包含一些[验证器](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/validators)，每个验证器都包含一个入口代理(即负载均衡器)(译者注：原文为ingress，等同于微服务集群中的网关代理，用于将请求根据预设规则路由到对应的服务)和一些工作节点(即物理分片)。
 
-通过执行以下命令启动本地测试网：
+执行以下命令启动本地测试网：
 
 ```terminal
 linera net up
@@ -61,7 +61,7 @@ linera query-balance
 
 ## [构建示例应用程序](zh_CN/developers/getting_started/hello_linera.md#构建示例应用程序)
 
-运行在Linera网络上的应用是[Wasm](https://webassembly.org/)字节码。每个验证器和客户端上都会运行一个内置的Wasm虚拟机(VM)，用来执行字节码。
+运行在Linera网络上的应用是[Wasm](https://webassembly.org/)字节码。每个验证器和客户端上都会运行一个内置的Wasm虚拟机(VM)实例，用来执行字节码。
 
 下面我们将构建`examples/`子目录中的`counter`应用：
 
@@ -86,7 +86,8 @@ linera publish-and-create \
 恭喜你！到此你已经成功发布了第一个Linera应用！
 
 ## [查询应用](zh_CN/developers/getting_started/hello_linera.md#查询应用)
-现在我们可以查询上面部署的应用，获取当前的计数值。查询应用需要使用客户端的[*服务模式*](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)运行一个Linera节点服务，我们将通过该节点服务提供的一系列APIs与应用交互。
+
+现在我们可以查询上面部署的应用，获取当前计数值。查询应用需要使用客户端的[*服务模式*](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)运行一个Linera节点服务，我们将通过节点服务提供的一系列APIs与应用交互。
 
 ```terminal
 linera service

@@ -1,6 +1,6 @@
 # 创建应用状态
 
-`src/state.rs`文件中包含定义应用状态的`struct`。
+`src/state.rs`文件中包含定义应用状态的`struct`，交易和事务执行时将会修改应用状态，并持久化存储。
 
 我们使用`u64`来表示应用中的计数值，并使用Linear的[View](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)模型持久化存储计数值。
 
@@ -26,6 +26,7 @@ pub struct Counter {
 }
 ```
 
+应用中其他需要持久化存储的状态也需要使用对应的View类型修饰。
 
 `RegisterView<T>`支持修改一个`T`类型的数值。不同应用场景我们将会使用不同的视图类型，但是主要的公共数据类型都已经实现：
 

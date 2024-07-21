@@ -6,7 +6,7 @@
 
 Linera工具链由以下两个crate构成（译者注：crate即为rust发布包）：
 
-- `linera-sdk`：Linera Rust应用开发的基础库，其中包含Linera基础类型、函数定义等。
+- `linera-sdk`：开发Linera应用的Rust基础库，其中包含Linera基础类型、函数定义等。
 
 - `linera-service`：包含下述可执行文件：
   - `linera` -- Linera的基础客户端工具，用于操作钱包，
@@ -32,7 +32,7 @@ Linera工具链由以下两个crate构成（译者注：crate即为rust发布包
   - 如果PATH环境变量不包含`~/.local`, 通过`export PATH="$PATH:$HOME/.local/bin"`添加
 - 在特定的Linux发行版上，你可能需要安装诸如`g++`，`libclang-dev`和`libssl-dev`等开发工具和库
 
-MacOS支持，以及测试Linera协议的一些附加需求可以参见[GitHub安装文档](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)的安装章节。
+MacOS支持，以及测试Linera协议的一些附加需求可以参见[GitHub安装文档](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)的相应章节。
 
 本手册测试使用的Rust工具链配置如下：
 
@@ -76,9 +76,9 @@ git checkout -t origin/devnet_2024_05_07  # 当前发布分支
 cargo install --locked --path linera-service
 ```
 
-开发者和调试人员可以通过编译调试版本的可执行文件对Linera进行调试，例如，通过`export PATH="$PWD/target/debug:$PATH"`将调试版本可执行文件添加到PATH中。
+开发者和调试人员可以使用带有调试信息的可执行文件调试Linera，例如，通过`export PATH="$PWD/target/debug:$PATH"`将调试版本可执行文件添加到PATH中。
 
-本文档的编写使用[仓库](https://github.com/linera-io/linera-protocol)的如下提交记录进行测试：
+本文档在[Linera代码仓库](https://github.com/linera-io/linera-protocol)的如下提交记录测试通过：
 
 ```terminal
 2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
@@ -90,4 +90,4 @@ cargo install --locked --path linera-service
 
 ## [寻求帮助](zh_CN/developers/getting_started/installation.md#寻求帮助)
 
-如果安装失败，联系我们的团队(例如通过[Discord](https://discord.gg/linera))协助调试，或者在Github[创建一个issue](https://github.com/linera-io/linera-protocol/issues/new)。
+如果安装过程中遇到障碍，可以联系我们的团队(例如通过[Discord](https://discord.gg/linera))协助调试，或者在Github[创建一个issue](https://github.com/linera-io/linera-protocol/issues/new)。
