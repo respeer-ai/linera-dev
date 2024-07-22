@@ -90,7 +90,7 @@ meant to scale out in production.
 <!--
 ## Configuring Networks, Workers, and Proxies
 
-In [a previous section](../getting_started/hello_linera.md), we used the
+In [a previous section](en_US/developers/core_concepts/getting_started/hello_linera.md), we used the
 `linera net up` command to start a local network. This should be sufficient for
 most use cases when you're running a local network.
 

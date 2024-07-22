@@ -5,7 +5,7 @@ The `struct` which defines your application's state can be found in
 between transactions.
 
 To represent our counter, we're going to need a single `u64`. To persist the
-counter we'll be using Linera's [view](../advanced_topics/views.md) paradigm.
+counter we'll be using Linera's [view](en_US/developers/advanced_topics/views.md) paradigm.
 
 Views are a little like an
 [ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping), however

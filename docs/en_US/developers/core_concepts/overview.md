@@ -118,7 +118,7 @@ frameworks (React/GraphQL). Furthermore, wallets will be able to leverage the
 full node as well for security purposes, including to display meaningful
 confirmation messages to users.
 
-## [What is the current state of the development of Linera?](en_US/developers/core_concepts/overview.md#What-is-the-current-state-of-the-development-of Linera)
+## [What is the current state of the development of Linera?](en_US/developers/core_concepts/overview.md#What-is-the-current-state-of-the-development-of-Linera)
 
 The
 [reference open-source implementation](https://github.com/linera-io/linera-protocol)

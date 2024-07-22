@@ -15,7 +15,7 @@ Applications should use these methods only in ways that make it very likely that
 all validators see the same result, otherwise any block proposals running that
 application's code are likely to fail, hurting the liveness of the users'
 chains. (Also, oracle methods are disallowed completely in fast rounds; see
-[Chain Ownership Semantics](../core_concepts/microchains.md#chain-ownership-semantics).)
+[Chain Ownership Semantics](en_US/developers/core_concepts/microchains.md#Chain-Ownership-Semantics).)
 
 The Linera SDK uses `http_post` to implement the `EthereumClient` type, which
 provides functions to query an Ethereum node:

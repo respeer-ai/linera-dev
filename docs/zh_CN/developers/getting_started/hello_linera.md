@@ -3,7 +3,7 @@
 
 本节我们将介绍Linera Devnet交互方式和运行本地测试网的步骤，然后从0开始编译并部署第一个Linera应用。
 
-本小节结束后，你将能够在Linera Devnet和你自己的本地测试网上创建一条[微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/microchains)，并运行一个可以使用GraphQL访问的应用。
+本小节结束后，你将能够在Linera Devnet和你自己的本地测试网上创建一条[微链](zh_CN/developers/core_concepts/microchains.md)，并运行一个可以使用GraphQL访问的应用。
 
 ## [使用Devnet](zh_CN/developers/getting_started/hello_linera.md#使用Devnet)
 
@@ -17,11 +17,11 @@ linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.li
 
 上述命令将在Devnet上创建一条微链，该微链持有一定数量的测试Token，并且自动被加入到新创建的钱包。
 
-> 确定你使用的Linera工具链[与当前的Devnet兼容](https://linera-dev.respeer.ai/#/zh_CN/getting_started/installation?id=installing-from-cratesio)。
+> 确定你使用的Linera工具链[与当前的Devnet兼容](zh_CN/developers/getting_started/installation.md#从cratesio安装)。
 
 ## [启动本地测试网](zh_CN/developers/getting_started/hello_linera.md#启动本地测试网)
 
-你也可以在本地环境启动本地测试网络。测试网络包含一些[验证器](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/validators)，每个验证器都包含一个入口代理(即负载均衡器)(译者注：原文为ingress，等同于微服务集群中的网关代理，用于将请求根据预设规则路由到对应的服务)和一些工作节点(即物理分片)。
+你也可以在本地环境启动本地测试网络。测试网络包含一些[验证器](zh_CN/developers/advanced_topics/validators.md)，每个验证器都包含一个入口代理(即负载均衡器)(译者注：原文为ingress，等同于微服务集群中的网关代理，用于将请求根据预设规则路由到对应的服务)和一些工作节点(即物理分片)。
 
 执行以下命令启动本地测试网：
 
@@ -50,7 +50,7 @@ export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/
 
 `linera`客户端是与Linera网络和应用交互的基本方式。
 
-你可以通过如下命令同步[默认微链](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/wallets)并显示微链余额来确认网络是否正常工作：
+你可以通过如下命令同步[默认微链](zh_CN/developers/core_concepts/wallets.md)并显示微链余额来确认网络是否正常工作：
 
 ```bash
 linera sync
@@ -87,7 +87,7 @@ linera publish-and-create \
 
 ## [查询应用](zh_CN/developers/getting_started/hello_linera.md#查询应用)
 
-现在我们可以查询上面部署的应用，获取当前计数值。查询应用需要使用客户端的[*服务模式*](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service)运行一个Linera节点服务，我们将通过节点服务提供的一系列APIs与应用交互。
+现在我们可以查询上面部署的应用，获取当前计数值。查询应用需要使用客户端的[_服务_ 模式](zh_CN/developers/core_concepts/node_service.md)运行一个Linera节点服务，我们将通过节点服务提供的一系列APIs与应用交互。
 
 ```bash
 linera service

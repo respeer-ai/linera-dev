@@ -44,7 +44,7 @@ targets = [ "wasm32-unknown-unknown" ]
 profile = "minimal"
 ```
 
-## [从crates.io安装](zh_CN/developers/getting_started/installation.md#从crates.io安装)
+## [从crates.io安装](zh_CN/developers/getting_started/installation.md#从cratesio安装)
 
 你可以通过如下命令安装Linera工具链
 

@@ -4,7 +4,7 @@ This section is about interacting with the Devnet, running a local development
 network, then compiling and deploying your first application from scratch.
 
 By the end of this section, you'll have a
-[microchain](../core_concepts/microchains.md) on the Devnet and/or on your local
+[microchain](en_US/developers/core_concepts/microchains.md) on the Devnet and/or on your local
 network, and a working application that can be queried using GraphQL.
 
 ## [Using the Devnet](en_US/developers/getting_started/hello_linera.md#using-the-devnet)
@@ -25,12 +25,12 @@ This creates a new microchain on Devnet with some initial test tokens, and the
 chain is automatically added to the newly instantiated wallet.
 
 > Make sure to use a Linera toolchain
-> [compatible with the current Devnet](installation.md#installing-from-cratesio).
+> [compatible with the current Devnet](en_US/developers/getting_started/installation.md#Installing-from-cratesio).
 
 ## [Starting a Local Test Network](en_US/developers/getting_started/hello_linera.md#Starting-a-Local-Test-Network)
 
 Another option is to start your own local development network. A development
-network consists of a number of [validators](../advanced_topics/validators.md),
+network consists of a number of [validators](en_US/developers/advanced_topics/validators.md),
 each of which consist of an ingress proxy (aka. a "load balancer") and a number
 of workers (aka. "physical shards").
 
@@ -70,7 +70,7 @@ The main way of interacting with the network and deploying applications is using
 the `linera` client.
 
 To check that the network is working, you can synchronize your
-[default chain](../core_concepts/wallets.md) with the rest of the network and
+[default chain](en_US/developers/core_concepts/wallets.md) with the rest of the network and
 display the chain balance as follows:
 
 ```bash
@@ -113,7 +113,7 @@ Congratulations! You've published your first application on Linera!
 
 Now let's query your application to get the current counter value. To do that,
 we need to use the client running in
-[_service_ mode](../core_concepts/node_service.md). This will expose a bunch of
+[_service_ mode](en_US/developers/core_concepts/node_service.md). This will expose a bunch of
 APIs locally which we can use to interact with applications on the network.
 
 ```bash
@@ -124,7 +124,7 @@ linera service
 
 Navigate to `http://localhost:8080` in your browser to access the GraphiQL, the
 [GraphQL](https://graphql.org) IDE. We'll look at this in more detail in a
-[later section](../core_concepts/node_service.md#graphiql-ide); for now, list
+[later section](en_US/developers/core_concepts/node_service.md#GraphiQL-IDE); for now, list
 the applications deployed on your default chain e476… by running:
 
 ```graphql

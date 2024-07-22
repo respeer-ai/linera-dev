@@ -2,7 +2,7 @@
 
 `src/state.rs`文件中包含定义应用状态的`struct`，交易和事务执行时将会修改应用状态，并持久化存储。
 
-我们使用`u64`来表示应用中的计数值，并使用Linear的[View](https://linera-dev.respeer.ai/#/zh_CN/advanced_topics/views)模型持久化存储计数值。
+我们使用`u64`来表示应用中的计数值，并使用Linear的[View](zh_CN/developers/advanced_topics/views.md)模型持久化存储计数值。
 
 Views有点儿像[ORM](https://en.wikipedia.org/wiki/Object–relational_mapping)，与ORM通常用于将数据结构映射到像Postgres这样的关系数据库不完全一样的是，Views将数据结构映射到像[RocksDB](https://rocksdb.org/)一样的KV存储。
 

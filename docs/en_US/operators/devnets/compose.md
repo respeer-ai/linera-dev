@@ -29,7 +29,7 @@ the Docker docs.
 ### Installing the Linera Toolchain
 
 To install the Linera Toolchain refer to the
-[installation section](../../developers/getting_started/installation.md#installing-from-github).
+[installation section](en_US/developers/getting_started/installation.md#Installing-from-GitHub).
 
 You want to install the toolchain from GitHub, as you'll be using the repository
 to run the Docker Compose validator service.

@@ -102,7 +102,7 @@ impl Service for MyService {
 
 ### 硬件加速
 
-虽然服务支持SIMD指令，但当前并不支持通用GPU硬件加速。因此，较大的模型执行本地推理的性能会有所降低。
+虽然服务支持SIMD指令，但[当前并不支持](https://github.com/linera-io/linera-protocol/issues/1931)通用GPU硬件加速。因此，较大的模型执行本地推理的性能会有所降低。
 
 ### 链上模型
 

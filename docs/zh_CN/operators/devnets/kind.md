@@ -56,7 +56,7 @@ profile = "minimal"
 
 ### 安装Linera工具链
 
-安装Linera工具链需要先下载源码：
+安装Linera工具链需要先从[GitHub](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)下载源码：
 
 ```bash
 git clone https://github.com/linera-io/linera-protocol.git
@@ -69,7 +69,12 @@ git checkout -t origin/devnet_2024_05_07  # Current release branch
 ```bash
 cargo install --locked --path linera-service --features kubernetes
 ```
-
+成功构建之后需要添加环境变量才可以生效使用
+```bash
+export PATH="$PATH:/root/.cargo/bin"
+source ~/.bashrc
+linera --version
+```
 ## 使用`kind`运行
 
 使用`kind`运行本地开发网络需要进入`linera-protocol`仓库根目录，并执行：
