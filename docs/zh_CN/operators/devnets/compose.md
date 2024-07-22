@@ -4,7 +4,7 @@
 
 Docker Compose是一个用于编排和管理多容器Docker应用的工具。开发者可以在一个YAML文件(docker-compose.yaml)中描述应用使用的服务、网络和存储卷。在Docker Compose的帮助下，开发者可以通过像`docker-compose up`和`docker-compose down`这样的简单命令统一启动、停止和管理应用的所有容器。
 
-如果开发者需要更加完整的设置，请考虑使用下一章介绍的[Kind](zh_CN/operators/devnets/kind.md)。
+如果开发者需要更加完整的设置，请考虑使用[下一章](zh_CN/operators/devnets/kind.md)介绍的Kind。
 
 ## 安装
 

@@ -16,7 +16,7 @@ The documentation is split in two parts:
 > **NEW: Publish and test your Web3 application on the Linera Devnet!**
 >
 > Install
-> [the Linera CLI tool](en_US/developers/getting_started/installation.md#installing-from-cratesio)
+> [the Linera CLI tool](en_US/developers/getting_started/installation.md#Installing-from-cratesio)
 > then follow the instructions on
 > [this page](en_US/developers/getting_started/hello_linera.md#using-the-devnet) to
 > claim a microchain and publish your first application on the current Devnet.

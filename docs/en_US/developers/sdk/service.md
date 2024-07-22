@@ -27,8 +27,7 @@ pub trait Service: WithServiceAbi + ServiceAbi + Sized {
 ```
 
 The full service trait definition can be found
-[here](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
-/linera-sdk/src/lib.rs).
+[here](https://github.com/linera-io/linera-protocol/blob/2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a/linera-sdk/src/lib.rs).
 
 Let's implement `Service` for our counter application.
 

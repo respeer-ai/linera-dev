@@ -7,7 +7,7 @@
 - `query_service` 允许合约调用应用程序自己的服务代码。服务可以访问一些链下信息，因此不能保证每次调用时都返回相同的结果。
 - `http_post` 发出一个 HTTP POST 请求并返回响应。
 
-应用程序应仅以非常有可能让所有验证者看到相同结果的方式使用这些方法，否则运行该应用程序代码的任何区块提案都可能失败，损害用户链的活跃性。（此外，在快速轮次中完全禁止 Oracle 方法；请参阅[链所有权语义](../core_concepts/microchains.md#chain-ownership-semantics)。）
+应用程序应仅以非常有可能让所有验证者看到相同结果的方式使用这些方法，否则运行该应用程序代码的任何区块提案都可能失败，损害用户链的活跃性。（此外，在快速轮次中完全禁止 Oracle 方法；请参阅[链所有权语义]zh_CN/developers/core_concepts/microchains.md#链的所有权语义)。）
 
 Linera SDK 使用 `http_post` 实现了 `EthereumClient` 类型，提供以下函数来查询以太坊节点：
 

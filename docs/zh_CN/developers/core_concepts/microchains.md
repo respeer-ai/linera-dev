@@ -1,6 +1,6 @@
 # 微链
 
-本节将介绍Linera协议的基础构建单元，微链。微链的正式阐述参见[白皮书](https://static1.squarespace.com/static/62d6e9b8bf6051136f934527/t/64ddbbe4cb495e1b1b37f678/1692253157602/Linera_whitepaper_v2.pdf)。
+本节将介绍Linera协议的基础构建单元，微链。微链的正式阐述参见[白皮书](https://linera.io/whitepaper)。
 
 ## [背景](zh_CN/developers/core_concepts/microchains.md#背景)
 

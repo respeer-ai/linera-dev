@@ -57,7 +57,7 @@ targets = [ "wasm32-unknown-unknown" ]
 profile = "minimal"
 ```
 
-## [Installing from crates.io](en_US/developers/getting_started/installation.md#Installing-from-crates-io)
+## [Installing from crates.io](en_US/developers/getting_started/installation.md#Installing-from-cratesio)
 
 You may install the Linera binaries with
 

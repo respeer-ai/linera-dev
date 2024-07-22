@@ -22,7 +22,7 @@ GraphQL广泛应用于应用开发领域，例如当我们需要从前端请求�
 
 更多GraphQL资料参见[官方文档](https://graphql.org/learn/)。
 
-## GraphiQL IDE
+## [GraphiQL IDE](zh_CN/developers/core_concepts/node_service.md#GraphiQL-IDE)
 
 为了方便开发者，节点服务集成了一个GraphQL IDE(GraphiQL)。在运行节点服务后，开发者通过浏览器访问`http://localhost:8080`即可使用GraphiQL。
 
