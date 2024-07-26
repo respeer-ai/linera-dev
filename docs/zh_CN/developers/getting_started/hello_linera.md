@@ -93,7 +93,7 @@ linera publish-and-create \
 linera service
 ```
 
-打开你的浏览器，在地址栏输入`http://localhost:8080`访问上面运行的节点服务器内置的GraphiQL用户界面([GraphQL](https://graphql.org/) IDE)。[后面的章节](https://linera-dev.respeer.ai/#/zh_CN/core_concepts/node_service?id=graphiql-ide)我们会提供更多GraphiQL的使用细节，现在，我们通过下面的命令获得默认微链(e476…)上的应用列表：
+打开你的浏览器，在地址栏输入`http://localhost:8080`访问上面运行的节点服务器内置的GraphiQL用户界面([GraphQL](https://graphql.org/) IDE)。[后面的章节](zh_CN/developers/core_concepts/node_service.md#GraphiQL-IDE)我们会提供更多GraphiQL的使用细节，现在，我们通过下面的命令获得默认微链(e476…)上的应用列表：
 
 ```graphql
 query {
