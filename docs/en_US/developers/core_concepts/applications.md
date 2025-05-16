@@ -4,8 +4,9 @@ The programming model of Linera is designed so that developers can take
 advantage of microchains to scale their applications.
 
 Linera uses the [WebAssembly (Wasm)](https://webassembly.org) Virtual Machine to
-execute user applications. Currently, the [Linera SDK](en_US/developers/sdk.md) is focused on
-the [Rust](https://www.rust-lang.org/) programming language.
+execute user applications. Currently, the [Linera SDK](../../../zh_CN/developers/backend.md) is focused
+on the [Rust](https://www.rust-lang.org/) programming language for the backend
+and [TypeScript](https://www.typescriptlang.org/) for the frontend.
 
 Linera applications are structured using the familiar notion of **Rust crate**:
 the external interfaces of an application (including instantiation parameters,
@@ -13,7 +14,7 @@ operations and messages) generally go into the library part of its crate, while
 the core of each application is compiled into binary files for the Wasm
 architecture.
 
-## The Application Deployment Lifecycle
+## The Application deployment lifecycle
 
 Linera Applications are designed to be powerful yet re-usable. For this reason
 there is a distinction between the bytecode and an application instance on the
@@ -40,7 +41,7 @@ linera publish-and-create <contract-path> <service-path> <init-args>
 
 This will publish the bytecode as well as instantiate the application for you.
 
-## Anatomy of an Application
+## Anatomy of an application
 
 An **application** is broken into two major components, the _contract_ and the
 _service_.
@@ -48,13 +49,13 @@ _service_.
 The **contract** is gas-metered, and is the part of the application which
 executes operations and messages, make cross-application calls and modifies the
 application's state. The details are covered in more depth in the
-[SDK docs](en_US/developers/sdk.md).
+[application backend guide](../../../zh_CN/developers/backend.md).
 
 The **service** is non-metered and read-only. It is used primarily to query the
 state of an application and populate the presentation layer (think front-end)
 with the data required for a user interface.
 
-## Operations and Messages
+## Operations and messages
 
 > For this section we'll be using a simplified version of the example
 > application called "fungible" where users can send tokens to each other.
@@ -75,7 +76,9 @@ to transfer funds to another user would look like this:
 
 ```rust
 # extern crate serde;
+# extern crate linera_sdk;
 # use serde::{Deserialize, Serialize};
+# use linera_sdk::linera_base_types::*;
 #[derive(Debug, Deserialize, Serialize)]
 pub enum Operation {
     /// A transfer from a (locally owned) account to a (possibly remote) account.
@@ -93,14 +96,18 @@ can be sent from one chain to another, always within the same application. Block
 proposers also actively include messages in their block proposal, but unlike
 with operations, they are only allowed to include them in the right order
 (possibly skipping some), and only if they were actually created by another
-chain (or by a previous block of the same chain).
+chain (or by a previous block of the same chain). Messages that originate from
+the same transaction are included as a single transaction in the receiving
+block.
 
 In our "fungible token" application, a message to credit an account would look
 like this:
 
 ```rust
 # extern crate serde;
+# extern crate linera_sdk;
 # use serde::{Deserialize, Serialize};
+# use linera_sdk::linera_base_types::*;
 #[derive(Debug, Deserialize, Serialize)]
 pub enum Message {
     Credit { owner: AccountOwner, amount: Amount },
@@ -182,26 +189,3 @@ With the `Claim` operation, users can store their tokens on another chain where
 they're able to produce blocks or where they trust the owner will produce blocks
 receiving their messages. Only they are able to move their tokens, even on
 chains where ownership is shared or where they are not able to produce blocks.
-
-## Registering an Application across Chains
-
-If Alice is using an application on her chain and starts interacting with Bob
-via the application, e.g. sends him some tokens using the `fungible` example,
-the application automatically gets registered on Bob's chain, too, as soon as he
-handles the incoming cross-chain messages. After that, he can execute the
-application's operations on his chain, too, and e.g. send tokens to someone.
-
-But there are also cases where Bob may want to start using an application he
-doesn't have yet. E.g. maybe Alice regularly makes posts using the `social`
-example, and Bob wants to subscribe to her.
-
-In that case, trying to execute an application-specific operation would fail,
-because the application is not registered on his chain. He needs to request it
-from Alice first:
-
-```bash
-linera request-application <application-id> --target-chain-id <alices-chain-id>
-```
-
-Once Alice processes his message (which happens automatically if she is running
-the client in service mode), he can start using the application.

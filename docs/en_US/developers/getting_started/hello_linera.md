@@ -1,77 +1,85 @@
 # Hello, Linera
 
-This section is about interacting with the Devnet, running a local development
-network, then compiling and deploying your first application from scratch.
+In this section, you will learn how to initialize a developer wallet, interact
+with the current Testnet, run a local development network, then compile and
+deploy your first application from scratch.
 
-By the end of this section, you'll have a
-[microchain](en_US/developers/core_concepts/microchains.md) on the Devnet and/or on your local
-network, and a working application that can be queried using GraphQL.
+By the end of this section, you will have a
+[microchain](../core_concepts/microchains.md) on the Testnet and/or on your
+local network, and a working application that can be queried using GraphQL.
 
-## [Using the Devnet](en_US/developers/getting_started/hello_linera.md#using-the-devnet)
+## Creating a wallet on the latest Testnet
 
-The Linera Devnet is a deployment of the Linera protocol that's useful for
-developers. It should not be considered stable, and can be restarted from a
-clean slate and new genesis at any time.
-
-To interact with the Devnet, some tokens are needed. A Faucet service is
-available to create new microchains and obtain some test tokens. To do so, this
-must be configured when initializing the wallet:
+To interact with the latest Testnet, you will need a developer wallet, a new
+microchain, and some tokens. These can be all obtained at once by querying the
+Testnet's **faucet** service as follows:
 
 ```bash
-linera wallet init --with-new-chain --faucet https://faucet.devnet-2024-05-07.linera.net
+linera wallet init --with-new-chain --faucet https://faucet.{{#include ../../../RELEASE_DOMAIN}}.linera.net
 ```
 
-This creates a new microchain on Devnet with some initial test tokens, and the
-chain is automatically added to the newly instantiated wallet.
+If you obtain an error message instead, make sure to use a Linera toolchain
+[compatible with the current Testnet](installation.md#installing-from-cratesio).
 
-> Make sure to use a Linera toolchain
-> [compatible with the current Devnet](en_US/developers/getting_started/installation.md#Installing-from-cratesio).
 
-## [Starting a Local Test Network](en_US/developers/getting_started/hello_linera.md#Starting-a-Local-Test-Network)
+> A Linera Testnet is a deployment of the Linera protocol used for testing. A deployment
+> consists of a number of [validators](../../../zh_CN/developers/advanced_topics/validators.md), each of which runs
+> a frontend service (aka. `linera-proxy`), a number of workers (aka. `linera-server`), and
+> a shared database (by default `linera-storage-service`).
 
-Another option is to start your own local development network. A development
-network consists of a number of [validators](en_US/developers/advanced_topics/validators.md),
-each of which consist of an ingress proxy (aka. a "load balancer") and a number
-of workers (aka. "physical shards").
+## Using a local test network
 
-To start a local network, run the following command:
+Another option is to start your own local development network. To do so, run the
+following command:
 
 ```bash
-linera net up
+linera net up --with-faucet --faucet-port 8080
 ```
 
-This will start a validator with the default number of shards and create a
-temporary directory storing the entire network state.
+This will start a validator with the default number of shards and start a
+faucet.
 
-This will set up a number of initial chains and create an initial wallet to
-operate them.
-
-### [Using the Initial Test Wallet](en_US/developers/getting_started/hello_linera.md#Using-the-Initial-Test-Wallet)
-
-`linera net up` prints Bash statements on its standard output to help you
-configure your terminal to use the initial wallet of the new test network, for
-instance:
+Now, we're ready to create a developer wallet by running the following command
+in a separate shell:
 
 ```bash
-export LINERA_WALLET="/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/.tmpvJ6lJI/wallet.json"
-export LINERA_STORAGE="rocksdb:/var/folders/3d/406tbklx3zx2p3_hzzpfqdbc0000gn/T/.tmpvJ6lJI/linera.db"
+linera wallet init --with-new-chain --faucet localhost:8080
 ```
 
-This wallet is only valid for the lifetime of a single network. Every time a
-local network is restarted, the wallet needs to be reconfigured.
+```admonish warn
+A wallet is valid for the lifetime of its network. Every time a local
+network is restarted, the wallet needs to be removed and created again.
+```
 
-## [Interacting with the Network](en_US/developers/getting_started/hello_linera.md#Interacting-with-the-Network)
+## Working with several developer wallets and several networks
 
-> In the following examples, we assume that either the wallet was initialized to
-> interact with the Devnet or the variables `LINERA_WALLET` and `LINERA_STORAGE`
-> are both set and point to the initial wallet of the running local network.
+By default, the `linera` command looks for wallet files located in a
+configuration path determined by your operating system. If you prefer to choose
+the location of your wallet files, you may optionally set the variables
+`LINERA_WALLET` and `LINERA_STORAGE` as follows:
 
-The main way of interacting with the network and deploying applications is using
-the `linera` client.
+```bash
+DIR=$HOME/my_directory
+mkdir -p $DIR
+export LINERA_WALLET=$DIR/wallet.json"
+export LINERA_STORAGE="rocksdb:$DIR/linera.db"
+```
 
-To check that the network is working, you can synchronize your
-[default chain](en_US/developers/core_concepts/wallets.md) with the rest of the network and
-display the chain balance as follows:
+Choosing such a directory can be useful to work with several networks because a
+wallet is always specific to the network where it was created.
+
+
+> We refer to the wallets created by the `linera` CLI as "developer wallets" because
+> they are operated from a developer tool and merely meant for testing and development.
+
+> Production-grade user wallets are generally operated by a browser
+> extension, a mobile application, or a hardware device.
+
+
+## Interacting with the Linera network
+
+To check that the network is working, you can synchronize your chain with the
+rest of the network and display the chain balance as follows:
 
 ```bash
 linera sync
@@ -80,19 +88,21 @@ linera query-balance
 
 You should see an output number, e.g. `10`.
 
-## [Building an Example Application](en_US/developers/getting_started/hello_linera.md#Building-an-Example-Application)
+## Building an example application
 
 Applications running on Linera are [Wasm](https://webassembly.org/) bytecode.
 Each validator and client has a built-in Wasm virtual machine (VM) which can
 execute bytecode.
 
-Let's build the `counter` application from the `examples/` subdirectory:
+Let's build the `counter` application from the `examples/` subdirectory of the
+[Linera testnet
+branch](https://github.com/linera-io/linera-protocol/tree/testnet_babbage):
 
 ```bash
 cd examples/counter && cargo build --release --target wasm32-unknown-unknown
 ```
 
-## [Publishing your Application](en_US/developers/getting_started/hello_linera.md#Publishing-your-Application)
+## Publishing your application
 
 You can publish the bytecode and create an application using it on your local
 network using the `linera` client's `publish-and-create` command and provide:
@@ -109,11 +119,11 @@ linera publish-and-create \
 
 Congratulations! You've published your first application on Linera!
 
-## [Querying your Application](en_US/developers/getting_started/hello_linera.md#Querying-your-Application)
+## Querying your application
 
 Now let's query your application to get the current counter value. To do that,
 we need to use the client running in
-[_service_ mode](en_US/developers/core_concepts/node_service.md). This will expose a bunch of
+[_service_ mode](../../../en_US/developers/core_concepts/node_service.md). This will expose a bunch of
 APIs locally which we can use to interact with applications on the network.
 
 ```bash
@@ -122,22 +132,22 @@ linera service
 
 <!-- TODO: add graphiql image here -->
 
-Navigate to `http://localhost:8080` in your browser to access the GraphiQL, the
+Navigate to `http://localhost:8080` in your browser to access GraphiQL, the
 [GraphQL](https://graphql.org) IDE. We'll look at this in more detail in a
-[later section](en_US/developers/core_concepts/node_service.md#GraphiQL-IDE); for now, list
-the applications deployed on your default chain e476… by running:
+[later section](../../../zh_CN/developers/core_concepts/node_service.md#graphiql-ide); for now, list
+the applications deployed on your default chain by running:
 
-```graphql
+```gql
 query {
-  applications(
-    chainId: "e476187f6ddfeb9d588c7b45d3df334d5501d6499b3f9ad5595cae86cce16a65"
-  ) {
+  applications(chainId: "...") {
     id
     description
     link
   }
 }
 ```
+
+where `...` are replaced by the chain ID shown by `linera wallet show`.
 
 Since we've only deployed one application, the results returned have a single
 entry.
@@ -147,7 +157,7 @@ your application copy and paste the link into a new browser tab.
 
 Finally, to query the counter value, run:
 
-```graphql
+```gql
 query {
   value
 }

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/assets/main.css">
     <link rel="stylesheet" href="/plugins/docsify-copy-code/styles.css">
     <link rel="stylesheet" href="/plugins/docsify-pagination/stylesheet.css">
+    # <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-plugin-admonitions@1/dist/theme.min.css">
   </head>
   <body>
     <nav>
@@ -55,7 +56,7 @@
        loadSidebar: '_sidebar.md',
        maxLevel: 2,
        loadNavbar: true,
-       subMaxLevel: 2,
+       subMaxLevel: 1,
 
        ga: 'UA-31535127-1',
 
@@ -70,6 +71,12 @@
      };
 
     </script>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true });
+      window.mermaid = mermaid;
+    </script>
+    <script src="//unpkg.com/docsify-mermaid@2.0.1/dist/docsify-mermaid.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docsify/4.13.1/docsify.js"></script>
     <script src="./plugins/docsify-copy-code/index.js" type="module"></script>
     <script src="./plugins/docsify-pagination/index.js" type="module"></script>
@@ -79,5 +86,8 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-rust.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-toml.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-graphql.js" type="module"></script>
+    # <script src="https://cdn.jsdelivr.net/npm/docsify-plugin-admonitions@1/dist/docsify-plugin-admonitions.min.js"></script>
+    <script src="//unpkg.com/mermaid/dist/mermaid.js"></script>
+    <script src="mermaid-docsify.js"></script>
   </body>
 </html>

@@ -4,7 +4,7 @@ This section provides an introduction to microchains, the main building block of
 the Linera Protocol. For a more formal treatment refer to the
 [whitepaper](https://linera.io/whitepaper).
 
-## [Background](en_US/developers/core_concepts/microchains.md#Background)
+## Background
 
 A **microchain** is a chain of blocks describing successive changes to a shared
 state. We will use the terms _chain_ and _microchain_ interchangeably. Linera
@@ -18,9 +18,9 @@ important specificities:
 - The task of proposing new blocks in a microchain can be assumed either by
   validators or by end users (or rather their wallets) depending on the
   configuration of a chain. Specifically, microchains can be _single-owner_,
-  _permissioned_, or _public_, depending on who is authorized to propose blocks.
+  _multi-owner_, or _public_, depending on who is authorized to propose blocks.
 
-## [Cross-Chain Messaging](en_US/developers/core_concepts/microchains.md#Cross-Chain-Messaging)
+## Cross-chain messaging
 
 In traditional networks with a single blockchain, every transaction can access
 the application's entire execution state. This is not the case in Linera where
@@ -69,7 +69,7 @@ when proposing the receiver's block. The current implementation of the Linera
 client always selects as many messages as possible from inboxes, and never
 discards messages unless they fail to execute.
 
-## [Chain Ownership Semantics](en_US/developers/core_concepts/microchains.md#Chain-Ownership-Semantics)
+## Chain ownership semantics
 
 Active chains can have one or multiple owners. Chains with zero owners are
 permanently deactivated.
@@ -77,7 +77,7 @@ permanently deactivated.
 In Linera, the validators guarantee _safety_: On each chain, at each height,
 there is at most one unique block.
 
-But _liveness_—actually adding blocks to a chain at all—relies on the owners.
+But _liveness_ —actually adding blocks to a chain at all—relies on the owners.
 There are different types of rounds and owners, optimized for different use
 cases:
 
@@ -100,4 +100,4 @@ contention. Chains that very often have high activity from multiple owners can
 set the number of multi-leader rounds to 0.
 
 For more detail and examples on how to open and close chains, see the wallet
-section on [chain management](en_US/developers/core_concepts/wallets.md#opening-a-chain).
+section on [chain management](../../../en_US/developers/core_concepts/wallets.md#opening-a-chain).

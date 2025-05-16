@@ -1,4 +1,4 @@
-![The Linera banner](../README.assets/Linera-Header_1920x284px.svg)
+![The Linera banner](./images/linera_banner_db73e9b.svg)
 
 # Linera开发者参考
 
@@ -40,4 +40,3 @@
 - Medium [https://medium.com/@linera](https://medium.com/@linera)
 - Discord [https://discord.com/invite/linera](https://discord.com/invite/linera)
 - LinkedIn [https://www.linkedin.com/company/linera-io](https://www.linkedin.com/company/linera-io)
-

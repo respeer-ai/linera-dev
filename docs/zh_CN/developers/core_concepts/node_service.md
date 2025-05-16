@@ -1,41 +1,41 @@
 # 节点服务
 
-到目前为止我们已经展示Linera客户端二进制文件在终端中的用法。除此之外，Linera客户端还可以作为节点运行。Linera节点执行下列功能：
+截至目前，我们已了解如何将Linera客户端作为终端二进制文件使用。不过，该客户端还具备节点功能：
 
 1. 执行区块
-2. 提供与应用和系统交互的GraphQL API和IDE
-3. 监听来自验证器的通知，自动更新本地微链
+2. 提供GraphQL API与IDE​​，支持与应用程序及系统进行动态交互
+3. 监听验证节点通知​​，并自动更新本地链状态
 
-将`linera`运行在`service`模式，即可与节点服务交互：
+若需与节点服务交互，请以`服务`模式运行`linera`：
 
 ```bash
 linera service
 ```
 
-上面的命令将在8080的默认端口运行一个节点服务，服务端口可以通过传递`--port`标志修改。
+默认情况下，节点服务将在8080端口运行（可通过--port参数覆盖此设置）。
 
-## [关于GraphQL](zh_CN/developers/core_concepts/node_service.md#关于GraphQL)
+## ​关于GraphQL的说明​​
 
-Linera使用GraphQL作为与系统不同部分交互的查询语言。GraphQL语言让客户端可以精准地从服务端获取需要的东西。
+Linera采用GraphQL作为查询语言，用于与系统各部分进行交互。GraphQL使客户端能够构建查询，从而精准获取所需数据，避免冗余信息。
 
-GraphQL广泛应用于应用开发领域，例如当我们需要从前端请求应用程序状态时。
+GraphQL在应用开发中被广泛使用，例如从前端查询应用状态。
 
-更多GraphQL资料参见[官方文档](https://graphql.org/learn/)。
+如需深入了解GraphQL，请查阅[官方文档](https://graphql.org/learn/)。
 
-## [GraphiQL IDE](zh_CN/developers/core_concepts/node_service.md#GraphiQL-IDE)
+## GraphiQL IDE
 
-为了方便开发者，节点服务集成了一个GraphQL IDE(GraphiQL)。在运行节点服务后，开发者通过浏览器访问`http://localhost:8080`即可使用GraphiQL。
+便捷的GraphQL IDE集成​​，节点服务内置了名为GraphiQL的GraphQL集成开发环境。要使用GraphiQL，请启动节点服务并访问 `localhost:8080/`。
 
-GraphiQL IDE左半部窗口是schema浏览器，其中可以输入GraphQL查询参数，点击`播放`按钮(或者`CTRL^F5`)可以执行查询，查询结果将显示在右半部窗口。`http://localhost:8080`链接可以查看系统状态和应用列表，如果需要查询应用状态，需要使用应用列表返回的`link`。
+通过GraphiQL IDE左侧的模式浏览器，可动态探索系统及应用程序的实时状态。
 
 ![graphiql.png](graphiql.png)
 
-## [GraphQL系统API](zh_CN/developers/core_concepts/node_service.md#GraphQL系统API)
+## GraphQL系统API
 
-节点服务也暴露一系列系统操作的GraphQL API，点击`MutationRoot`可以查看完整操作列表。
+节点服务还提供了一个与系统操作集对应的GraphQL API。点击`MutationRoot`即可查看全部系统操作。
 
-## [GraphQL应用API](zh_CN/developers/core_concepts/node_service.md#GraphQL应用API)
+## GraphQL application API
 
-Linera运行在节点服务模式时，向客户端提供应用API，开发者可以访问`http://localhost:8080/chains/<chain-id>/applications/<application-id>`，执行GraphQL查询应用在钱包管理的微链上的状态。
+要与应用程序交互，需以服务模式运行Linera客户端。该客户端会为所有运行在所属链上的应用程序暴露GraphQL API，接口地址为：`localhost:8080/chains/<chain-id>/applications/<application-id>`。
 
-访问上面的链接将会在浏览器打开GraphiQL用户界面，开发者可以方便地通过图形化方式查看应用状态。
+通过浏览器访问该地址将打开GraphiQL界面，从而可以图形化探索应用程序状态。

@@ -45,9 +45,9 @@ For MacOS support see the installation section on
 
 This manual was tested with the following Rust toolchain:
 
-```rust
+```text
 [toolchain]
-channel = "1.77.2"
+channel = "1.85.0"
 components = [ "clippy", "rustfmt", "rust-src" ]
 targets = [ "wasm32-unknown-unknown" ]
 profile = "minimal"
@@ -72,7 +72,7 @@ To install the `Linera` toolchain, download the Linera source from
 ```bash
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
-git checkout -t origin/devnet_2024_05_07  # Current release branch
+git checkout -t origin/testnet_babbage  # Current release branch
 ```
 
 and to install the Linera toolchain:

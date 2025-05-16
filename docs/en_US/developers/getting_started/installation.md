@@ -2,21 +2,20 @@
 
 Let's start with the installation of the Linera development tools.
 
-## [Overview](en_US/developers/getting_started/installation.md#overview)
+## Overview
 
-The Linera toolchain consist of two crates:
+The Linera toolchain consists of several crates:
 
-- `linera-sdk` is the main library to program Linera applications in Rust.
+- `linera-sdk` is the main library used to program Linera applications in Rust.
 
-- `linera-service` defines a number of binaries, including:
+- `linera-service` defines a number of binaries, notably `linera` the main
+  client tool used to operate developer wallets and start local testing
+  networks.
 
-  - `linera` -- the main client tool, used to operate development wallets,
-  - `linera-proxy` -- the proxy service, acting as a public entrypoint for each
-    validator,
-  - `linera-server` -- the service run by each worker of a validator, hidden
-    behind the proxy.
+- `linera-storage-service` provides a simple database used to run local
+  validator nodes for testing and development purposes.
 
-## [Requirements](en_US/developers/getting_started/installation.md#Requirements)
+## Requirements
 
 The operating systems currently supported by the Linera toolchain can be
 summarized as follows:
@@ -38,7 +37,7 @@ Protoc. They can be installed as follows on Linux:
   - `curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v21.11/protoc-21.11-linux-x86_64.zip`
   - `unzip protoc-21.11-linux-x86_64.zip -d $HOME/.local`
   - If `~/.local` is not in your path, add it:
-    `export PATH="$PATH:$HOME/.local/bin"`
+    `export PATH="$HOME/.local/bin:$PATH"`
 
 - On certain Linux distributions, you may have to install development packages
   such as `g++`, `libclang-dev` and `libssl-dev`.
@@ -49,44 +48,47 @@ protocol itself, see the installation section on
 
 This manual was tested with the following Rust toolchain:
 
-```rust
+```text
 [toolchain]
-channel = "1.77.2"
+channel = "1.85.0"
 components = [ "clippy", "rustfmt", "rust-src" ]
 targets = [ "wasm32-unknown-unknown" ]
 profile = "minimal"
 ```
 
-## [Installing from crates.io](en_US/developers/getting_started/installation.md#Installing-from-cratesio)
+## Installing from crates.io
 
 You may install the Linera binaries with
 
 ```bash
-cargo install --locked linera-service@0.11.3
+cargo install --locked linera-storage-service@0.14.0
+cargo install --locked linera-service@0.14.0
 ```
 
 and use `linera-sdk` as a library for Linera Wasm applications:
 
 ```bash
-cargo add linera-sdk@0.11.3
+cargo add linera-sdk@0.14.0
 ```
 
-The version number `0.11.3` corresponds to the
-current Devnet of Linera and may change frequently.
+The version number `0.14.0` corresponds to the
+current Testnet of Linera. The minor version may change frequently but should
+not induce breaking changes.
 
-## [Installing from GitHub](en_US/developers/getting_started/installation.md#Installing-from-GitHub)
+## Installing from GitHub
 
 Download the source from [GitHub](https://github.com/linera-io/linera-protocol):
 
 ```bash
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
-git checkout -t origin/devnet_2024_05_07  # Current release branch
+git checkout -t origin/{{#include ../../../RELEASE_BRANCH}}  # Current release branch
 ```
 
 To install the Linera toolchain locally from source, you may run:
 
 ```bash
+cargo install --locked --path linera-storage-service
 cargo install --locked --path linera-service
 ```
 
@@ -97,15 +99,10 @@ This manual was tested against the following commit of the
 [repository](https://github.com/linera-io/linera-protocol):
 
 ```text
-2ada2e77e6a2f3dfa3bd32f4dc609bdadd0fbf3a
+3e867613343b937b4bcdb6994a0c7b459e9d497e
 ```
 
-## [Bash helper (optional)](en_US/developers/getting_started/installation.md#Bash-helper-optional)
-
-Consider adding the output of `linera net helper` to your `~/.bash_profile` to
-help with [automation](en_US/developers/core_concepts/wallets.md#automation-in-bash).
-
-## [Getting help](en_US/developers/getting_started/installation.md#Getting-help)
+## Getting help
 
 If installation fails, reach out to the team (e.g. on
 [Discord](https://discord.gg/linera)) to help troubleshoot your issue or
