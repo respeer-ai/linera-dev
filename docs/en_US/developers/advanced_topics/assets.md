@@ -16,24 +16,23 @@ Such an application should have a designated operation or message that causes it
 to close the chain: when that operation is executed, it should send back all
 remaining assets, and call the runtime's `close_chain` method.
 
-Once the chain is closed, owners can still create blocks rejecting messages.
+Once the chain is closed, owners can still create blocks to reject messages.
 That way, even assets that are in flight can be returned.
 
 The
 [`matching-engine` example application](https://github.com/linera-io/linera-protocol/tree/main/examples/matching-engine)
 does this:
 
-```rust
+```rust,ignore
     async fn execute_operation(&mut self, operation: Operation) -> Self::Response {
         match operation {
             // ...
             Operation::CloseChain => {
-                for order_id in self.state.orders.indices().await? {
+                for order_id in self.state.orders.indices().await.unwrap() {
                     match self.modify_order(order_id, ModifyAmount::All).await {
-                        Ok(transfer) => self.send_to(transfer),
+                        Some(transfer) => self.send_to(transfer),
                         // Orders with amount zero may have been cleared in an earlier iteration.
-                        Err(MatchingEngineError::OrderNotPresent) => continue,
-                        Err(error) => return Err(error),
+                        None => continue,
                     }
                 }
                 self.runtime

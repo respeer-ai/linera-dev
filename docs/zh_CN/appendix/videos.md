@@ -26,8 +26,6 @@ Mathieu Baudet和Andreas Fackler在Eth Prague 2024上讨论了怎么通过WebAss
 
 和Movement Labs在Consensus 2024讨论区块链和Web3技术的重要性、行业面临的挑战和基于，以及安全性和用户赋权在新的网络生态中的重要性。
 
-For the latest videos and highlights, check out our
+最新的视频和亮点可以在[YouTube channel](https://www.youtube.com/@linera_io)和[X（原 Twitter） Media](https://x.com/linera_io)找到.
 
-最新的视频和亮点可以在[YouTube channel](https://www.youtube.com/@linera_io)和[Twitter Media](https://twitter.com/linera_io)找到.
-
-_Happy viewing!_
+_感谢阅读!_

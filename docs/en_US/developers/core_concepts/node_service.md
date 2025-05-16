@@ -4,7 +4,7 @@ So far we've seen how to use the Linera client treating it as a binary in your
 terminal. However, the client also acts as a node which:
 
 1. Executes blocks
-2. Exposes an GraphQL API and IDE for dynamically interacting with applications
+2. Exposes a GraphQL API and IDE for dynamically interacting with applications
    and the system
 3. Listens for notifications from validators and automatically updates local
    chains.
@@ -18,7 +18,7 @@ linera service
 This will run the node service on port 8080 by default (this can be overridden
 using the `--port` flag).
 
-## A Note on GraphQL
+## A note on GraphQL
 
 Linera uses GraphQL as the query language for interfacing with different parts
 of the system. GraphQL enables clients to craft queries such that they receive
@@ -40,13 +40,13 @@ explore the state of the system and your applications.
 
 ![graphiql.png](graphiql.png)
 
-## GraphQL System API
+## GraphQL system API
 
 The node service also exposes a GraphQL API which corresponds to the set of
 system operations. You can explore the full set of operations by clicking on
 `MutationRoot`.
 
-## GraphQL Application API
+## GraphQL application API
 
 To interact with an application, we run the Linera client in service mode. It
 exposes a GraphQL API for every application running on any owned chain at

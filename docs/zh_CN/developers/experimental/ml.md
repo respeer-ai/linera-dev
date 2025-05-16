@@ -1,18 +1,23 @@
 # Linera 上的机器学习
 
+The Linera application contract / service split allows for securely and
+efficiently running machine learning models on the edge.
 Linera应用的合约/服务分离设计允许在边缘节点安全高效地运行机器学习模型。
 
 链上共识算法确保应用程序合约检索到正确的模型，客户端应用在无计量的链下服务执行推理。由于服务时运行在用户所有的硬件上，因此是可信任的。
 
 ## 指南
 
-实例应用使用 [Hugging Face](https://huggingface.co/) 提供的 [`candle`](https://github.com/huggingface/candle) 框架作为底层机器学习框架。
+实例应用使用  [Hugging Face](https://huggingface.co/) 提供的 [`candle`](https://github.com/huggingface/candle) 框架作为底层机器学习框架。
 
 `candle` 是专注于性能和可用性的最小化机器学习框架，使用Rust实现，可以编译为Wasm，在浏览器内外都有很好的Wasm支持。可以从candle的[示例](https://github.com/huggingface/candle/tree/main/candle-wasm-examples)了解该框架支持哪些模型。
 
 ### 开始
 
-为了支持机器学习能力，我们需要将下列依赖项添加到Linera应用的`Cargo.toml`文件中：
+To add ML capabilities to your existing Linera project, you'll need to add the
+`candle-core`, `getrandom`, `rand` and `tokenizers` dependencies to your Linera
+project:
+为了支持机器学习能力，我们需要将`candle-core`, `getrandom`, `rand` and `tokenizers`这些依赖项添加到Linera项目中：
 
 ```toml
 candle-core = "0.4.1"
@@ -20,7 +25,7 @@ getrandom = { version = "0.2.12", default-features = false, features = ["custom"
 rand = "0.8.5"
 ```
 
-如果需要运行大型语言模型，还需要添加下列crate：
+如果需要运行大型语言模型，还需要添加`candle-transformers` 和 `transformers`两个crate：
 
 ```toml
 candle-transformers = "0.4.1"
@@ -29,11 +34,14 @@ tokenizers = { git = "https://github.com/christos-h/tokenizers", default-feature
 
 ### 随机源
 
-机器学习框架使用随机数进行推理。Linera服务运行在Wasm虚拟机中，无法访问操作系统的随机数生成器。因此，我们需要为`candle`使用的随机数生成器设置种子。
+ML frameworks use random numbers to perform inference. Linera services run in a
+Wasm VM which does not have access to the OS Rng. For this reason, we need to
+manually seed RNG used by `candle`. We do this by writing a custom `getrandom`.
+机器学习框架使用随机数进行推理。Linera服务运行在Wasm虚拟机中，无法访问操作系统的随机数生成器。因此，我们需要为`candle`使用的随机数生成器设置种子。我们通过编写一个自定义的`getrandom`来实现这一点。
 
 创建一个文件 `src/random.rs` 并添加以下内容：
 
-```rust
+```rust,ignore
 use std::sync::{Mutex, OnceLock};
 
 use rand::{rngs::StdRng, Rng, SeedableRng};
@@ -58,9 +66,9 @@ getrandom::register_custom_getrandom!(custom_getrandom);
 
 目前无法将模型存储在链上，请参阅下面的`局限性`章节获得更多细节。
 
-执行推理前，需要通过`fetch_url`加载模型：
+为了执行模型推理，必须将模型加载到服务中。为此，当服务接收到查询请求时，我们将通过`fetch_url` API来实现模型加载：
 
-```rust
+```rust,ignore
 impl Service for MyService {
     async fn handle_query(&self, request: Request) -> Response {
         // do some stuff here
@@ -76,7 +84,7 @@ impl Service for MyService {
 
 我们可以通过`candle`提供的函数方便地将字节转换为类型化的`struct`，用于执行推理。以下是非量化 Llama 2 模型的示例：
 
-```rust
+```rust,ignore
     fn load_llama_model(cursor: &mut Cursor<Vec<u8>>) -> Result<(Llama, Cache), candle_core::Error> {
         let config = llama2_c::Config::from_reader(cursor)?;
         let weights =
@@ -95,8 +103,8 @@ impl Service for MyService {
 幸运的是，下列示例可以作为使用Wasm执行推理的指南：
 
 - [Llm Stories](https://github.com/linera-io/linera-protocol/tree/main/examples/llm)
-- [生成式 NFTs](https://github.com/linera-io/linera-protocol/tree/main/examples/gen-nft)
-- [Candle Wasm 示例](https://github.com/huggingface/candle/tree/main/candle-wasm-examples)
+- [Generative NFTs](https://github.com/linera-io/linera-protocol/tree/main/examples/gen-nft)
+- [Candle Wasm Examples](https://github.com/huggingface/candle/tree/main/candle-wasm-examples)
 
 ## 限制
 

@@ -1,18 +1,29 @@
-![Linera 横幅](developers/images/Linera-Header_1920x284px.svg)
+![The Linera banner](images/linera_banner_db73e9b.svg)
 
-# Linera 手册
+# Linera 使用指南
 
-欢迎阅读Linera手册，Linera是为**高扩展、低延迟的Web3应用**设计的去中心化协议。
+欢迎查阅Linera协议参考手册，一个专为**实时Web3应用**设计的去中心化协议。
 
-本文档分为两部分：
+本文档分为三个主要部分：
 
-1. [开发者](zh_CN/developers.md)部分适用于希望通过Linera Rust SDK原型应用了解关于Linera及其编程模型的开发者。
-2. [运营商](zh_CN/operators.md)部分适用于希望运行Linera验证器的运营商。
+1. 第一部分[概述](../zh_CN/protocol/overview.md)协议的核心架构。
 
-> **新功能：在Linera Devnet上发布和测试你的Web3应用！**
->
-> 安装[Linera CLI 工具](zh_CN/developers/getting_started/installation.md#installing-from-cratesio)，按照[此页面](zh_CN/developers/getting_started/hello_linera.md#using-the-devnet)上的说明初始化一条微链，然后在当前Devnet上发布你的第一个应用。
+2. 第二部分面向使用Linera Rust SDK构建应用的[开发者](../zh_CN/developers/getting_started.md)。
 
-如果想加入我们的社区并参与Linera生态开发，可以查看我们的[GitHub仓库](https://github.com/linera-io/linera-protocol)、[网站](https://linera.io/)，或通过[youtube](https://www.youtube.com/@linera_io)，[twitter](https://twitter.com/linera_io)，[telegram](https://t.me/linera_official)，和[discord](https://discord.gg/linera)等社交媒体找到我们。
+3. 第三部分面向希望运行Linera验证节点的[运维人员](../zh_CN/operators/devnets.md)。
 
-现在，让我们开始Linera旅程吧！
+> **新功能：在Linera测试网发布并测试您的Web3应用！**
+> 
+> 安装
+> [Linera命令行工具](../zh_CN/developers/getting_started/installation.md#installing-from-cratesio)后，
+> 按照[本页](../zh_CN/developers/getting_started/hello_linera.md#using-the-testnet)
+> 指引申领微链并在当前测试网发布首个应用。
+
+加入社区参与Linera生态开发，访问我们的[GitHub代码库](https://github.com/linera-io/linera-protocol), 查看[官方网站](https://linera.io), 通过以下社交媒体关注我们
+[YouTube](https://www.youtube.com/@linera_io), 
+[X](https://x.com/linera_io),
+[Telegram](https://t.me/linera_official),
+[Discord](https://discord.gg/linera)。
+
+_立即开始使用！_
+

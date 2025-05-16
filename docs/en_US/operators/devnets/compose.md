@@ -11,14 +11,14 @@ application as a single unit using simple commands like docker-compose up and
 docker-compose down.
 
 For a more complete setup, consider using Kind as described
-[in the next section](en_US/operators/devnets/kind.md).
+[in the next section]((../../../en_US/operators/devnets/kind.md)).
 
 ## Installation
 
 This section covers everything you need to install to run a Linera network with
 Docker Compose.
 
-Note: This section was only tested under Linux.
+Note: This section has been tested only on Linux.
 
 ### Docker Compose Requirements
 
@@ -29,7 +29,7 @@ the Docker docs.
 ### Installing the Linera Toolchain
 
 To install the Linera Toolchain refer to the
-[installation section](en_US/developers/getting_started/installation.md#Installing-from-GitHub).
+[installation section](../../../zh_CN/developers/getting_started/installation.md#installing-from-github).
 
 You want to install the toolchain from GitHub, as you'll be using the repository
 to run the Docker Compose validator service.
@@ -44,7 +44,7 @@ cd docker && ./compose.sh
 ```
 
 This will take some time as Docker images are built from the Linera source. When
-the service is ready, a temporary wallet and database is available under the
+the service is ready, a temporary wallet and database are available under the
 `docker` subdirectory.
 
 Referencing these variables with the `linera` binary will enable you to interact

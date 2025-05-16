@@ -1,24 +1,25 @@
-# 使用`kind`运行开发网络
+# 使用`kind`运行devnets
 
-本章将介绍使用`kind`怎么运行一个包含多个验证者的本地开发网络。
+在本节中，我们使用 `Kind`在本地运行一个完整的开发者网络（即由验证者节点组成的网络）。
 
-Kind(Kubernetes in Docker)是一个在Docker容器节点中运行本地Kubernetes集群的工具。Kind使用在Docker上创建的容器集群来模拟Kubernetes控制平面和工作节点，这样开发者就可以在本地主机方便地创建、管理和测试多节点集群。
+Kind（Kubernetes in Docker）是一种通过Docker容器节点运行本地Kubernetes集群的工具。它利用Docker创建一组容器，模拟Kubernetes的控制平面（control plane）和工作节点（worker nodes），使开发者能够轻松在本地机器上创建、管理和测试多节点集群。
 
 ## 安装
 
-本节涵盖了使用`kind`运行Linera网络的所有安装步骤。
+本节介绍使用 `Kind` 运行 Linera 网络所需的所有安装内容。
 
-### Linera工具链要求
+### Linera 工具链安装要求
 
-当前Linera工具链对于各操作系统支持状况如下：
+Linera 工具链当前支持的操作系统可总结如下：
 
-| Linux x86 64-bit | Mac OS (M1 / M2) | Mac OS (x86) | Windows |
-| ---------------- | ---------------- | ------------ | ------- |
-| ✓ 主要平台       | ✓ 可以工作       | ✓ 可以工作   | 未测试  |
+| Linux x86 64-bit | Mac OS (M1 / M2) | Mac OS (x86) | Windows  |
+| ---------------- | ---------------- | ------------ | -------- |
+| ✓ 主要平台  | ✓ 可以工作        | ✓ 可以工作    | 未测试 |
 
-安装Linera工具链之前需要先安装Rust，Wasm和Protoc，在Linux可以按照如下步骤安装：
 
-- Rust和Wasm
+安装Linera工具链的主要先决条件包括Rust、WebAssembly（Wasm）和Protocol Buffers编译器（protoc）。在Linux系统上的安装方法如下：
+
+- Rust and Wasm
 
   - `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
   - `rustup target add wasm32-unknown-unknown`
@@ -27,17 +28,18 @@ Kind(Kubernetes in Docker)是一个在Docker容器节点中运行本地Kubernete
 
   - `curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v21.11/protoc-21.11-linux-x86_64.zip`
   - `unzip protoc-21.11-linux-x86_64.zip -d $HOME/.local`
-  - 需要将路径`~/.local`添加到环境变量：`export PATH="$PATH:$HOME/.local/bin"`
+  - If `~/.local` is not in your path, add it:
+    `export PATH="$PATH:$HOME/.local/bin"`
 
 - 在某些Linux发行版上，可能需要安装`g++`、`libclang-dev` 和 `libssl-dev`等开发包。
 
-MacOS系统参见[GitHub上的安装部分](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)。
+MacOS系统参见[GitHub](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)上的安装部分。
 
 本手册基于下列工具链测试：
 
-```rust
+```text
 [toolchain]
-channel = "1.77.2"
+channel = "1.85.0"
 components = [ "clippy", "rustfmt", "rust-src" ]
 targets = [ "wasm32-unknown-unknown" ]
 profile = "minimal"
@@ -56,12 +58,12 @@ profile = "minimal"
 
 ### 安装Linera工具链
 
-安装Linera工具链需要先从[GitHub](https://github.com/linera-io/linera-protocol/blob/main/INSTALL.md)下载源码：
+安装Linera工具链需要先从[GitHub](https://github.com/linera-io/linera-protocol)下载源码：
 
 ```bash
 git clone https://github.com/linera-io/linera-protocol.git
 cd linera-protocol
-git checkout -t origin/devnet_2024_05_07  # Current release branch
+git checkout -t origin/testnet_babbage  # Current release branch
 ```
 
 然后编译安装：
@@ -69,12 +71,7 @@ git checkout -t origin/devnet_2024_05_07  # Current release branch
 ```bash
 cargo install --locked --path linera-service --features kubernetes
 ```
-成功构建之后需要添加环境变量才可以生效使用
-```bash
-export PATH="$PATH:/root/.cargo/bin"
-source ~/.bashrc
-linera --version
-```
+
 ## 使用`kind`运行
 
 使用`kind`运行本地开发网络需要进入`linera-protocol`仓库根目录，并执行：
@@ -83,20 +80,14 @@ linera --version
 linera net up --kubernetes
 ```
 
-> 译者注：如果使用较新的helmfile（例如v1的rc版本），或许我们会遇到不能解析文件的错误，可以参考[这里](https://github.com/helmfile/helmfile/discussions/1497)将helmfile.yaml重命名为helmfile.yaml.gotmpl解决。
-
-```bash
-mv kubernetes/linera-validator/helmfile.gotmpl kubernetes/linera-validator/helmfile.yaml.gotmpl
-```
-
-从源码构建镜像需要一些时间。部署完毕后，终端将会输出包含开发网络钱包设置的环境变量：
+此过程可能需要一些时间，因为需要从Linera源代码构建Docker镜像。当集群就绪后，进程输出中会显示一些配置信息（包含用于配置开发者网络钱包所需的环境变量导出命令），例如：
 
 ```bash
 export LINERA_WALLET="/tmp/.tmpIOelqk/wallet_0.json"
 export LINERA_STORAGE="rocksdb:/tmp/.tmpIOelqk/client_0.db"
 ```
 
-这些变量用于在新的终端中与上面部署的开发网络交互：
+在新终端中导出这些变量即可与开发者网络进行交互：
 
 ```bash
 $ linera sync-balance

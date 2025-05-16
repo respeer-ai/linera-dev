@@ -18,14 +18,14 @@ infrastructure in the sense that:
 - If one block on a particular height is certified, no other block on the same
   height is.
 
-These properties are guaranteed to hold as long as two third of the validators
+These properties are guaranteed to hold as long as two thirds of the validators
 (weighted by their stake) follow the protocol. In the future, deviating from the
 protocol may cause a validator to be considered malicious and to lose their
 _stake_.
 
 Validators also play a role in the liveness of the system by making sure that
 the history of the chains stays available. However, since validators do not
-propose blocks on most chains (see [next section](en_US/developers/advanced_topics/block_creation.md)), they do
+propose blocks on most chains (see [next section]((../../../en_US/developers/advanced_topics/block_creation.md))), they do
 _not_ guarantee that any particular operation or message will eventually be
 executed on a chain. Instead, chain owners decide whether and when to propose
 new blocks, and which operations and messages to include. The current
@@ -84,13 +84,13 @@ Note that the number of workers may vary for each validator. Both the load
 balancer and the shared database are represented as a single entity but are
 meant to scale out in production.
 
-> For local testing during development, we currently use a single worker and
-> RocksDB as a database.
+> For local testing during development, we currently use a single worker and a
+> testing in-memory service as a shared database.
 
 <!--
 ## Configuring Networks, Workers, and Proxies
 
-In [a previous section](en_US/developers/core_concepts/getting_started/hello_linera.md), we used the
+In [a previous section](../getting_started/hello_linera.md), we used the
 `linera net up` command to start a local network. This should be sufficient for
 most use cases when you're running a local network.
 

@@ -20,7 +20,7 @@ outside the browser. Check candle's
 [examples](https://github.com/huggingface/candle/tree/main/candle-wasm-examples)
 for inspiration on the types of models which are supported.
 
-### Getting Started
+### Getting started
 
 To add ML capabilities to your existing Linera project, you'll need to add the
 `candle-core`, `getrandom`, `rand` and `tokenizers` dependencies to your Linera
@@ -40,15 +40,15 @@ candle-transformers = "0.4.1"
 tokenizers = { git = "https://github.com/christos-h/tokenizers", default-features = false, features = ["unstable_wasm"] }
 ```
 
-### Providing Randomness
+### Providing randomness
 
 ML frameworks use random numbers to perform inference. Linera services run in a
-Wasm VM which do not have access to the OS Rng. For this reason, we need to
+Wasm VM which does not have access to the OS Rng. For this reason, we need to
 manually seed RNG used by `candle`. We do this by writing a custom `getrandom`.
 
 Create a file under `src/random.rs` and add the following:
 
-```rust
+```rust,ignore
 use std::sync::{Mutex, OnceLock};
 
 use rand::{rngs::StdRng, Rng, SeedableRng};
@@ -71,7 +71,7 @@ This will enable `candle` and any other crates which rely on `getrandom` access
 to a deterministic RNG. If deterministic behaviour is not desired, the System
 API can be used to seed the RNG from a timestamp.
 
-### Loading the model into the Service
+### Loading the model into the service
 
 Models cannot currently be saved on-chain; for more information see the
 `Limitations` below.
@@ -79,7 +79,7 @@ Models cannot currently be saved on-chain; for more information see the
 To perform model inference, the model must be loaded into the service. To do
 this we'll use the `fetch_url` API when a query is made against the service:
 
-```rust
+```rust,ignore
 impl Service for MyService {
     async fn handle_query(&self, request: Request) -> Response {
         // do some stuff here
@@ -100,7 +100,7 @@ Depending on the model format that you're using, `candle` exposes convenience
 functions to convert the bytes into a typed `struct` which can then be used to
 perform inference. Below is an example for a non-quantized Llama 2 model:
 
-```rust
+```rust,ignore
     fn load_llama_model(cursor: &mut Cursor<Vec<u8>>) -> Result<(Llama, Cache), candle_core::Error> {
         let config = llama2_c::Config::from_reader(cursor)?;
         let weights =
@@ -127,14 +127,14 @@ perform inference in Wasm:
 
 ## Limitations
 
-### Hardware Acceleration
+### Hardware acceleration
 
 Although SIMD instructions _are_ supported by the service runtime, general
 purpose GPU hardware acceleration is
-[currently not supported](https://github.com/linera-io/linera-protocol/issues/1931).
-Therefore, performance in local model inference degraded for larger models.
+[not currently supported](https://github.com/linera-io/linera-protocol/issues/1931).
+Therefore, performance in local model inference is degraded for larger models.
 
-### On-Chain Models
+### On-chain models
 
 Due to block-size constraints, models need to be stored off-chain until the
 introduction of the
@@ -142,7 +142,7 @@ introduction of the
 API will enable large binary blobs to be stored on-chain, the correctness and
 availability of which is guaranteed by the validators.
 
-### Maximum Model Size
+### Maximum model size
 
 The maximum size of a model which can be loaded into an application's service is
 currently constrained by:
@@ -150,5 +150,5 @@ currently constrained by:
 1. The addressable memory of the service's Wasm runtime being 4 GiB.
 2. Not being able to load models directly to the GPU.
 
-It is recommended that smaller models (50 Mb - 100 Mb) are used at current state
+It is recommended that smaller models (50 MB - 100 MB) are used at current state
 of development.
